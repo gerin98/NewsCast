@@ -76,4 +76,16 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
+    // Koin
+    implementation "org.koin:koin-android:2.0.1"
+    implementation "org.koin:koin-androidx-scope:2.0.1"
+    implementation "org.koin:koin-androidx-viewmodel:2.0.1"
+
+    // Testing with Koin
+    testImplementation 'org.koin:koin-test:2.0.1'
+
+    // Testing with Robolectric
+    testImplementation 'androidx.test:core:1.2.0'
+    testImplementation "org.robolectric:robolectric:4.3.1"
+
 }
