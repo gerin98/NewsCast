@@ -22,11 +22,12 @@ class MainActivityViewModel: ViewModel() {
         get() = _progressBarVisibility
 
     fun getNews() {
+        _progressBarVisibility.value = true
 
         viewModelScope.launch {
 
             val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
-            val body = NewsRequestBody(keyword = "NBA", articlesSortBy = "rel")
+            val body = NewsRequestBody(keyword = "News", articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
 
             val news = service.getArticles(body)
 
@@ -34,7 +35,8 @@ class MainActivityViewModel: ViewModel() {
                 Log.e("gerin", "null articles")
             }
 
-            _newsLiveData.value = news
+            _newsLiveData.postValue(news)
+            _progressBarVisibility.postValue(false)
         }
 
     }
@@ -59,5 +61,69 @@ class MainActivityViewModel: ViewModel() {
 
     }
 
+    fun getNewsForTopic(topic: SearchLinks) {
+        _progressBarVisibility.value = true
+
+        var keyword = ""
+        var articlesSortBy = ""
+        when(topic) {
+            is SearchLinks.World -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Us -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Politics -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Business -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Tech -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Science -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Sports -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Travel -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            is SearchLinks.Culture -> {
+                keyword = topic.keyword
+                articlesSortBy = topic.articlesSortBy
+            }
+            else -> {
+                keyword = "News"
+                articlesSortBy = ArticlesToSortBy.DATE.sort
+            }
+        }
+
+        viewModelScope.launch {
+
+            val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
+            val body = NewsRequestBody(keyword = keyword, articlesSortBy = articlesSortBy)
+
+            val news = service.getArticles(body)
+
+            if (news.articles == null) {
+                Log.e("gerin", "null articles")
+            }
+
+            _newsLiveData.postValue(news)
+            _progressBarVisibility.postValue(false)
+        }
+
+    }
 
 }

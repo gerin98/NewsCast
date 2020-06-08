@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.databinding.ActivityMainBinding
+import com.example.newscast.network.model.NewsModel
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter
 import com.google.android.material.navigation.NavigationView
@@ -36,6 +37,20 @@ class MainActivity : AppCompatActivity(),
 
     private val viewModel by lazy {
         ViewModelProvider(this, MainActivityViewModelFactory()).get(MainActivityViewModel::class.java)
+    }
+
+    // Observers
+    private val newsLiveDataObserver = Observer<NewsModel> { news ->
+        myDataset.clear()
+        val results = news.articles?.results
+        results?.let{
+            for (result in results) {
+                Log.e("gerin", "Title: ${result?.url}")
+                myDataset.add(result)
+            }
+        }
+
+        viewAdapter.notifyDataSetChanged()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,47 +99,47 @@ class MainActivity : AppCompatActivity(),
         // Handle item selection
         return when (item.itemId) {
             R.id.menu_world -> {
-                Toast.makeText(this, "World clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.World())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_us -> {
-                Toast.makeText(this, "US clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Us())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_politics -> {
-                Toast.makeText(this, "Politics clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Politics())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_business -> {
-                Toast.makeText(this, "Business clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Business())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_tech -> {
-                Toast.makeText(this, "Tech clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Tech())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_science -> {
-                Toast.makeText(this, "Science clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Science())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_sports -> {
-                Toast.makeText(this, "Sports clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Sports())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_travel -> {
-                Toast.makeText(this, "Travel clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Travel())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             R.id.menu_culture -> {
-                Toast.makeText(this, "Culture clicked", Toast.LENGTH_SHORT).show()
+                viewModel.getNewsForTopic(SearchLinks.Culture())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
@@ -158,19 +173,7 @@ class MainActivity : AppCompatActivity(),
     private fun initLiveData() {
         viewModel.getNews()
 
-        viewModel.newsLiveData.observe(this, Observer { news ->
-            Log.e("Gerin", "Title: ${news.articles?.results?.get(5)?.title}")
-
-            myDataset.clear()
-            val results = news.articles?.results
-            results?.let{
-                for (result in results) {
-                    myDataset.add(result)
-                }
-            }
-
-            viewAdapter.notifyDataSetChanged()
-        })
+        viewModel.newsLiveData.observe(this, newsLiveDataObserver)
     }
 
 }

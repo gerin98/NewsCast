@@ -95,6 +95,7 @@
                 app:srcCompat="@drawable/ic_view_agenda_black"
                 app:tint="@color/white1"
                 app:backgroundTint="@color/black1"
+                app:rippleColor="@color/white5"
                 app:layout_anchor="@id/newsBottomAppBar" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
