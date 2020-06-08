@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         this.setSupportActionBar(newsBottomAppBar)
-//        newsBottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar)
 
         myDataset = ArrayList()
 
@@ -53,6 +52,21 @@ class MainActivity : AppCompatActivity() {
 
         news_button.setOnClickListener{
             viewModel.getNews()
+        }
+
+        newsBottomAppBar.setOnMenuItemClickListener {item ->
+            when(item.itemId) {
+                R.id.menu_favourites -> {
+                    // do something
+                    true
+                }
+                R.id.menu_search -> {
+                    // do something
+                    true
+                }
+                else -> false
+            }
+
         }
 
         initLiveData()
