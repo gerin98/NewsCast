@@ -1,9 +1,11 @@
 package com.example.newscast.ui.browse
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        this.setSupportActionBar(newsBottomAppBar)
+//        newsBottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar)
 
         myDataset = ArrayList()
 
@@ -52,6 +56,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         initLiveData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_bottom_app_bar, menu)
+        return true
     }
 
     private fun initLiveData() {

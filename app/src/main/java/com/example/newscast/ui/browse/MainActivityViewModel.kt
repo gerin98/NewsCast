@@ -22,7 +22,7 @@ class MainActivityViewModel: ViewModel() {
         viewModelScope.launch {
 
             val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
-            val body = NewsRequestBody(keyword = "Headline", articlesSortBy = "rel")
+            val body = NewsRequestBody(keyword = "News", articlesSortBy = "date")
 
             val news = service.getArticles(body)
 

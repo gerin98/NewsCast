@@ -10,5 +10,10 @@
     <color name="black4">#66000000</color>
     <color name="black5">#33000000</color>
 
+    <color name="white1">#FFFFFF</color>
+    <color name="white2">#CCFFFFFF</color>
+    <color name="white3">#99FFFFFF</color>
+    <color name="white4">#66FFFFFF</color>
+    <color name="white5">#33FFFFFF</color>
 
 </resources>

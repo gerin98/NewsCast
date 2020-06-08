@@ -7,13 +7,14 @@ class NewsRequestBody(
     val action: String = "getArticles",
     val keyword: String = "Headline",
     val articlesPage: Int = 1,
-    val articlesCount: Int = 10,
+    val articlesCount: Int = 20,
     val articlesSortBy: String = "rel",
     val articlesSortByAsc: Boolean = false,
     val articlesArticleBodyLen: Int = -1,
     val resultType: String = "articles",
     val dataType: Array<String> = arrayOf("news", "pr"),
     val apiKey: String = "63eed15f-9dd0-41c9-b511-ed6efaea22fb",
+    val lang: String = "eng",
     val forceMaxDataTimeWindow: Int = 30
 ) {
 
