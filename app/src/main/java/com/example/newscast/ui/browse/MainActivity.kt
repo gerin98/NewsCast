@@ -6,10 +6,12 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -50,6 +52,12 @@ class MainActivity : AppCompatActivity(),
         viewAdapter.notifyDataSetChanged()
     }
 
+    private val errorMessageLiveDataObserver = Observer<Boolean> { error ->
+        if (error) {
+            Toast.makeText(this, "Sorry something went wrong. Please try again later.", Toast.LENGTH_LONG).show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
@@ -82,6 +90,7 @@ class MainActivity : AppCompatActivity(),
         newsBottomAppBar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
         initLiveData()
     }
@@ -154,6 +163,10 @@ class MainActivity : AppCompatActivity(),
                 // do something
                 true
             }
+            R.id.menu_refresh -> {
+                // do something
+                true
+            }
             else -> false
         }
     }
@@ -171,6 +184,7 @@ class MainActivity : AppCompatActivity(),
         viewModel.getInitialNews()
 
         viewModel.newsLiveData.observe(this, newsLiveDataObserver)
+        viewModel.errorMessageLiveData.observe(this, errorMessageLiveDataObserver)
     }
 
 }

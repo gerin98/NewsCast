@@ -22,6 +22,11 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val newsLiveData: LiveData<NewsModel>
         get() = _newsLiveData
 
+    private val _errorMessageLiveData = MutableLiveData<Boolean>(false)
+    val errorMessageLiveData: LiveData<Boolean>
+        get() = _errorMessageLiveData
+
+    // Data Binding Live Data
     private val _progressBarVisibility = MutableLiveData<Boolean>()
     val progressBarVisibility: LiveData<Boolean>
         get() = _progressBarVisibility
@@ -43,6 +48,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
                 _newsTopic.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
                 // send failure toast here
+                _errorMessageLiveData.postValue(true)
             }
 
             _progressBarVisibility.postValue(false)
@@ -63,6 +69,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
                 _newsTopic.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
                 // send failure toast here
+                _errorMessageLiveData.postValue(true)
             }
 
             _progressBarVisibility.postValue(false)
@@ -139,6 +146,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
                 _newsTopic.postValue(title)
             } else if (response.status == Status.ERROR) {
                 // send failure toast here
+                _errorMessageLiveData.postValue(true)
             }
 
             _progressBarVisibility.postValue(false)

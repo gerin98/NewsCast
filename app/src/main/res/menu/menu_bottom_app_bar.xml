@@ -8,8 +8,12 @@
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search_black"
-        android:title="Search"
-        app:showAsAction="always"/>
+    android:icon="@drawable/ic_search_black"
+    android:title="Search"
+    app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_refresh"
+        android:title="Refresh"
+        app:showAsAction="never"/>
 
 </menu>
