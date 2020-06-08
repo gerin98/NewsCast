@@ -1,8 +1,9 @@
 package com.example.newscast.network
 
-import com.example.newscast.network.model.ArticleModel
 import com.example.newscast.network.model.NewsModel
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.Headers
+import retrofit2.http.POST
 
 interface NewsService {
 
