@@ -5,18 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newscast.network.NewsApi
 import com.example.newscast.network.NewsRequestBody
 import com.example.newscast.network.NewsService
 import com.example.newscast.network.model.NewsModel
-import com.example.newscast.network.provideNewsApi
+import com.example.newscast.utils.state.Status
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.lang.Exception
 
 class MainActivityViewModel: ViewModel(), KoinComponent {
-
-    val newsService by inject<NewsService>()
 
     private val _newsLiveData = MutableLiveData<NewsModel>()
     val newsLiveData: LiveData<NewsModel>
@@ -26,7 +24,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val progressBarVisibility: LiveData<Boolean>
         get() = _progressBarVisibility
 
-    val repo = MainActivityRepository()
+    val repo = NewsRepository()
 
     fun getNews() {
         _progressBarVisibility.value = true
@@ -34,14 +32,12 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
         viewModelScope.launch {
 
             val body = NewsRequestBody(keyword = "News", articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
+            val response = repo.getNews(body)
 
-            val news = newsService.getArticles(body)
-
-            if (news.articles == null) {
-                Log.e("gerin", "null articles")
+            if (response.status == Status.SUCCESS) {
+                _newsLiveData.postValue(response.data)
             }
 
-            _newsLiveData.postValue(news)
             _progressBarVisibility.postValue(false)
         }
 
@@ -53,14 +49,12 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
         viewModelScope.launch {
 
             val body = NewsRequestBody(keyword = "News", articlesSortBy = "sourceImportance")
+            val response = repo.getNews(body)
 
-            val news = newsService.getArticles(body)
-
-            if (news.articles == null) {
-                Log.e("gerin", "null articles")
+            if (response.status == Status.SUCCESS) {
+                _newsLiveData.postValue(response.data)
             }
 
-            _newsLiveData.postValue(news)
             _progressBarVisibility.postValue(false)
         }
 
@@ -117,14 +111,12 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
         viewModelScope.launch {
 
             val body = NewsRequestBody(keyword = keyword, articlesSortBy = articlesSortBy)
+            val response = repo.getNews(body)
 
-            val news = newsService.getArticles(body)
-
-            if (news.articles == null) {
-                Log.e("gerin", "null articles")
+            if (response.status == Status.SUCCESS) {
+                _newsLiveData.postValue(response.data)
             }
-
-            _newsLiveData.postValue(news)
+            
             _progressBarVisibility.postValue(false)
         }
 
