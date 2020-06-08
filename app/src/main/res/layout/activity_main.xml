@@ -19,11 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Title Layout -->
             <LinearLayout
                 android:id="@+id/newsLayoutTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:padding="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +38,19 @@
                     android:text="Breaking News"/>
 
             </LinearLayout>
+
+            <!-- Progress bar indicator -->
+            <ProgressBar
+                android:id="@+id/my_progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/newsLayoutTitle"
+                android:visibility="gone"
+                android:indeterminate="true"
+                tools:visibility="visible"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newsRecyclerView"
