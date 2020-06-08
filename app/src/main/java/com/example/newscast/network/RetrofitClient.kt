@@ -11,9 +11,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
-    factory { AuthInterceptor() }
     factory { provideLoggingInterceptor() }
-    factory { provideOkHttpClient(get(), get()) }
+    factory { provideOkHttpClient(get()) }
     factory { provideConverterFactory() }
     single { provideRetrofit(get(), get()) }
     factory { NetworkResponseHelper() }
@@ -22,9 +21,8 @@ val networkModule = module {
 
 private const val BASE_URL = "http://eventregistry.org/api/v1/article/"
 
-fun provideOkHttpClient(authInterceptor: AuthInterceptor, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
     return OkHttpClient().newBuilder()
-        .addInterceptor(authInterceptor)
         .addInterceptor(loggingInterceptor)
         .connectTimeout(15, TimeUnit.SECONDS)
         .readTimeout(15, TimeUnit.SECONDS)
