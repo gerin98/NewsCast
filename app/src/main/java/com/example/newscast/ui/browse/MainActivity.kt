@@ -5,8 +5,11 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -71,9 +76,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         newsBottomAppBar.setNavigationOnClickListener {item ->
-            drawerLayout.openDrawer(Gravity.LEFT)
-
+            drawerLayout.openDrawer(GravityCompat.START)
         }
+
+        navigationView.setNavigationItemSelectedListener(this)
 
         initLiveData()
     }
@@ -82,6 +88,18 @@ class MainActivity : AppCompatActivity() {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_bottom_app_bar, menu)
         return true
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//         Handle item selection
+        return when (item.itemId) {
+            R.id.menu_settings -> {
+                Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
+                drawerLayout.closeDrawer(GravityCompat.START)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun initLiveData() {
@@ -101,4 +119,5 @@ class MainActivity : AppCompatActivity() {
             viewAdapter.notifyDataSetChanged()
         })
     }
+
 }
