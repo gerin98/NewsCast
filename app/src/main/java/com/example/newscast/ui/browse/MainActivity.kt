@@ -1,13 +1,11 @@
 package com.example.newscast.ui.browse
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -45,7 +43,6 @@ class MainActivity : AppCompatActivity(),
         val results = news.articles?.results
         results?.let{
             for (result in results) {
-                Log.e("gerin", "Title: ${result?.url}")
                 myDataset.add(result)
             }
         }
@@ -171,7 +168,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun initLiveData() {
-        viewModel.getNews()
+        viewModel.getInitialNews()
 
         viewModel.newsLiveData.observe(this, newsLiveDataObserver)
     }

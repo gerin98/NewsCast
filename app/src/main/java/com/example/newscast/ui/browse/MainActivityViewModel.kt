@@ -1,5 +1,6 @@
 package com.example.newscast.ui.browse
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,12 +22,15 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val newsLiveData: LiveData<NewsModel>
         get() = _newsLiveData
 
-    private val _progressBarVisibility = MutableLiveData<Boolean>(false)
+    private val _progressBarVisibility = MutableLiveData<Boolean>()
     val progressBarVisibility: LiveData<Boolean>
         get() = _progressBarVisibility
 
+    private val _newsTopic = MutableLiveData<String?>()
+    val newsTopic: LiveData<String?>
+        get() = _newsTopic
 
-    fun getNews() {
+    fun getInitialNews() {
         _progressBarVisibility.value = true
 
         viewModelScope.launch {
@@ -36,6 +40,9 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
+                _newsTopic.postValue("Breaking News")
+            } else if (response.status == Status.ERROR) {
+                // send failure toast here
             }
 
             _progressBarVisibility.postValue(false)
@@ -53,6 +60,9 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
+                _newsTopic.postValue("Breaking News")
+            } else if (response.status == Status.ERROR) {
+                // send failure toast here
             }
 
             _progressBarVisibility.postValue(false)
@@ -65,46 +75,57 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
         var keyword = ""
         var articlesSortBy = ""
+        var title = ""
         when(topic) {
             is SearchLinks.World -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Us -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Politics -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Business -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Tech -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Science -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Sports -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Travel -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             is SearchLinks.Culture -> {
                 keyword = topic.keyword
                 articlesSortBy = topic.articlesSortBy
+                title = topic.title
             }
             else -> {
                 keyword = "News"
                 articlesSortBy = ArticlesToSortBy.DATE.sort
+                title = "Breaking News"
             }
         }
 
@@ -115,6 +136,9 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
+                _newsTopic.postValue(title)
+            } else if (response.status == Status.ERROR) {
+                // send failure toast here
             }
 
             _progressBarVisibility.postValue(false)

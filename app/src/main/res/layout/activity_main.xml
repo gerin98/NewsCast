@@ -37,11 +37,12 @@
                     android:orientation="horizontal" >
 
                     <TextView
-                        style="@style/Headline2"
                         android:id="@+id/newsLayoutTitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Breaking News"/>
+                        style="@style/Headline2"
+                        android:text="@{viewModel.newsTopic}"
+                        tools:text="Breaking News"/>
 
                 </LinearLayout>
 
@@ -58,6 +59,7 @@
                     android:indeterminate="true"
                     tools:visibility="visible"/>
 
+                <!-- News Articles -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/newsRecyclerView"
                     android:layout_width="match_parent"
@@ -67,6 +69,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/newsLayoutTitle" />
 
+                <!-- Bottom Padding -->
                 <LinearLayout
                     android:id="@+id/newsLayoutBottomPadding"
                     android:layout_width="match_parent"
