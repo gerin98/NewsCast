@@ -9,9 +9,14 @@ import com.example.newscast.network.NewsApi
 import com.example.newscast.network.NewsRequestBody
 import com.example.newscast.network.NewsService
 import com.example.newscast.network.model.NewsModel
+import com.example.newscast.network.provideNewsApi
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel: ViewModel(), KoinComponent {
+
+    val newsService by inject<NewsService>()
 
     private val _newsLiveData = MutableLiveData<NewsModel>()
     val newsLiveData: LiveData<NewsModel>
@@ -21,15 +26,16 @@ class MainActivityViewModel: ViewModel() {
     val progressBarVisibility: LiveData<Boolean>
         get() = _progressBarVisibility
 
+    val repo = MainActivityRepository()
+
     fun getNews() {
         _progressBarVisibility.value = true
 
         viewModelScope.launch {
 
-            val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
             val body = NewsRequestBody(keyword = "News", articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
 
-            val news = service.getArticles(body)
+            val news = newsService.getArticles(body)
 
             if (news.articles == null) {
                 Log.e("gerin", "null articles")
@@ -46,10 +52,9 @@ class MainActivityViewModel: ViewModel() {
 
         viewModelScope.launch {
 
-            val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
             val body = NewsRequestBody(keyword = "News", articlesSortBy = "sourceImportance")
 
-            val news = service.getArticles(body)
+            val news = newsService.getArticles(body)
 
             if (news.articles == null) {
                 Log.e("gerin", "null articles")
@@ -111,10 +116,9 @@ class MainActivityViewModel: ViewModel() {
 
         viewModelScope.launch {
 
-            val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
             val body = NewsRequestBody(keyword = keyword, articlesSortBy = articlesSortBy)
 
-            val news = service.getArticles(body)
+            val news = newsService.getArticles(body)
 
             if (news.articles == null) {
                 Log.e("gerin", "null articles")

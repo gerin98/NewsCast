@@ -5,7 +5,7 @@ package com.example.newscast.ui.browse
  */
 sealed class SearchLinks {
     class World(val keyword: String = "World", val articlesSortBy: String = ArticlesToSortBy.RELEVANCE.sort) : SearchLinks()
-    class Us(val keyword: String = "Us", val articlesSortBy: String = ArticlesToSortBy.RELEVANCE.sort) : SearchLinks()
+    class Us(val keyword: String = "America", val articlesSortBy: String = ArticlesToSortBy.RELEVANCE.sort) : SearchLinks()
     class Politics(val keyword: String = "Politics", val articlesSortBy: String = ArticlesToSortBy.RELEVANCE.sort) : SearchLinks()
     class Business(val keyword: String = "Business", val articlesSortBy: String = ArticlesToSortBy.RELEVANCE.sort) : SearchLinks()
     class Tech(val keyword: String = "Tech", val articlesSortBy: String = ArticlesToSortBy.RELEVANCE.sort) : SearchLinks()
