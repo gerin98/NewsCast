@@ -1,142 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawerLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.browse.MainActivity">
 
-    <!-- Main Layout -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <data>
+        <variable name="viewModel" type="com.example.newscast.ui.browse.MainActivityViewModel" />
+    </data>
+
+    <!-- Parent layout containing Sidebar and Main Layout   -->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- List of Articles -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/newsLayout"
+        <!-- Main Layout -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Title Layout -->
-            <LinearLayout
-                android:id="@+id/newsLayoutTitle"
+            <!-- List of Articles -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/newsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Title Layout -->
+                <LinearLayout
+                    android:id="@+id/newsLayoutTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/Headline2"
+                        android:id="@+id/newsLayoutTitleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Breaking News"/>
+
+                </LinearLayout>
+
+                <!-- Progress bar indicator -->
+                <ProgressBar
+                    android:id="@+id/my_progressBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/newsLayoutTitle"
+                    android:visibility="gone"
+                    android:indeterminate="true"
+                    tools:visibility="visible"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@id/newsLayoutBottomPadding"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/newsLayoutTitle" />
+
+                <LinearLayout
+                    android:id="@+id/newsLayoutBottomPadding"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="horizontal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Bottom App Bar -->
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/newsBottomAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="horizontal" >
+                android:layout_gravity="bottom"
+                app:navigationIcon="@drawable/ic_menu_black"
+                app:navigationContentDescription="testing navigation button"/>
 
-                <TextView
-                    style="@style/Headline2"
-                    android:id="@+id/newsLayoutTitleText"
+            <!-- FAB to be placed in Bottom App Bar -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/news_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_view_agenda_black"
+                app:tint="@color/white1"
+                app:backgroundTint="@color/black1"
+                app:layout_anchor="@id/newsBottomAppBar" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <!-- Sidebar -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|left"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/menu_navigation_view">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground">
+
+                <ImageView
+                    android:id="@+id/settings_button_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Breaking News"/>
+                    android:src="@drawable/ic_settings"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/settings_button" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/settings_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Menu1"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/settings_button_icon"
+                    android:text="Settings" />
 
-            <!-- Progress bar indicator -->
-            <ProgressBar
-                android:id="@+id/my_progressBar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/newsLayoutTitle"
-                android:visibility="gone"
-                android:indeterminate="true"
-                tools:visibility="visible"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/newsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@id/newsLayoutBottomPadding"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/newsLayoutTitle" />
+        </com.google.android.material.navigation.NavigationView>
 
-            <LinearLayout
-                android:id="@+id/newsLayoutBottomPadding"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="horizontal" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- Bottom App Bar -->
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/newsBottomAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:navigationIcon="@drawable/ic_menu_black"
-            app:navigationContentDescription="testing navigation button"/>
-
-        <!-- FAB to be placed in Bottom App Bar -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/news_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_view_agenda_black"
-            app:tint="@color/white1"
-            app:backgroundTint="@color/black1"
-            app:layout_anchor="@id/newsBottomAppBar" />
-        
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!-- Sidebar -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start|left"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/menu_navigation_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:clickable="true"
-            android:background="?android:attr/selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/settings_button_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_settings"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/settings_button" />
-
-            <TextView
-                android:id="@+id/settings_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Menu1"
-                android:layout_marginStart="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/settings_button_icon"
-                android:text="Settings" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
     
-</androidx.drawerlayout.widget.DrawerLayout>
+</layout>
+
+
+
 
 <!--
 Create a bottom nav bar. Will contain
