@@ -2,9 +2,40 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings"
+    <item android:id="@+id/menu_world"
+        android:title="World"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_us"
+        android:title="US"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_politics"
+        android:title="Politics"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_business"
+        android:title="Business"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_tech"
+        android:title="Tech"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_science"
+        android:title="Science"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_sports"
+        android:title="Sports"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_travel"
+        android:title="Travel"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/menu_culture"
+        android:title="Culture"
         app:showAsAction="always"/>
 
 </menu>
