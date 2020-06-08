@@ -9,7 +9,7 @@
     </style>
 
     <style name="Headline2" parent="TextAppearance.AppCompat">
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/merriweather</item>
         <item name="android:textColor">@color/black1</item>
