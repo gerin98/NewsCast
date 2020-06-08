@@ -20,7 +20,7 @@ val networkModule = module {
     factory { provideNewsApi(get()) }
 }
 
-private val BASE_URL = "http://eventregistry.org/api/v1/article/"
+private const val BASE_URL = "http://eventregistry.org/api/v1/article/"
 
 fun provideOkHttpClient(authInterceptor: AuthInterceptor, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
     return OkHttpClient().newBuilder()

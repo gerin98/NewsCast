@@ -1,21 +1,22 @@
 package com.example.newscast.ui.browse
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newscast.network.NewsRequestBody
-import com.example.newscast.network.NewsService
 import com.example.newscast.network.model.NewsModel
 import com.example.newscast.utils.state.Status
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.lang.Exception
 
 class MainActivityViewModel: ViewModel(), KoinComponent {
 
+    // Koin Components
+    private val repo by inject<NewsRepository>()
+
+    // Live Data
     private val _newsLiveData = MutableLiveData<NewsModel>()
     val newsLiveData: LiveData<NewsModel>
         get() = _newsLiveData
@@ -24,7 +25,6 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val progressBarVisibility: LiveData<Boolean>
         get() = _progressBarVisibility
 
-    val repo = NewsRepository()
 
     fun getNews() {
         _progressBarVisibility.value = true
@@ -116,7 +116,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
             }
-            
+
             _progressBarVisibility.postValue(false)
         }
 
