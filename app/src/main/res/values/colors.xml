@@ -4,5 +4,11 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="primary_black">#000000</color>
+    <color name="black1">#000000</color>
+    <color name="black2">#CC000000</color>
+    <color name="black3">#99000000</color>
+    <color name="black4">#66000000</color>
+    <color name="black5">#33000000</color>
+
+
 </resources>

@@ -18,12 +18,12 @@
         android:padding="6dp">
 
         <TextView
-            android:id="@+id/news_tile_category"
+            android:id="@+id/news_tile_source"
             style="@style/Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/libre_franklin"
-            android:text="TECH" />
+            tools:text="CNN News" />
 
         <TextView
             android:id="@+id/news_tile_title"

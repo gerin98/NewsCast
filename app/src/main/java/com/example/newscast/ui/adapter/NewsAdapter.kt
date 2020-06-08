@@ -19,6 +19,7 @@ class NewsAdapter(private  val newsDataset: ArrayList<ResultsModel?>) : Recycler
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
         val newsTileName: TextView = view.findViewById(R.id.news_tile_title)
+        val newsTileSource: TextView = view.findViewById(R.id.news_tile_source)
         val newsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
 
         override fun onClick(p0: View?) {
@@ -39,10 +40,9 @@ class NewsAdapter(private  val newsDataset: ArrayList<ResultsModel?>) : Recycler
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.newsTileName.text = newsDataset[position]?.title
 
+        // load image
         val imageUrl = newsDataset[position]?.image
-
         if (imageUrl != null) {
             GlideApp.with(holder.newsTileImage.context)
                 .load(imageUrl)
@@ -51,6 +51,13 @@ class NewsAdapter(private  val newsDataset: ArrayList<ResultsModel?>) : Recycler
         } else {
             holder.newsTileImage.setImageDrawable(null)
         }
+
+        // load title
+        holder.newsTileName.text = newsDataset[position]?.title
+
+        // load source
+        holder.newsTileSource.text = newsDataset[position]?.source?.title
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

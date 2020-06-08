@@ -40,7 +40,11 @@ class MainActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
-        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, LinearLayout.VERTICAL)
+        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, LinearLayout.VERTICAL).apply {
+            this@MainActivity.getDrawable(R.drawable.divider)?.let {
+                setDrawable(it)
+            }
+        }
         recyclerView.addItemDecoration(dividerItemDecoration)
 
         news_button.setOnClickListener{
