@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search_black"
-        android:title="Search"
-        app:showAsAction="always"/>
-
     <item android:id="@+id/menu_favourites"
         android:icon="@drawable/ic_favorite_border_black"
         android:title="Favourites"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search_black"
+        android:title="Search"
+        app:showAsAction="always"/>
+    
 </menu>

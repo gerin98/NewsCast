@@ -21,20 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/news_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="67dp"
-            android:background="@color/colorPrimary"
-            android:padding="8dp"
-            android:text="Get Latest News"
-            android:textColor="@color/white1"
-            app:layout_constraintBottom_toBottomOf="@+id/newsRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
@@ -44,6 +30,15 @@
         android:layout_gravity="bottom"
         app:navigationIcon="@drawable/ic_menu_black"
         app:navigationContentDescription="testing navigation button"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/news_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_view_agenda_black"
+        app:tint="@color/white1"
+        app:backgroundTint="@color/black1"
+        app:layout_anchor="@id/newsBottomAppBar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
