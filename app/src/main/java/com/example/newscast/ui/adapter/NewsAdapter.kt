@@ -1,18 +1,17 @@
 package com.example.newscast.ui.adapter
 
-import android.text.method.TextKeyListener.clear
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter.ViewHolder
-import com.example.newscast.utils.GlideApp
-import com.example.newscast.utils.miniThumbnail
+import com.example.newscast.utils.glide.GlideApp
+import com.example.newscast.utils.glide.miniThumbnail
+
 
 class NewsAdapter(private  val newsDataset: ArrayList<ResultsModel?>) : RecyclerView.Adapter<ViewHolder>() {
 

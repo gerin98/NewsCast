@@ -54,7 +54,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/newsLayoutTitle"
-                    android:visibility="gone"
+                    android:booleanVisibility="@{viewModel.progressBarVisibility}"
                     android:indeterminate="true"
                     tools:visibility="visible"/>
 
@@ -145,13 +145,3 @@
     </androidx.drawerlayout.widget.DrawerLayout>
     
 </layout>
-
-
-
-
-<!--
-Create a bottom nav bar. Will contain
-
-< drawer for topics > , < global button for breaking news, search  for "news" sort by "date >, <favourites button powered by room>, <search button>
-
--->

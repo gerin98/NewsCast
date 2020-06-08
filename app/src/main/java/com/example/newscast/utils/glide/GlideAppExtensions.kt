@@ -1,4 +1,4 @@
-package com.example.newscast.utils
+package com.example.newscast.utils.glide
 
 import com.bumptech.glide.request.RequestOptions
 

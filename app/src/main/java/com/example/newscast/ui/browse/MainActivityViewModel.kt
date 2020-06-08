@@ -17,6 +17,10 @@ class MainActivityViewModel: ViewModel() {
     val newsLiveData: LiveData<NewsModel>
         get() = _newsLiveData
 
+    private val _progressBarVisibility = MutableLiveData<Boolean>(false)
+    val progressBarVisibility: LiveData<Boolean>
+        get() = _progressBarVisibility
+
     fun getNews() {
 
         viewModelScope.launch {
@@ -36,6 +40,7 @@ class MainActivityViewModel: ViewModel() {
     }
 
     fun getLatestNews() {
+        _progressBarVisibility.value = true
 
         viewModelScope.launch {
 
@@ -48,7 +53,8 @@ class MainActivityViewModel: ViewModel() {
                 Log.e("gerin", "null articles")
             }
 
-            _newsLiveData.value = news
+            _newsLiveData.postValue(news)
+            _progressBarVisibility.postValue(false)
         }
 
     }
