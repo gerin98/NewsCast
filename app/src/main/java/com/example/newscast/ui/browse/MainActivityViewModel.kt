@@ -22,7 +22,25 @@ class MainActivityViewModel: ViewModel() {
         viewModelScope.launch {
 
             val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
-            val body = NewsRequestBody(keyword = "News", articlesSortBy = "date")
+            val body = NewsRequestBody(keyword = "NBA", articlesSortBy = "rel")
+
+            val news = service.getArticles(body)
+
+            if (news.articles == null) {
+                Log.e("gerin", "null articles")
+            }
+
+            _newsLiveData.value = news
+        }
+
+    }
+
+    fun getLatestNews() {
+
+        viewModelScope.launch {
+
+            val service = NewsApi.getRetrofitInstance().create(NewsService::class.java)
+            val body = NewsRequestBody(keyword = "News", articlesSortBy = "sourceImportance")
 
             val news = service.getArticles(body)
 

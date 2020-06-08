@@ -2,6 +2,7 @@ package com.example.newscast.ui.browse
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
 import android.widget.LinearLayout
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(dividerItemDecoration)
 
         news_button.setOnClickListener{
-            viewModel.getNews()
+            viewModel.getLatestNews()
         }
 
         newsBottomAppBar.setOnMenuItemClickListener {item ->
@@ -66,6 +67,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+
+        }
+
+        newsBottomAppBar.setNavigationOnClickListener {item ->
+            drawerLayout.openDrawer(Gravity.LEFT)
 
         }
 
