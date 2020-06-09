@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             style="@style/Headline1"
             android:layout_margin="@dimen/text_margin"
+            android:textIsSelectable="true"
             tools:text="Llama Patrol The Central Coast of California" />
 
         <TextView
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             style="@style/Headline3"
             android:layout_margin="@dimen/text_margin"
+            android:textIsSelectable="true"
             tools:text="by Betty Eghan" />
 
         <TextView
@@ -45,7 +47,18 @@
             android:layout_height="wrap_content"
             style="@style/Content1"
             android:layout_margin="@dimen/text_margin"
+            android:textIsSelectable="true"
             tools:text="@string/large_text" />
+
+        <TextView
+            android:id="@+id/news_paper_article_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textIsSelectable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/link"
+            tools:text="https://en.wikipedia.org/wiki/News" />
 
     </LinearLayout>
 

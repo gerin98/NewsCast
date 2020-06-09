@@ -1,13 +1,9 @@
 package com.example.newscast.ui.newspaper
 
-import android.graphics.Paint
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
@@ -31,6 +27,10 @@ class NewsPaperActivity : AppCompatActivity() {
 
             news_paper_article_title.text = it.title
             news_paper_article_text.text = it.body
+
+            if (it.url?.isNotEmpty() == true) {
+                news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), it.url)
+            }
 
             source = it.source
         }

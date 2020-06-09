@@ -97,5 +97,6 @@
 
     <string name="news_paper_author">by %s</string>
     <string name="news_paper_news_topic">¬ %s</string>
+    <string name="news_paper_news_url">Source: %s</string>
 
 </resources>

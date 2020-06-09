@@ -39,7 +39,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
         viewModelScope.launch {
 
-            val body = NewsRequestBody(conceptUri = "https://en.wikipedia.org/wiki/News", articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
+            val body = NewsRequestBody(conceptUri = ConceptUri.NEWS.sort, articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
@@ -59,7 +59,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
         viewModelScope.launch {
 
-            val body = NewsRequestBody(conceptUri = "https://en.wikipedia.org/wiki/News", articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
+            val body = NewsRequestBody(conceptUri = ConceptUri.NEWS.sort, articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
@@ -127,7 +127,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
                 title = topic.title
             }
             else -> {
-                conceptUri = "https://en.wikipedia.org/wiki/News"
+                conceptUri = ConceptUri.NEWS.sort
                 articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort
                 title = "Breaking News"
             }
