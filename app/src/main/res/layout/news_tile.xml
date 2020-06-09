@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:background="@drawable/focus_state"
     android:layout_margin="5dp"
     android:weightSum="10">
 
@@ -30,7 +31,7 @@
             style="@style/Headline1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="8dp"
             tools:text="Designs Use Tech To Make Futuristic Fabrics More Words" />
 
 

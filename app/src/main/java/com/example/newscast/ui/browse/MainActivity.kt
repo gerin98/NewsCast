@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun recyclerViewOnClick(item: ResultsModel?) {
-        Timber.e("recyclerViewOnClick")
+        Timber.d("recyclerViewOnClick")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

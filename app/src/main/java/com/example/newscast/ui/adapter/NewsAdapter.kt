@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
@@ -19,6 +20,7 @@ class NewsAdapter(
     ) : RecyclerView.Adapter<ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        val newsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_layout)
         val newsTileName: TextView = view.findViewById(R.id.news_tile_title)
         val newsTileSource: TextView = view.findViewById(R.id.news_tile_source)
         val newsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
@@ -37,7 +39,11 @@ class NewsAdapter(
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.newsTileName.setOnClickListener{
+        // set item focus state
+        holder.newsTileLayout.isSelected = true
+
+        // set item click listener
+        holder.newsTileLayout.setOnClickListener{
             listener(newsDataset[position])
         }
 

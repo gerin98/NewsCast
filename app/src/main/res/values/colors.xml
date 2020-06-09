@@ -16,4 +16,10 @@
     <color name="white4">#66FFFFFF</color>
     <color name="white5">#33FFFFFF</color>
 
+    <color name="purple1">#6200EE</color>
+    <color name="purple2">#CC6200EE</color>
+    <color name="purple3">#996200EE</color>
+    <color name="purple4">#666200EE</color>
+    <color name="purple5">#336200EE</color>
+
 </resources>
