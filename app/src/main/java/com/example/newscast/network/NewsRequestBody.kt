@@ -5,7 +5,7 @@ package com.example.newscast.network
  */
 class NewsRequestBody(
     val action: String = "getArticles",
-    val keyword: String = "Headline",
+    val conceptUri: String = "https://en.wikipedia.org/wiki/News",
     val articlesPage: Int = 1,
     val articlesCount: Int = 20,
     val articlesSortBy: String = "rel",

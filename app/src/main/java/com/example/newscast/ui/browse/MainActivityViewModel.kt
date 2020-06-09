@@ -39,14 +39,13 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
         viewModelScope.launch {
 
-            val body = NewsRequestBody(keyword = "News", articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
+            val body = NewsRequestBody(conceptUri = "https://en.wikipedia.org/wiki/News", articlesSortBy = ArticlesToSortBy.SOURCE_IMPORTANCE.sort)
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
-                // send failure toast here
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -60,14 +59,13 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
         viewModelScope.launch {
 
-            val body = NewsRequestBody(keyword = "News", articlesSortBy = "sourceImportance")
+            val body = NewsRequestBody(conceptUri = "https://en.wikipedia.org/wiki/News", articlesSortBy = "sourceImportance")
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
-                // send failure toast here
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -79,57 +77,57 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     fun getNewsForTopic(topic: SearchLinks) {
         _progressBarVisibilityLiveData.value = true
 
-        var keyword = ""
+        var conceptUri = ""
         var articlesSortBy = ""
         var title = ""
         when(topic) {
             is SearchLinks.World -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Us -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Politics -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Business -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Tech -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Science -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Sports -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Travel -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             is SearchLinks.Culture -> {
-                keyword = topic.keyword
+                conceptUri = topic.conceptUri
                 articlesSortBy = topic.articlesSortBy
                 title = topic.title
             }
             else -> {
-                keyword = "News"
+                conceptUri = "https://en.wikipedia.org/wiki/News"
                 articlesSortBy = ArticlesToSortBy.DATE.sort
                 title = "Breaking News"
             }
@@ -137,14 +135,13 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
         viewModelScope.launch {
 
-            val body = NewsRequestBody(keyword = keyword, articlesSortBy = articlesSortBy)
+            val body = NewsRequestBody(conceptUri = conceptUri, articlesSortBy = articlesSortBy)
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
                 _newsTopicLiveData.postValue(title)
             } else if (response.status == Status.ERROR) {
-                // send failure toast here
                 _errorMessageLiveData.postValue(true)
             }
 
