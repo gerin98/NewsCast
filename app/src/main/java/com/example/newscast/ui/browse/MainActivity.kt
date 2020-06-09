@@ -26,17 +26,22 @@ import com.example.newscast.ui.adapter.NewsAdapter
 import com.example.newscast.ui.newspaper.NewsPaperActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener,
     Toolbar.OnMenuItemClickListener,
     View.OnClickListener {
 
+    companion object {
+        const val NEWS_ARTICLE_INTENT_FLAGS = "NEWS_ARTICLE_INTENT_FLAGS"
+        const val NEWS_TOPIC_INTENT_FLAGS = "NEWS_TOPIC_INTENT_FLAGS"
+    }
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var myDataset: ArrayList<ResultsModel?>
+    private lateinit var dataset: ArrayList<ResultsModel?>
+    private var newsTopic = "Breaking News"
 
     private val viewModel by lazy {
         ViewModelProvider(this, MainActivityViewModelFactory()).get(MainActivityViewModel::class.java)
@@ -44,15 +49,15 @@ class MainActivity : AppCompatActivity(),
 
     // Observers
     private val newsLiveDataObserver = Observer<NewsModel> { news ->
-        myDataset.clear()
+        dataset.clear()
         val results = news.articles?.results
         results?.let{
             for (result in results) {
-                myDataset.add(result)
+                dataset.add(result)
             }
         }
 
-        if (myDataset.isEmpty()) {
+        if (dataset.isEmpty()) {
             showZeroCase(true)
         } else {
             showZeroCase(false)
@@ -68,6 +73,12 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+    private val newsTopicLiveDataObserver = Observer<String?> {
+        it?.let {
+            newsTopic = it
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
@@ -76,10 +87,10 @@ class MainActivity : AppCompatActivity(),
         }
         this.setSupportActionBar(newsBottomAppBar)
 
-        myDataset = ArrayList()
+        dataset = ArrayList()
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = NewsAdapter(myDataset) {
+        viewAdapter = NewsAdapter(dataset) {
             recyclerViewOnClick(it)
         }
 
@@ -197,7 +208,8 @@ class MainActivity : AppCompatActivity(),
 
     private fun recyclerViewOnClick(item: ResultsModel?) {
         val intent = Intent(this, NewsPaperActivity::class.java)
-        intent.putExtra("news_article", item)
+        intent.putExtra(NEWS_ARTICLE_INTENT_FLAGS, item)
+        intent.putExtra(NEWS_TOPIC_INTENT_FLAGS, newsTopic)
         startActivity(intent)
     }
 
@@ -206,6 +218,7 @@ class MainActivity : AppCompatActivity(),
 
         viewModel.newsLiveData.observe(this, newsLiveDataObserver)
         viewModel.errorMessageLiveData.observe(this, errorMessageLiveDataObserver)
+        viewModel.newsTopic.observe(this, newsTopicLiveDataObserver)
     }
 
     private fun showZeroCase(show: Boolean) {

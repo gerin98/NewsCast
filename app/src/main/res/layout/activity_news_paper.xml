@@ -10,9 +10,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/news_paper_article_tag"
@@ -21,7 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:fontFamily="@font/libre_franklin_bold"
-            android:text="¬ Tech" />
+            android:text="@string/news_paper_news_topic"
+            tools:text="¬ Tech"/>
 
         <TextView
             android:id="@+id/news_paper_article_title"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             style="@style/Headline1"
             android:layout_margin="@dimen/text_margin"
-            android:text="Llama Patrol The Central Coast of California" />
+            tools:text="Llama Patrol The Central Coast of California" />
 
         <TextView
             android:id="@+id/news_paper_article_author"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             style="@style/Headline3"
             android:layout_margin="@dimen/text_margin"
-            android:text="by Betty Eghan" />
+            tools:text="by Betty Eghan" />
 
         <TextView
             android:id="@+id/news_paper_article_text"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             style="@style/Content1"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/large_text" />
+            tools:text="@string/large_text" />
 
     </LinearLayout>
 

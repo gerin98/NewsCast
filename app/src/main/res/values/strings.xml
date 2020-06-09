@@ -93,4 +93,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="news_paper_author">by %s</string>
+    <string name="news_paper_news_topic">¬ %s</string>
+
 </resources>

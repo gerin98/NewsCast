@@ -1,6 +1,5 @@
 package com.example.newscast.ui.browse
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,10 +13,10 @@ import org.koin.core.inject
 
 class MainActivityViewModel: ViewModel(), KoinComponent {
 
-    // Koin Components
+    /** Koin Components **/
     private val repo by inject<NewsRepository>()
 
-    // Live Data
+    /** Live Data **/
     private val _newsLiveData = MutableLiveData<NewsModel>()
     val newsLiveData: LiveData<NewsModel>
         get() = _newsLiveData
@@ -26,17 +25,17 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val errorMessageLiveData: LiveData<Boolean>
         get() = _errorMessageLiveData
 
-    // Data Binding Live Data
-    private val _progressBarVisibility = MutableLiveData<Boolean>()
+    private val _progressBarVisibilityLiveData = MutableLiveData<Boolean>()
     val progressBarVisibility: LiveData<Boolean>
-        get() = _progressBarVisibility
+        get() = _progressBarVisibilityLiveData
 
-    private val _newsTopic = MutableLiveData<String?>()
+    private val _newsTopicLiveData = MutableLiveData<String?>()
     val newsTopic: LiveData<String?>
-        get() = _newsTopic
+        get() = _newsTopicLiveData
 
+    /** Get News **/
     fun getInitialNews() {
-        _progressBarVisibility.value = true
+        _progressBarVisibilityLiveData.value = true
 
         viewModelScope.launch {
 
@@ -45,19 +44,19 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
-                _newsTopic.postValue("Breaking News")
+                _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
                 // send failure toast here
                 _errorMessageLiveData.postValue(true)
             }
 
-            _progressBarVisibility.postValue(false)
+            _progressBarVisibilityLiveData.postValue(false)
         }
 
     }
 
     fun getLatestNews() {
-        _progressBarVisibility.value = true
+        _progressBarVisibilityLiveData.value = true
 
         viewModelScope.launch {
 
@@ -66,19 +65,19 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
-                _newsTopic.postValue("Breaking News")
+                _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
                 // send failure toast here
                 _errorMessageLiveData.postValue(true)
             }
 
-            _progressBarVisibility.postValue(false)
+            _progressBarVisibilityLiveData.postValue(false)
         }
 
     }
 
     fun getNewsForTopic(topic: SearchLinks) {
-        _progressBarVisibility.value = true
+        _progressBarVisibilityLiveData.value = true
 
         var keyword = ""
         var articlesSortBy = ""
@@ -143,13 +142,13 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 _newsLiveData.postValue(response.data)
-                _newsTopic.postValue(title)
+                _newsTopicLiveData.postValue(title)
             } else if (response.status == Status.ERROR) {
                 // send failure toast here
                 _errorMessageLiveData.postValue(true)
             }
 
-            _progressBarVisibility.postValue(false)
+            _progressBarVisibilityLiveData.postValue(false)
         }
 
     }
