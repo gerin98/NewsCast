@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/news_tile_source"
-            style="@style/Subtitle1"
+            style="@style/Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/libre_franklin"
@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/news_tile_title"
-            style="@style/Headline1"
+            style="@style/Subtitle3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

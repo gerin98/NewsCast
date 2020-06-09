@@ -1,5 +1,6 @@
 package com.example.newscast.ui.browse
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -22,6 +23,7 @@ import com.example.newscast.databinding.ActivityMainBinding
 import com.example.newscast.network.model.NewsModel
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter
+import com.example.newscast.ui.newspaper.NewsPaperActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -108,10 +110,6 @@ class MainActivity : AppCompatActivity(),
         initLiveData()
     }
 
-    private fun recyclerViewOnClick(item: ResultsModel?) {
-        Timber.d("recyclerViewOnClick")
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_bottom_app_bar, menu)
@@ -195,6 +193,12 @@ class MainActivity : AppCompatActivity(),
             }
             else -> {}
         }
+    }
+
+    private fun recyclerViewOnClick(item: ResultsModel?) {
+        val intent = Intent(this, NewsPaperActivity::class.java)
+        intent.putExtra("news_article", item)
+        startActivity(intent)
     }
 
     private fun initLiveData() {

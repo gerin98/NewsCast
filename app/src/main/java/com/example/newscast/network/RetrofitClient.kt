@@ -32,7 +32,9 @@ fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClien
 
 fun provideConverterFactory(): Converter.Factory {
     return MoshiConverterFactory.create(
-        Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
     )
 }
 
