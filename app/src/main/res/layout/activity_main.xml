@@ -69,6 +69,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/newsLayoutTitle" />
 
+                <!-- Zero Case-->
+                <TextView
+                    android:id="@+id/recycler_view_zero_case"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/no_news_articles_found"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
                 <!-- Bottom Padding -->
                 <LinearLayout
                     android:id="@+id/newsLayoutBottomPadding"
@@ -108,7 +118,7 @@
             android:id="@+id/navigationView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="start|left"
+            android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:menu="@menu/menu_navigation_view">
 
@@ -140,7 +150,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/settings_button_icon"
-                    android:text="Settings" />
+                    android:text="@string/settings" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

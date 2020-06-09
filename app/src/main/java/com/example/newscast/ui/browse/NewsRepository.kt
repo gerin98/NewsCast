@@ -16,6 +16,7 @@ val newsModule = module {
 
 class NewsRepository(private val service: NewsService, private val responseHelper: NetworkResponseHelper) {
 
+    // look into using concepts rather than keywords
     suspend fun getNews(body: NewsRequestBody): Resource<NewsModel> {
         return try {
             val response = service.getArticles(body)

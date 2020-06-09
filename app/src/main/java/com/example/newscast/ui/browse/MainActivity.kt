@@ -24,6 +24,7 @@ import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener,
@@ -49,6 +50,12 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
+        if (myDataset.isEmpty()) {
+            showZeroCase(true)
+        } else {
+            showZeroCase(false)
+        }
+
         viewAdapter.notifyDataSetChanged()
     }
 
@@ -69,7 +76,10 @@ class MainActivity : AppCompatActivity(),
         myDataset = ArrayList()
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = NewsAdapter(myDataset)
+        viewAdapter = NewsAdapter(myDataset) {
+            recyclerViewOnClick(it)
+        }
+
 
         val dividerItemDecoration = DividerItemDecoration(this, LinearLayout.VERTICAL).apply {
             this@MainActivity.getDrawable(R.drawable.divider)?.let {
@@ -92,7 +102,13 @@ class MainActivity : AppCompatActivity(),
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
+        showZeroCase(true)
+
         initLiveData()
+    }
+
+    private fun recyclerViewOnClick(item: ResultsModel?) {
+        Timber.e("recyclerViewOnClick")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -185,6 +201,16 @@ class MainActivity : AppCompatActivity(),
 
         viewModel.newsLiveData.observe(this, newsLiveDataObserver)
         viewModel.errorMessageLiveData.observe(this, errorMessageLiveDataObserver)
+    }
+
+    private fun showZeroCase(show: Boolean) {
+        if (show) {
+            recyclerView.visibility = View.GONE
+            recycler_view_zero_case.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            recycler_view_zero_case.visibility = View.GONE
+        }
     }
 
 }

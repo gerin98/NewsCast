@@ -13,18 +13,15 @@ import com.example.newscast.utils.glide.GlideApp
 import com.example.newscast.utils.glide.miniThumbnail
 
 
-class NewsAdapter(private  val newsDataset: ArrayList<ResultsModel?>) : RecyclerView.Adapter<ViewHolder>() {
+class NewsAdapter(
+        private val newsDataset: ArrayList<ResultsModel?>,
+        private val listener: (ResultsModel?) -> Unit
+    ) : RecyclerView.Adapter<ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
-
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val newsTileName: TextView = view.findViewById(R.id.news_tile_title)
         val newsTileSource: TextView = view.findViewById(R.id.news_tile_source)
         val newsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
-
-        override fun onClick(p0: View?) {
-            // handle clicks
-        }
-
     }
 
     // Create new views (invoked by the layout manager)
@@ -39,6 +36,10 @@ class NewsAdapter(private  val newsDataset: ArrayList<ResultsModel?>) : Recycler
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+
+        holder.newsTileName.setOnClickListener{
+            listener(newsDataset[position])
+        }
 
         // load image
         val imageUrl = newsDataset[position]?.image
