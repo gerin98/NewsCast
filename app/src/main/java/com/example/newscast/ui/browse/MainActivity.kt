@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity(),
             showZeroCase(true)
         } else {
             showZeroCase(false)
+            viewManager.scrollToPosition( 0)
         }
 
         viewAdapter.notifyDataSetChanged()
