@@ -19,14 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="6dp">
+        android:padding="14dp">
 
         <TextView
             android:id="@+id/news_tile_large_source"
-            style="@style/Subtitle2"
+            style="@style/Subtitle4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/libre_franklin"
             tools:text="CNN News" />
 
         <TextView

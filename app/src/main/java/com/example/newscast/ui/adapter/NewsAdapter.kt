@@ -19,7 +19,7 @@ class NewsAdapter(
     ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val SMALL_TILE = 0
-    private val LARGE_TILE = 3
+    private val LARGE_TILE = 1
 
     class SmallViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val smallNewsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_layout)
@@ -36,7 +36,7 @@ class NewsAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 3) {
+        return if (isLargeTile(position)) {
             LARGE_TILE
         } else {
             SMALL_TILE
@@ -62,8 +62,7 @@ class NewsAdapter(
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-
-        if (position == LARGE_TILE) {
+        if (isLargeTile(position)) {
             // show large tile
 
             val largeHolder = holder as LargeViewHolder
@@ -127,13 +126,11 @@ class NewsAdapter(
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount(): Int = newsDataset.size
 
-
-    private fun bindSmallTile() {
-
-    }
-
-    private fun bindLargeTile() {
-
+    /**
+     * Every 7th tile starting from the 4th tile should be a large tile
+     */
+    private fun isLargeTile(position: Int): Boolean {
+        return position%7 == 3
     }
 
 }
