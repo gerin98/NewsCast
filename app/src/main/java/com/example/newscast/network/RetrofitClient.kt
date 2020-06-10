@@ -4,6 +4,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -14,9 +15,9 @@ val networkModule = module {
     factory { provideLoggingInterceptor() }
     factory { provideOkHttpClient(get()) }
     factory { provideConverterFactory() }
-    single { provideRetrofit(get(), get()) }
+    single(named("event_registry")) { provideRetrofit(get(), get(), BASE_URL) }
     factory { NetworkResponseHelper() }
-    factory { provideNewsApi(get()) }
+    factory { provideNewsApi( get(named("event_registry")) ) }
 }
 
 private const val BASE_URL = "http://eventregistry.org/api/v1/article/"
@@ -44,9 +45,9 @@ fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return logger
 }
 
-fun provideRetrofit(okHttpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit {
+fun provideRetrofit(okHttpClient: OkHttpClient, converterFactory: Converter.Factory, url: String): Retrofit {
     return Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(url)
         .addConverterFactory(converterFactory)
         .client(okHttpClient)
         .build()
