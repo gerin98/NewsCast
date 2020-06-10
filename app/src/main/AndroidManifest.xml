@@ -15,12 +15,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.newspaper.NewsPaperActivity"
-            android:label="@string/title_activity_news_paper"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.browse.MainActivity">
+            android:parentActivityName=".ui.browse.MainActivity"
+            android:theme="@style/AppTheme.ActionBar"/>
+        <activity android:name=".ui.browse.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

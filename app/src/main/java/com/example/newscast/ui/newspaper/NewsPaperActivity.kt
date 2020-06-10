@@ -9,6 +9,8 @@ import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.browse.MainActivity
+import com.example.newscast.utils.glide.GlideApp
+import com.example.newscast.utils.glide.miniThumbnail
 import kotlinx.android.synthetic.main.activity_news_paper.*
 import timber.log.Timber
 
@@ -21,6 +23,7 @@ class NewsPaperActivity : AppCompatActivity() {
         val result: ResultsModel? = intent.extras?.get(MainActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
         val topic: String? = intent.getStringExtra(MainActivity.NEWS_TOPIC_INTENT_FLAGS)
         var source: SourceModel? = null
+        var imageUrl: String? = null
 
         result?.let {
             Timber.d("Article to be displayed: ${it.title}")
@@ -32,6 +35,7 @@ class NewsPaperActivity : AppCompatActivity() {
                 news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), it.url)
             }
 
+            imageUrl = it.image
             source = it.source
         }
 
@@ -41,6 +45,12 @@ class NewsPaperActivity : AppCompatActivity() {
 
         topic?.let {
             news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
+        }
+
+        if (imageUrl != null) {
+            GlideApp.with(this)
+                .load(imageUrl)
+                .into(news_paper_article_image)
         }
 
     }
