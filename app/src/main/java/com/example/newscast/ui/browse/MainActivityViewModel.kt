@@ -33,6 +33,8 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val newsTopic: LiveData<String?>
         get() = _newsTopicLiveData
 
+    var lastRequest: NewsRequestBody? = null
+
     /** Get News **/
     fun getInitialNews() {
         _progressBarVisibilityLiveData.value = true
@@ -43,6 +45,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
+                lastRequest = body
                 _newsLiveData.postValue(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
@@ -63,6 +66,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
+                lastRequest = body
                 _newsLiveData.postValue(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
@@ -139,6 +143,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
             val response = repo.getNews(body)
 
             if (response.status == Status.SUCCESS) {
+                lastRequest = body
                 _newsLiveData.postValue(response.data)
                 _newsTopicLiveData.postValue(title)
             } else if (response.status == Status.ERROR) {
@@ -146,6 +151,31 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
             }
 
             _progressBarVisibilityLiveData.postValue(false)
+        }
+
+    }
+
+    fun refreshNews() {
+
+        if (lastRequest == null) {
+            getInitialNews()
+            return
+        }
+
+        lastRequest?.let {
+            _progressBarVisibilityLiveData.value = true
+
+            viewModelScope.launch {
+                val response = repo.getNews(it)
+
+                if (response.status == Status.SUCCESS) {
+                    _newsLiveData.postValue(response.data)
+                } else if (response.status == Status.ERROR) {
+                    _errorMessageLiveData.postValue(true)
+                }
+
+                _progressBarVisibilityLiveData.postValue(false)
+            }
         }
 
     }

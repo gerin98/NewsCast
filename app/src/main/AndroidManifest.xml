@@ -16,6 +16,7 @@
         <activity
             android:name=".ui.newspaper.NewsPaperActivity"
             android:parentActivityName=".ui.browse.MainActivity"
+            android:label=""
             android:theme="@style/AppTheme.ActionBar"/>
         <activity android:name=".ui.browse.MainActivity"
             android:launchMode="singleTop">

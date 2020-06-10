@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity(),
                 true
             }
             R.id.menu_refresh -> {
-                // do something
+                viewModel.refreshNews()
                 true
             }
             else -> false
