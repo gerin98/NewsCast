@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.ui.adapter.NewsAdapter.ViewHolder
 import com.example.newscast.utils.glide.GlideApp
 import com.example.newscast.utils.glide.miniThumbnail
 
@@ -17,56 +16,124 @@ import com.example.newscast.utils.glide.miniThumbnail
 class NewsAdapter(
         private val newsDataset: ArrayList<ResultsModel?>,
         private val listener: (ResultsModel?) -> Unit
-    ) : RecyclerView.Adapter<ViewHolder>() {
+    ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val newsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_layout)
-        val newsTileName: TextView = view.findViewById(R.id.news_tile_title)
-        val newsTileSource: TextView = view.findViewById(R.id.news_tile_source)
-        val newsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
+    private val SMALL_TILE = 0
+    private val LARGE_TILE = 3
+
+    class SmallViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val smallNewsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_layout)
+        val smallNewsTileName: TextView = view.findViewById(R.id.news_tile_title)
+        val smallNewsTileSource: TextView = view.findViewById(R.id.news_tile_source)
+        val smallNewsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
+    }
+
+    class LargeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val largeNewsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_large_layout)
+        val largeNewsTileName: TextView = view.findViewById(R.id.news_tile_large_title)
+        val largeNewsTileSource: TextView = view.findViewById(R.id.news_tile_large_source)
+        val largeNewsTileImage: ImageView = view.findViewById(R.id.news_tile_large_image)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 3) {
+            LARGE_TILE
+        } else {
+            SMALL_TILE
+        }
     }
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // create a new view
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.news_tile, parent, false) as View
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        // create a new view based on the view type
 
-        return ViewHolder(view)
+        return if (viewType == LARGE_TILE) {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.news_tile_large, parent, false) as View
+            LargeViewHolder(view)
+        } else {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.news_tile, parent, false) as View
+            SmallViewHolder(view)
+        }
+
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        // set item focus state
-        holder.newsTileLayout.isSelected = true
 
-        // set item click listener
-        holder.newsTileLayout.setOnClickListener{
-            listener(newsDataset[position])
-        }
+        if (position == LARGE_TILE) {
+            // show large tile
 
-        // load image
-        val imageUrl = newsDataset[position]?.image
-        if (imageUrl != null) {
-            GlideApp.with(holder.newsTileImage.context)
-                .load(imageUrl)
-                .miniThumbnail()
-                .into(holder.newsTileImage)
+            val largeHolder = holder as LargeViewHolder
+
+            // set item focus state
+            largeHolder.largeNewsTileImage.isSelected = true
+
+            // set item click listener
+            largeHolder.largeNewsTileLayout.setOnClickListener{
+                listener(newsDataset[position])
+            }
+
+            // load image
+            val imageUrl = newsDataset[position]?.image
+            if (imageUrl != null) {
+                GlideApp.with(largeHolder.largeNewsTileImage.context)
+                    .load(imageUrl)
+                    .into(largeHolder.largeNewsTileImage)
+            } else {
+                largeHolder.largeNewsTileImage.setImageDrawable(null)
+            }
+
+            // load title
+            largeHolder.largeNewsTileName.text = newsDataset[position]?.title
+
+            // load source
+            largeHolder.largeNewsTileSource.text = newsDataset[position]?.source?.title
         } else {
-            holder.newsTileImage.setImageDrawable(null)
+            // show small tile
+
+            val smallHolder = holder as SmallViewHolder
+
+            // set item focus state
+            smallHolder.smallNewsTileLayout.isSelected = true
+
+            // set item click listener
+            smallHolder.smallNewsTileLayout.setOnClickListener{
+                listener(newsDataset[position])
+            }
+
+            // load image
+            val imageUrl = newsDataset[position]?.image
+            if (imageUrl != null) {
+                GlideApp.with(smallHolder.smallNewsTileImage.context)
+                    .load(imageUrl)
+                    .miniThumbnail()
+                    .into(smallHolder.smallNewsTileImage)
+            } else {
+                smallHolder.smallNewsTileImage.setImageDrawable(null)
+            }
+
+            // load title
+            smallHolder.smallNewsTileName.text = newsDataset[position]?.title
+
+            // load source
+            smallHolder.smallNewsTileSource.text = newsDataset[position]?.source?.title
         }
-
-        // load title
-        holder.newsTileName.text = newsDataset[position]?.title
-
-        // load source
-        holder.newsTileSource.text = newsDataset[position]?.source?.title
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount(): Int = newsDataset.size
+
+
+    private fun bindSmallTile() {
+
+    }
+
+    private fun bindLargeTile() {
+
+    }
 
 }

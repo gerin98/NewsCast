@@ -33,7 +33,8 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val newsTopic: LiveData<String?>
         get() = _newsTopicLiveData
 
-    var lastRequest: NewsRequestBody? = null
+    /* Variables */
+    private var lastRequest: NewsRequestBody? = null
 
     /** Get News **/
     fun getInitialNews() {
