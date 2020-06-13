@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.browse.MainActivity
 import com.example.newscast.utils.glide.GlideApp
-import com.example.newscast.utils.glide.miniThumbnail
 import kotlinx.android.synthetic.main.activity_news_paper.*
 import timber.log.Timber
+
 
 class NewsPaperActivity : AppCompatActivity() {
 
@@ -53,6 +55,18 @@ class NewsPaperActivity : AppCompatActivity() {
                 .into(news_paper_article_image)
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                NavUtils.navigateUpTo(this, intent)
+                return true
+            }
+            else -> {
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     // Todo: move to helper later on

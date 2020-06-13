@@ -13,18 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name=".ui.newspaper.NewsPaperActivity"
-            android:parentActivityName=".ui.browse.MainActivity"
-            android:label=""
-            android:theme="@style/AppTheme.ActionBar"/>
-        <activity android:name=".ui.browse.MainActivity"
+            android:name=".ui.browse.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.newspaper.NewsPaperActivity"
+            android:parentActivityName=".ui.browse.MainActivity"
+            android:label="newspaper"
+            android:theme="@style/AppTheme.ActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -6,23 +6,17 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
-import com.example.newscast.databinding.ActivityMainBinding
-import com.example.newscast.network.model.NewsModel
 import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.ui.adapter.NewsAdapter
 import com.example.newscast.ui.newspaper.NewsPaperActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -37,76 +31,20 @@ class MainActivity : AppCompatActivity(),
         const val NEWS_TOPIC_INTENT_FLAGS = "NEWS_TOPIC_INTENT_FLAGS"
     }
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var dataset: ArrayList<ResultsModel?>
-    private var newsTopic = "Breaking News"
-
-    private val viewModel by lazy {
-        ViewModelProvider(this, MainActivityViewModelFactory()).get(MainActivityViewModel::class.java)
-    }
+    private val viewModel: MainActivityViewModel by viewModels { MainActivityViewModelFactory() }
 
     // Observers
-    private val newsLiveDataObserver = Observer<NewsModel> { news ->
-        dataset.clear()
-        val results = news.articles?.results
-        results?.let{
-            for (result in results) {
-                dataset.add(result)
-            }
-        }
-
-        if (dataset.isEmpty()) {
-            showZeroCase(true)
-        } else {
-            showZeroCase(false)
-            viewManager.scrollToPosition( 0)
-        }
-
-        viewAdapter.notifyDataSetChanged()
-    }
-
     private val errorMessageLiveDataObserver = Observer<Boolean> { error ->
         if (error) {
             Toast.makeText(this, "Sorry something went wrong. Please try again later.", Toast.LENGTH_LONG).show()
         }
     }
 
-    private val newsTopicLiveDataObserver = Observer<String?> {
-        it?.let {
-            newsTopic = it
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
-            lifecycleOwner = this@MainActivity
-            viewModel = this@MainActivity.viewModel
-        }
+        setContentView(R.layout.activity_main)
         this.setSupportActionBar(newsBottomAppBar)
-
-        dataset = ArrayList()
-
-        viewManager = LinearLayoutManager(this)
-        viewAdapter = NewsAdapter(dataset) {
-            recyclerViewOnClick(it)
-        }
-
-
-        val dividerItemDecoration = DividerItemDecoration(this, LinearLayout.VERTICAL).apply {
-            this@MainActivity.getDrawable(R.drawable.divider)?.let {
-                setDrawable(it)
-            }
-        }
-
-        recyclerView = findViewById<RecyclerView>(R.id.newsRecyclerView).apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = viewAdapter
-            addItemDecoration(dividerItemDecoration)
-        }
 
         navigationView.setNavigationItemSelectedListener(this)
         news_button.setOnClickListener(this)
@@ -116,9 +54,15 @@ class MainActivity : AppCompatActivity(),
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
-        showZeroCase(true)
-
         initLiveData()
+
+        val fragment = BrowseFragment()
+        val fragmentManager: FragmentManager = supportFragmentManager
+        fragmentManager
+            .beginTransaction()
+            .replace(R.id.browse_fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -183,6 +127,11 @@ class MainActivity : AppCompatActivity(),
         return when(item?.itemId) {
             R.id.menu_favourites -> {
                 // do something
+                val intent = Intent(this, NewsPaperActivity::class.java)
+                val resultsModel = ResultsModel()
+                intent.putExtra(NEWS_ARTICLE_INTENT_FLAGS, resultsModel)
+                intent.putExtra(NEWS_TOPIC_INTENT_FLAGS, "Tech")
+                startActivity(intent)
                 true
             }
             R.id.menu_search -> {
@@ -206,29 +155,10 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    private fun recyclerViewOnClick(item: ResultsModel?) {
-        val intent = Intent(this, NewsPaperActivity::class.java)
-        intent.putExtra(NEWS_ARTICLE_INTENT_FLAGS, item)
-        intent.putExtra(NEWS_TOPIC_INTENT_FLAGS, newsTopic)
-        startActivity(intent)
-    }
-
     private fun initLiveData() {
         viewModel.getInitialNews()
 
-        viewModel.newsLiveData.observe(this, newsLiveDataObserver)
         viewModel.errorMessageLiveData.observe(this, errorMessageLiveDataObserver)
-        viewModel.newsTopic.observe(this, newsTopicLiveDataObserver)
-    }
-
-    private fun showZeroCase(show: Boolean) {
-        if (show) {
-            recyclerView.visibility = View.GONE
-            recycler_view_zero_case.visibility = View.VISIBLE
-        } else {
-            recyclerView.visibility = View.VISIBLE
-            recycler_view_zero_case.visibility = View.GONE
-        }
     }
 
 }

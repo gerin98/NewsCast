@@ -5,7 +5,7 @@
     tools:context=".ui.browse.MainActivity">
 
     <data>
-        <variable name="viewModel" type="com.example.newscast.ui.browse.MainActivityViewModel" />
+
     </data>
 
     <!-- Parent layout containing Sidebar and Main Layout   -->
@@ -20,76 +20,10 @@
             android:layout_height="match_parent">
 
             <!-- List of Articles -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/newsLayout"
+            <FrameLayout
+                android:id="@+id/browse_fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <!-- Title Layout -->
-                <LinearLayout
-                    android:id="@+id/newsLayoutTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/newsLayoutTitleText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/Headline2"
-                        android:text="@{viewModel.newsTopic}"
-                        tools:text="Breaking News"/>
-
-                </LinearLayout>
-
-                <!-- Progress bar indicator -->
-                <ProgressBar
-                    android:id="@+id/my_progressBar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/newsLayoutTitle"
-                    android:booleanVisibility="@{viewModel.progressBarVisibility}"
-                    android:indeterminate="true"
-                    tools:visibility="visible"/>
-
-                <!-- News Articles -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/newsRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toTopOf="@id/newsLayoutBottomPadding"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/newsLayoutTitle" />
-
-                <!-- Zero Case-->
-                <TextView
-                    android:id="@+id/recycler_view_zero_case"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/no_news_articles_found"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
-
-                <!-- Bottom Padding -->
-                <LinearLayout
-                    android:id="@+id/newsLayoutBottomPadding"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="horizontal" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent" />
 
             <!-- Bottom App Bar -->
             <com.google.android.material.bottomappbar.BottomAppBar
