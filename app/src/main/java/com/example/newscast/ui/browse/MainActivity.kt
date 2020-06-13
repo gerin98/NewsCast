@@ -14,7 +14,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.newspaper.NewsPaperActivity
@@ -127,11 +126,6 @@ class MainActivity : AppCompatActivity(),
         return when(item?.itemId) {
             R.id.menu_favourites -> {
                 // do something
-                val intent = Intent(this, NewsPaperActivity::class.java)
-                val resultsModel = ResultsModel()
-                intent.putExtra(NEWS_ARTICLE_INTENT_FLAGS, resultsModel)
-                intent.putExtra(NEWS_TOPIC_INTENT_FLAGS, "Tech")
-                startActivity(intent)
                 true
             }
             R.id.menu_search -> {
@@ -153,6 +147,11 @@ class MainActivity : AppCompatActivity(),
             }
             else -> {}
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun initLiveData() {
