@@ -64,6 +64,7 @@ class SearchActivity : AppCompatActivity() {
                 }
 
             })
+            requestFocus()
         }
 
         return true
@@ -79,6 +80,11 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun initLiveData() {

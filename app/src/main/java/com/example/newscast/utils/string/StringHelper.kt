@@ -11,6 +11,13 @@ val stringHelperModule = module {
 
 class StringHelper {
 
+    /**
+     * Create a spannable string to underline input text.
+     *
+     * @param text text that will be underlined
+     * @param underlineStart index to begin underline at
+     * @param underlineEnd index to end underline at
+     */
     fun underlineText(text: String, underlineStart: Int? = null, underlineEnd: Int? = null): SpannableString {
             val underlinedContent = SpannableString(text)
             val start = 0
