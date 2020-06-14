@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.browse.MainActivity"
+            android:name=".ui.browse.BrowseActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
             android:name=".ui.search.SearchActivity"
             android:label=""
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.browse.MainActivity"
+            android:parentActivityName=".ui.browse.BrowseActivity"
             android:theme="@style/searchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -40,7 +40,7 @@
         <activity
             android:name=".ui.newspaper.NewsPaperActivity"
             android:label=""
-            android:parentActivityName=".ui.browse.MainActivity"
+            android:parentActivityName=".ui.browse.BrowseActivity"
             android:theme="@style/AppTheme.ActionBar" >
 
         </activity>

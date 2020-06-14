@@ -1,7 +1,8 @@
-package com.example.newscast.ui.browse
+package com.example.newscast.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.newscast.ui.browse.BrowseViewModel
 import com.example.newscast.ui.search.SearchViewModel
 
 class ViewModelFactory : ViewModelProvider.Factory {

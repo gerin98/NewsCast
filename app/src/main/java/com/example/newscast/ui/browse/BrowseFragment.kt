@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.databinding.FragmentBrowseBinding
 import com.example.newscast.network.model.ResultsModel
+import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.NewsAdapter
 import com.example.newscast.ui.newspaper.NewsPaperActivity
 
@@ -92,6 +93,16 @@ class BrowseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView(view)
+        initLiveData()
+    }
+
+    private fun initLiveData() {
+        viewModel.newsLiveData.observe(viewLifecycleOwner, newsLiveDataObserver)
+        viewModel.newsTopic.observe(viewLifecycleOwner, newsTopicLiveDataObserver)
+    }
+
+    private fun setupRecyclerView(view: View) {
         dataset = ArrayList()
 
         viewManager = LinearLayoutManager(activity)
@@ -111,19 +122,12 @@ class BrowseFragment : Fragment() {
             adapter = viewAdapter
             addItemDecoration(dividerItemDecoration)
         }
-
-        initLiveData()
-    }
-
-    private fun initLiveData() {
-        viewModel.newsLiveData.observe(viewLifecycleOwner, newsLiveDataObserver)
-        viewModel.newsTopic.observe(viewLifecycleOwner, newsTopicLiveDataObserver)
     }
 
     private fun recyclerViewOnClick(item: ResultsModel?) {
         val intent = Intent(activity, NewsPaperActivity::class.java)
-        intent.putExtra(MainActivity.NEWS_ARTICLE_INTENT_FLAGS, item)
-        intent.putExtra(MainActivity.NEWS_TOPIC_INTENT_FLAGS, newsTopic)
+        intent.putExtra(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS, item)
+        intent.putExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS, newsTopic)
         startActivity(intent)
     }
 

@@ -13,7 +13,7 @@ import androidx.core.app.NavUtils
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.example.newscast.R
-import com.example.newscast.ui.browse.ViewModelFactory
+import com.example.newscast.ui.ViewModelFactory
 import timber.log.Timber
 
 class SearchActivity : AppCompatActivity() {
@@ -43,16 +43,14 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the options menu from XML
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_search, menu)
 
         // Get the SearchView and set the searchable configuration
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.searchView).actionView as SearchView).apply {
-            // Assumes current activity is the searchable activity
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+            setIconifiedByDefault(false)
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     Timber.e("Search query: $query")

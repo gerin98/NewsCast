@@ -15,11 +15,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.example.newscast.R
+import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.search.SearchActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(),
+class BrowseActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener,
     Toolbar.OnMenuItemClickListener,
     View.OnClickListener {

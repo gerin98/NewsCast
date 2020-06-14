@@ -1,34 +1,23 @@
 package com.example.newscast.ui.search
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
-import com.example.newscast.databinding.FragmentBrowseBinding
 import com.example.newscast.databinding.FragmentSearchBinding
-import com.example.newscast.network.model.NewsModel
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter
-import com.example.newscast.ui.browse.MainActivity
-import com.example.newscast.ui.browse.ViewModelFactory
-import com.example.newscast.ui.newspaper.NewsPaperActivity
-import timber.log.Timber
+import com.example.newscast.ui.ViewModelFactory
+import com.example.newscast.ui.adapter.SearchAdapter
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -81,15 +70,11 @@ class SearchFragment : Fragment() {
         viewAdapter.notifyDataSetChanged()
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentSearchBinding = DataBindingUtil.inflate<FragmentSearchBinding>(inflater, R.layout.fragment_search, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@SearchFragment.viewModel
@@ -101,10 +86,19 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView(view)
+        initLiveData()
+    }
+
+    private fun initLiveData() {
+        viewModel.searchLiveData.observe(viewLifecycleOwner, newsLiveDataObserver)
+    }
+
+    private fun setupRecyclerView(view: View) {
         dataset = ArrayList()
 
         viewManager = LinearLayoutManager(activity)
-        viewAdapter = NewsAdapter(dataset) {
+        viewAdapter = SearchAdapter(dataset) {
             recyclerViewOnClick(it)
         }
 
@@ -120,16 +114,10 @@ class SearchFragment : Fragment() {
             adapter = viewAdapter
             addItemDecoration(dividerItemDecoration)
         }
-
-        initLiveData()
     }
 
     private fun recyclerViewOnClick(item: ResultsModel?) {
-       // todo
+        // todo
     }
-
-    private fun initLiveData() {
-        viewModel.searchLiveData.observe(viewLifecycleOwner, newsLiveDataObserver)
-    }
-
+    
 }

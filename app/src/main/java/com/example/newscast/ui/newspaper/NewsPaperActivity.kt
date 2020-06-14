@@ -10,7 +10,7 @@ import androidx.core.app.NavUtils
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
-import com.example.newscast.ui.browse.MainActivity
+import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.utils.glide.GlideApp
 import kotlinx.android.synthetic.main.activity_news_paper.*
 import timber.log.Timber
@@ -22,8 +22,8 @@ class NewsPaperActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_paper)
 
-        val result: ResultsModel? = intent.extras?.get(MainActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
-        val topic: String? = intent.getStringExtra(MainActivity.NEWS_TOPIC_INTENT_FLAGS)
+        val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
+        val topic: String? = intent.getStringExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS)
         var source: SourceModel? = null
         var imageUrl: String? = null
 
