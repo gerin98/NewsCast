@@ -56,18 +56,12 @@ class SearchViewModel : ViewModel(), KoinComponent {
 
     private fun parseArticles(response: NewsModel?) {
         val results = response?.articles?.results
-
-       results?.let { searchResults ->
-           if (searchResults.isNotEmpty()) {
-               _showZeroCaseLiveData.postValue(false)
-               _searchLiveData.postValue(searchResults)
-           } else {
-               noResults()
-           }
-           return
-       }
-
-        noResults()
+        if (results != null && results.isNotEmpty()) {
+            _showZeroCaseLiveData.postValue(false)
+            _searchLiveData.postValue(results)
+        } else {
+            noResults()
+        }
     }
 
     private fun noResults() {
