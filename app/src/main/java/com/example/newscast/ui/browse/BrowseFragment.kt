@@ -38,6 +38,7 @@ class BrowseFragment : Fragment() {
             for (result in it) {
                 dataset.add(result)
             }
+            viewManager.scrollToPosition( 0)
         }
 
         viewAdapter.notifyDataSetChanged()

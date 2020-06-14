@@ -158,7 +158,6 @@ class BrowseActivity : AppCompatActivity(),
 
     private fun initLiveData() {
         viewModel.getInitialNews()
-
         viewModel.errorMessageLiveData.observe(this, errorMessageLiveDataObserver)
     }
 
