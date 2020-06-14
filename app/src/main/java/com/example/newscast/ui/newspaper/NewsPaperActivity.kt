@@ -13,11 +13,15 @@ import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.utils.glide.GlideApp
+import com.example.newscast.utils.string.StringHelper
 import kotlinx.android.synthetic.main.activity_news_paper.*
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 
 class NewsPaperActivity : AppCompatActivity() {
+
+    private val stringHelper by inject<StringHelper> ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +47,8 @@ class NewsPaperActivity : AppCompatActivity() {
         }
 
         source?.let {
-            news_paper_article_author.text = authorTextHelper(it)
+            val authorText =  String.format(getString(R.string.news_paper_author), it.title)
+            news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
         }
 
         topic?.let {
@@ -69,14 +74,6 @@ class NewsPaperActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    // Todo: move to helper later on
-    private fun authorTextHelper(source: SourceModel): SpannableString {
-        val authorText =  String.format(getString(R.string.news_paper_author), source.title)
-        val underlinedContent = SpannableString(authorText)
-        underlinedContent.setSpan(UnderlineSpan(), 3, underlinedContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        return underlinedContent
     }
 
 }
