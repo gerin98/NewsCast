@@ -5,6 +5,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import com.example.newscast.R
@@ -46,6 +47,7 @@ class NewsPaperActivity : AppCompatActivity() {
         }
 
         topic?.let {
+            news_paper_article_tag.visibility = View.VISIBLE
             news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
         }
 

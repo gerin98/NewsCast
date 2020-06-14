@@ -1,5 +1,6 @@
 package com.example.newscast.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +19,8 @@ import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.SearchAdapter
+import com.example.newscast.ui.browse.BrowseActivity
+import com.example.newscast.ui.newspaper.NewsPaperActivity
 
 class SearchFragment : Fragment() {
 
@@ -88,7 +91,9 @@ class SearchFragment : Fragment() {
     }
 
     private fun recyclerViewOnClick(item: ResultsModel?) {
-        // todo
+        val intent = Intent(activity, NewsPaperActivity::class.java)
+        intent.putExtra(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS, item)
+        startActivity(intent)
     }
 
 }
