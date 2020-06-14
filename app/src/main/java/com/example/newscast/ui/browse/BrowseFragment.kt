@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +50,7 @@ class BrowseFragment : Fragment() {
             }
     }
 
-    private val viewModel: MainActivityViewModel by activityViewModels { MainActivityViewModelFactory() }
+    private val viewModel: MainActivityViewModel by activityViewModels { ViewModelFactory() }
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -60,11 +59,11 @@ class BrowseFragment : Fragment() {
     private var newsTopic = "Breaking News"
 
     // Observers
-    private val newsLiveDataObserver = Observer<NewsModel> { news ->
+    private val newsLiveDataObserver = Observer<NewsModel?> { news ->
         dataset.clear()
-        val results = news.articles?.results
+        val results = news?.articles?.results
         results?.let{
-            for (result in results) {
+            for (result in it) {
                 dataset.add(result)
             }
         }
@@ -88,9 +87,6 @@ class BrowseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

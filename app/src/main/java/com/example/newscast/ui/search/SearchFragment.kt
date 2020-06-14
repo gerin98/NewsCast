@@ -1,13 +1,35 @@
 package com.example.newscast.ui.search
 
+import android.app.SearchManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+import com.example.newscast.databinding.FragmentBrowseBinding
+import com.example.newscast.databinding.FragmentSearchBinding
+import com.example.newscast.network.model.NewsModel
+import com.example.newscast.network.model.ResultsModel
+import com.example.newscast.ui.adapter.NewsAdapter
+import com.example.newscast.ui.browse.MainActivity
+import com.example.newscast.ui.browse.ViewModelFactory
+import com.example.newscast.ui.newspaper.NewsPaperActivity
+import timber.log.Timber
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -17,23 +39,8 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
 
     companion object {
         /**
@@ -44,13 +51,85 @@ class SearchFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment SearchFragment.
          */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
-                SearchFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            SearchFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
+            }
     }
+
+    private val viewModel: SearchViewModel by activityViewModels { ViewModelFactory() }
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var dataset: ArrayList<ResultsModel?>
+
+    // Observers
+    private val newsLiveDataObserver = Observer<List<ResultsModel?>?> {
+        dataset.clear()
+
+        if (it != null) {
+            for (result in it) {
+                dataset.add(result)
+            }
+        }
+
+        viewAdapter.notifyDataSetChanged()
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding: FragmentSearchBinding = DataBindingUtil.inflate<FragmentSearchBinding>(inflater, R.layout.fragment_search, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@SearchFragment.viewModel
+        }
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dataset = ArrayList()
+
+        viewManager = LinearLayoutManager(activity)
+        viewAdapter = NewsAdapter(dataset) {
+            recyclerViewOnClick(it)
+        }
+
+        val dividerItemDecoration = DividerItemDecoration(activity, LinearLayout.VERTICAL).apply {
+            activity?.getDrawable(R.drawable.divider)?.let {
+                setDrawable(it)
+            }
+        }
+
+        recyclerView = view.findViewById<RecyclerView>(R.id.searchRecyclerView).apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+            addItemDecoration(dividerItemDecoration)
+        }
+
+        initLiveData()
+    }
+
+    private fun recyclerViewOnClick(item: ResultsModel?) {
+       // todo
+    }
+
+    private fun initLiveData() {
+        viewModel.searchLiveData.observe(viewLifecycleOwner, newsLiveDataObserver)
+    }
+
 }

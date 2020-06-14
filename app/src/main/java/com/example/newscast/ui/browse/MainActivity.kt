@@ -15,8 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.example.newscast.R
-import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.ui.newspaper.NewsPaperActivity
+import com.example.newscast.ui.search.SearchActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity(),
         const val NEWS_TOPIC_INTENT_FLAGS = "NEWS_TOPIC_INTENT_FLAGS"
     }
 
-    private val viewModel: MainActivityViewModel by viewModels { MainActivityViewModelFactory() }
+    private val viewModel: MainActivityViewModel by viewModels { ViewModelFactory() }
 
     // Observers
     private val errorMessageLiveDataObserver = Observer<Boolean> { error ->
@@ -129,7 +128,9 @@ class MainActivity : AppCompatActivity(),
                 true
             }
             R.id.menu_search -> {
-                // do something
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)
+
                 true
             }
             R.id.menu_refresh -> {

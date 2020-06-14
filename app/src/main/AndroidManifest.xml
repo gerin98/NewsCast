@@ -19,15 +19,31 @@
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".ui.newspaper.NewsPaperActivity"
+            android:name=".ui.search.SearchActivity"
+            android:label=""
+            android:launchMode="singleTop"
             android:parentActivityName=".ui.browse.MainActivity"
-            android:label="newspaper"
-            android:theme="@style/AppTheme.ActionBar"/>
+            android:theme="@style/searchTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+
+        <activity
+            android:name=".ui.newspaper.NewsPaperActivity"
+            android:label=""
+            android:parentActivityName=".ui.browse.MainActivity"
+            android:theme="@style/AppTheme.ActionBar" >
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

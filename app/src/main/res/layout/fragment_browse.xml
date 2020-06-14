@@ -37,7 +37,7 @@
 
     <!-- Progress bar indicator -->
     <ProgressBar
-        android:id="@+id/my_progressBar"
+        android:id="@+id/newsProgressBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

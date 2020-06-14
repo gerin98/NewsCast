@@ -12,4 +12,10 @@ interface NewsService {
     )
     @POST("getArticles")
     suspend fun getArticles(@Body body: NewsRequestBody) : NewsModel
+
+    @Headers(
+        "Content-Type: application/json"
+    )
+    @POST("getArticles")
+    suspend fun getSearchArticles(@Body body: SearchRequestBody) : NewsModel
 }

@@ -98,7 +98,8 @@
     <string name="news_paper_author">by %s</string>
     <string name="news_paper_news_topic">¬ %s</string>
     <string name="news_paper_news_url">Source: %s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="app_label">NewsCast</string>
+    <string name="search_hint">Search for a keyword</string>
 
 </resources>

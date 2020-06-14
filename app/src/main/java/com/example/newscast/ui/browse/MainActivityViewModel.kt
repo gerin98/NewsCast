@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newscast.network.NewsRequestBody
 import com.example.newscast.network.model.NewsModel
+import com.example.newscast.repository.NewsRepository
 import com.example.newscast.utils.state.Status
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
