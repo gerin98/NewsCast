@@ -24,6 +24,10 @@ class SearchViewModel : ViewModel(), KoinComponent {
     val searchLiveData: LiveData<List<ResultsModel?>?>
         get() = _searchLiveData
 
+    private val _errorMessageLiveData = MutableLiveData<Boolean>(false)
+    val errorMessageLiveData: LiveData<Boolean>
+        get() = _errorMessageLiveData
+
     private val _progressBarVisibilityLiveData = MutableLiveData<Boolean>()
     val progressBarVisibility: LiveData<Boolean>
         get() = _progressBarVisibilityLiveData
@@ -43,7 +47,7 @@ class SearchViewModel : ViewModel(), KoinComponent {
             if (response.status == Status.SUCCESS) {
                 parseArticles(response.data)
             } else if (response.status == Status.ERROR) {
-                Timber.e("Response = ${response.message}")
+                _errorMessageLiveData.postValue(true)
             }
 
             _progressBarVisibilityLiveData.postValue(false)
@@ -54,21 +58,23 @@ class SearchViewModel : ViewModel(), KoinComponent {
         val results = response?.articles?.results
 
        results?.let { searchResults ->
-           Timber.e("parseArticles")
            if (searchResults.isNotEmpty()) {
                _showZeroCaseLiveData.postValue(false)
                _searchLiveData.postValue(searchResults)
            } else {
-               _showZeroCaseLiveData.postValue(true)
-               _searchLiveData.postValue(null)
+               noResults()
            }
            return
        }
 
-        Timber.e("parseArticles 2")
+        noResults()
+    }
+
+    private fun noResults() {
         _showZeroCaseLiveData.postValue(true)
         _searchLiveData.postValue(null)
-        // todo: show error message
+        _errorMessageLiveData.postValue(true)
+        // todo: hook up error live data with activity
     }
 
 }

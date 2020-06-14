@@ -6,20 +6,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newscast.network.NewsRequestBody
 import com.example.newscast.network.model.NewsModel
+import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.repository.NewsRepository
 import com.example.newscast.utils.state.Status
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import timber.log.Timber
 
-class MainActivityViewModel: ViewModel(), KoinComponent {
+class BrowseViewModel: ViewModel(), KoinComponent {
 
     /** Koin Components **/
     private val repo by inject<NewsRepository>()
 
     /** Live Data **/
-    private val _newsLiveData = MutableLiveData<NewsModel>()
-    val newsLiveData: LiveData<NewsModel>
+    private val _newsLiveData = MutableLiveData<List<ResultsModel?>?>()
+    val newsLiveData: LiveData<List<ResultsModel?>?>
         get() = _newsLiveData
 
     private val _errorMessageLiveData = MutableLiveData<Boolean>(false)
@@ -30,9 +32,14 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
     val progressBarVisibility: LiveData<Boolean>
         get() = _progressBarVisibilityLiveData
 
+    private val _showZeroCaseLiveData = MutableLiveData<Boolean>(true)
+    val showZeroCaseLiveData: LiveData<Boolean>
+        get() = _showZeroCaseLiveData
+
     private val _newsTopicLiveData = MutableLiveData<String?>()
     val newsTopic: LiveData<String?>
         get() = _newsTopicLiveData
+
 
     /* Variables */
     private var lastRequest: NewsRequestBody? = null
@@ -48,7 +55,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 lastRequest = body
-                _newsLiveData.postValue(response.data)
+                parseArticles(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
                 _errorMessageLiveData.postValue(true)
@@ -69,7 +76,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 lastRequest = body
-                _newsLiveData.postValue(response.data)
+                parseArticles(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
                 _errorMessageLiveData.postValue(true)
@@ -146,7 +153,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
 
             if (response.status == Status.SUCCESS) {
                 lastRequest = body
-                _newsLiveData.postValue(response.data)
+                parseArticles(response.data)
                 _newsTopicLiveData.postValue(title)
             } else if (response.status == Status.ERROR) {
                 _errorMessageLiveData.postValue(true)
@@ -171,7 +178,7 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
                 val response = repo.getNews(it)
 
                 if (response.status == Status.SUCCESS) {
-                    _newsLiveData.postValue(response.data)
+                    parseArticles(response.data)
                 } else if (response.status == Status.ERROR) {
                     _errorMessageLiveData.postValue(true)
                 }
@@ -180,6 +187,28 @@ class MainActivityViewModel: ViewModel(), KoinComponent {
             }
         }
 
+    }
+
+    private fun parseArticles(response: NewsModel?) {
+        val results = response?.articles?.results
+
+        results?.let { searchResults ->
+            if (searchResults.isNotEmpty()) {
+                _showZeroCaseLiveData.postValue(false)
+                _newsLiveData.postValue(searchResults)
+            } else {
+                noResults()
+            }
+            return
+        }
+
+        noResults()
+    }
+
+    private fun noResults() {
+        _showZeroCaseLiveData.postValue(true)
+        _newsLiveData.postValue(null)
+        _errorMessageLiveData.postValue(true)
     }
 
 }

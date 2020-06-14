@@ -9,11 +9,8 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.NavUtils
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.example.newscast.R
-import com.example.newscast.ui.browse.BrowseFragment
-import com.example.newscast.ui.browse.MainActivityViewModel
 import com.example.newscast.ui.browse.ViewModelFactory
 import timber.log.Timber
 

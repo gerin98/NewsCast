@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(),
         const val NEWS_TOPIC_INTENT_FLAGS = "NEWS_TOPIC_INTENT_FLAGS"
     }
 
-    private val viewModel: MainActivityViewModel by viewModels { ViewModelFactory() }
+    private val viewModel: BrowseViewModel by viewModels { ViewModelFactory() }
 
     // Observers
     private val errorMessageLiveDataObserver = Observer<Boolean> { error ->

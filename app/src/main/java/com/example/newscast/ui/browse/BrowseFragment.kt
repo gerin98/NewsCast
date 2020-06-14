@@ -15,11 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.databinding.FragmentBrowseBinding
-import com.example.newscast.network.model.NewsModel
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.adapter.NewsAdapter
 import com.example.newscast.ui.newspaper.NewsPaperActivity
-import kotlinx.android.synthetic.main.fragment_browse.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -50,7 +48,7 @@ class BrowseFragment : Fragment() {
             }
     }
 
-    private val viewModel: MainActivityViewModel by activityViewModels { ViewModelFactory() }
+    private val viewModel: BrowseViewModel by activityViewModels { ViewModelFactory() }
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -59,20 +57,13 @@ class BrowseFragment : Fragment() {
     private var newsTopic = "Breaking News"
 
     // Observers
-    private val newsLiveDataObserver = Observer<NewsModel?> { news ->
+    private val newsLiveDataObserver = Observer<List<ResultsModel?>?> {
         dataset.clear()
-        val results = news?.articles?.results
-        results?.let{
+
+        if (it != null) {
             for (result in it) {
                 dataset.add(result)
             }
-        }
-
-        if (dataset.isEmpty()) {
-            showZeroCase(true)
-        } else {
-            showZeroCase(false)
-            viewManager.scrollToPosition( 0)
         }
 
         viewAdapter.notifyDataSetChanged()
@@ -121,8 +112,6 @@ class BrowseFragment : Fragment() {
             addItemDecoration(dividerItemDecoration)
         }
 
-        showZeroCase(true)
-
         initLiveData()
     }
 
@@ -136,16 +125,6 @@ class BrowseFragment : Fragment() {
         intent.putExtra(MainActivity.NEWS_ARTICLE_INTENT_FLAGS, item)
         intent.putExtra(MainActivity.NEWS_TOPIC_INTENT_FLAGS, newsTopic)
         startActivity(intent)
-    }
-
-    private fun showZeroCase(show: Boolean) {
-        if (show) {
-            recyclerView.visibility = View.GONE
-            recycler_view_zero_case.visibility = View.VISIBLE
-        } else {
-            recyclerView.visibility = View.VISIBLE
-            recycler_view_zero_case.visibility = View.GONE
-        }
     }
 
 }

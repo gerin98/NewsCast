@@ -5,7 +5,7 @@
     tools:context=".ui.browse.MainActivity">
 
     <data>
-        <variable name="viewModel" type="com.example.newscast.ui.browse.MainActivityViewModel" />
+        <variable name="viewModel" type="com.example.newscast.ui.browse.BrowseViewModel" />
     </data>
 
     <!-- List of Articles -->
@@ -65,7 +65,7 @@
         android:layout_height="match_parent"
         android:text="@string/no_news_articles_found"
         android:gravity="center"
-        android:visibility="gone"
+        android:booleanVisibility="@{viewModel.showZeroCaseLiveData}"
         tools:visibility="visible" />
 
     <!-- Bottom Padding -->

@@ -7,8 +7,8 @@ import com.example.newscast.ui.search.SearchViewModel
 class ViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when(modelClass) {
-            MainActivityViewModel::class.java -> {
-                MainActivityViewModel() as T
+            BrowseViewModel::class.java -> {
+                BrowseViewModel() as T
             }
             SearchViewModel::class.java -> {
                 SearchViewModel() as T
