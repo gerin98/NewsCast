@@ -2,12 +2,14 @@ package com.example.newscast.ui.search
 
 import android.app.SearchManager
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.NavUtils
 import androidx.fragment.app.FragmentManager
@@ -65,6 +67,11 @@ class SearchActivity : AppCompatActivity() {
 
             })
             requestFocus()
+
+            // remove default magnifying glass icon
+            val magIcon: ImageView = findViewById(androidx.appcompat.R.id.search_mag_icon)
+            magIcon.visibility = View.GONE
+            magIcon.setImageDrawable(null)
         }
 
         return true
