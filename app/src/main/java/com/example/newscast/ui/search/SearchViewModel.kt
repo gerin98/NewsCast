@@ -74,7 +74,6 @@ class SearchViewModel : ViewModel(), KoinComponent {
         _showZeroCaseLiveData.postValue(true)
         _searchLiveData.postValue(null)
         _errorMessageLiveData.postValue(true)
-        // todo: hook up error live data with activity
     }
 
 }

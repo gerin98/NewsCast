@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.NavUtils
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import com.example.newscast.R
 import com.example.newscast.ui.browse.ViewModelFactory
 import timber.log.Timber
@@ -17,6 +19,13 @@ import timber.log.Timber
 class SearchActivity : AppCompatActivity() {
 
     private val viewModel: SearchViewModel by viewModels { ViewModelFactory() }
+
+    // Observers
+    private val errorMessageLiveDataObserver = Observer<Boolean> { error ->
+        if (error) {
+            Toast.makeText(this, "Sorry something went wrong. Please try again later.", Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +38,8 @@ class SearchActivity : AppCompatActivity() {
             .replace(R.id.search_fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+
+        initLiveData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,6 +80,10 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initLiveData() {
+        viewModel.errorMessageLiveData.observe(this, errorMessageLiveDataObserver)
     }
 
 }
