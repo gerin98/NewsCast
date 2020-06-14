@@ -57,6 +57,7 @@ class SearchActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     Timber.e("Search query: $query")
                     viewModel.searchNews(query)
+                    clearFocus()
                     return true
                 }
 
