@@ -91,14 +91,22 @@ dependencies {
     // OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
 
+    // Room
+    implementation "androidx.room:room-runtime:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
+
+    // timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+}
+
+dependencies {
+
     // Testing with Koin
     testImplementation 'org.koin:koin-test:2.0.1'
 
     // Testing with Robolectric
     testImplementation 'androidx.test:core:1.2.0'
     testImplementation "org.robolectric:robolectric:4.3.1"
-
-    // timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 }
