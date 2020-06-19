@@ -34,9 +34,8 @@ class NewsCastApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+            Stetho.initializeWithDefaults(this)
         }
-
-        Stetho.initializeWithDefaults(this)
 
     }
 
