@@ -15,19 +15,18 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
 
     private val favouritesRepository by inject<FavouritesRepository>()
 
-
     fun favourite() {
         viewModelScope.launch {
             favouritesRepository.getAllFavourites()
         }
     }
 
-    fun insert(title: String? = null,
-               body: String? = null,
-               url: String? = null,
-               imageUrl: String? = null,
-               author: String? = null,
-               topic: String? = null) {
+    fun addToDb(title: String? = null,
+                body: String? = null,
+                url: String? = null,
+                imageUrl: String? = null,
+                author: String? = null,
+                topic: String? = null) {
         Timber.e("inserting into db")
         viewModelScope.launch(Dispatchers.IO) {
             favouritesRepository.insertArticle(title, body, url, imageUrl, author, topic)

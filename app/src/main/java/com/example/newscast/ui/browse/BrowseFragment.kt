@@ -72,21 +72,22 @@ class BrowseFragment : Fragment() {
 
         detector = RecyclerViewItemTouchListener(activity, object: OnItemClickEventListener{
             override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
-                Timber.d("gerin, onItemLongClick")
+                Timber.d("onItemLongClick")
             }
 
             override fun onItemClick(clickedView: View?, adapterPosition: Int) {
-                Timber.d("gerin, onItemClick")
+                Timber.d("onItemClick")
                 recyclerViewOnClick(dataset[adapterPosition])
             }
 
             override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
+                Timber.d("onItemDoubleClick")
                 val animateIcon = doubleClickedView?.findViewById<ImageView>(R.id.heart_animation)
                 animateIcon?.let {
-                    Timber.d("gerin, onItemDoubleClick")
                     it.visibility = View.VISIBLE
                     (it.drawable as? Animatable)?.start()
                 }
+                viewModel.addToDb(dataset[adapterPosition], newsTopic)
             }
 
         })

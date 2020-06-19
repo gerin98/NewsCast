@@ -19,6 +19,7 @@ class RecyclerViewItemTouchListener(
     context: Context?,
     listener: OnItemClickEventListener?
 ) : SimpleOnItemTouchListener() {
+
     /**
      * A listener that will be invoked on item click events.
      */
@@ -28,6 +29,11 @@ class RecyclerViewItemTouchListener(
      * A gesture detector to detect and capture click events.
      */
     private val mGestureDetector: GestureDetector
+
+    init {
+        mGestureDetector = GestureDetector(context, GestureDelegator())
+        mOnItemClickListener = listener
+    }
 
     /**
      * The child on which a click event happened.
@@ -66,7 +72,7 @@ class RecyclerViewItemTouchListener(
 
         /**
          * Called when an item is clicked.
-         * @param clickedView     The clicked view.
+         * @param clickedView The clicked view.
          * @param adapterPosition The position of the clicked view in the adapter.
          */
         fun onItemClick(clickedView: View?, adapterPosition: Int)
@@ -74,7 +80,7 @@ class RecyclerViewItemTouchListener(
         /**
          * Called when an item is double clicked.
          * @param doubleClickedView The clicked view.
-         * @param adapterPosition   The position of the clicked view in the adapter.
+         * @param adapterPosition The position of the clicked view in the adapter.
          */
         fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int)
     }
@@ -124,9 +130,4 @@ class RecyclerViewItemTouchListener(
         }
     }
 
-    init {
-        mGestureDetector =
-            GestureDetector(context, GestureDelegator())
-        mOnItemClickListener = listener
-    }
 }

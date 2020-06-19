@@ -1,9 +1,6 @@
 package com.example.newscast.ui.newspaper
 
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -72,11 +69,6 @@ class NewsPaperActivity : AppCompatActivity() {
             GlideApp.with(this)
                 .load(imageUrl)
                 .into(news_paper_article_image)
-        }
-
-        test_favourite_button.setOnClickListener{
-            Timber.e("onClick")
-            viewModel.insert(title, body, url, imageUrl, author, topic)
         }
 
     }

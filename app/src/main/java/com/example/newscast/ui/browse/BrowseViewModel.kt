@@ -7,8 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.newscast.network.NewsRequestBody
 import com.example.newscast.network.model.NewsModel
 import com.example.newscast.network.model.ResultsModel
+import com.example.newscast.repository.FavouritesRepository
 import com.example.newscast.repository.NewsRepository
 import com.example.newscast.utils.state.Status
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -18,6 +20,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
 
     /** Koin Components **/
     private val repo by inject<NewsRepository>()
+    private val favouritesRepository by inject<FavouritesRepository>()
 
     /** Live Data **/
     private val _newsLiveData = MutableLiveData<List<ResultsModel?>?>()
@@ -203,6 +206,28 @@ class BrowseViewModel: ViewModel(), KoinComponent {
         _showZeroCaseLiveData.postValue(true)
         _newsLiveData.postValue(null)
         _errorMessageLiveData.postValue(true)
+    }
+
+    /* Database operations */
+    fun addToDb(result: ResultsModel?, topic: String?) {
+        Timber.e("inserting into db from Browse")
+        var title: String? = null
+        var body: String? = null
+        var url: String? = null
+        var imageUrl: String? = null
+        var author: String? = null
+
+        result?.let {
+            title = it.title
+            body = it.body
+            url = it.url
+            imageUrl = it.image
+            author = it.source?.title
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            favouritesRepository.insertArticle(title, body, url, imageUrl, author, topic)
+        }
     }
 
 }
