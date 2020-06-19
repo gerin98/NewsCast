@@ -81,9 +81,9 @@ class BrowseFragment : Fragment() {
             }
 
             override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
-                Timber.d("gerin, onItemDoubleClick")
                 val animateIcon = doubleClickedView?.findViewById<ImageView>(R.id.heart_animation)
                 animateIcon?.let {
+                    Timber.d("gerin, onItemDoubleClick")
                     it.visibility = View.VISIBLE
                     (it.drawable as? Animatable)?.start()
                 }

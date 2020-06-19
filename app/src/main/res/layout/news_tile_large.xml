@@ -15,28 +15,42 @@
         android:layout_gravity="center"
         android:src="@drawable/ic_launcher_background" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="14dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/news_tile_large_source"
-            style="@style/Subtitle4"
+        <ImageView
+            android:id="@+id/heart_animation"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/anim_heart"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="CNN News" />
+            android:orientation="vertical"
+            android:padding="14dp">
 
-        <TextView
-            android:id="@+id/news_tile_large_title"
-            style="@style/Subtitle3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:text="Designs Use Tech To Make Futuristic Fabrics More Words" />
+            <TextView
+                android:id="@+id/news_tile_large_source"
+                style="@style/Subtitle4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="CNN News" />
+
+            <TextView
+                android:id="@+id/news_tile_large_title"
+                style="@style/Subtitle3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="Designs Use Tech To Make Futuristic Fabrics More Words" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>
