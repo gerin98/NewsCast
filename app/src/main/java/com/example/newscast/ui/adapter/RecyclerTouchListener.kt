@@ -8,7 +8,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SimpleOnItemTouchListener
 
-
+// todo: gerin
 /**
  * Created by Rany Albeg Wein on 07/11/2015.
  * Since we currently don't have a LongItemClick listener for the [RecyclerView]

@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import com.example.newscast.R
@@ -23,6 +24,8 @@ class NewsPaperActivity : AppCompatActivity() {
 
     private val stringHelper by inject<StringHelper> ()
 
+    private val viewModel: NewsPaperViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_paper)
@@ -30,15 +33,23 @@ class NewsPaperActivity : AppCompatActivity() {
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
         val topic: String? = intent.getStringExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS)
         var source: SourceModel? = null
+
+        var title: String? = null
+        var body: String? = null
+        var url: String? = null
+        var author: String? = null
         var imageUrl: String? = null
 
         result?.let {
             Timber.d("Article to be displayed: ${it.title}")
+            title = it.title
+            body = it.body
 
-            news_paper_article_title.text = it.title
-            news_paper_article_text.text = it.body
+            news_paper_article_title.text = title
+            news_paper_article_text.text = body
 
             if (it.url?.isNotEmpty() == true) {
+                url = it.url
                 news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), it.url)
             }
 
@@ -47,6 +58,7 @@ class NewsPaperActivity : AppCompatActivity() {
         }
 
         source?.let {
+            author = it.title
             val authorText =  String.format(getString(R.string.news_paper_author), it.title)
             news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
         }
@@ -60,6 +72,11 @@ class NewsPaperActivity : AppCompatActivity() {
             GlideApp.with(this)
                 .load(imageUrl)
                 .into(news_paper_article_image)
+        }
+
+        test_favourite_button.setOnClickListener{
+            Timber.e("onClick")
+            viewModel.insert(title, body, url, imageUrl, author, topic)
         }
 
     }

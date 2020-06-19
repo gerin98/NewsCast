@@ -14,11 +14,6 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
         return articlesDao.getAllArticles()
     }
 
-    suspend fun insertDummy() {
-        val dummyArticle = Articles(title = "Canada", body = "Trudeau says the lockdown is lifted")
-        articlesDao.insert(dummyArticle)
-    }
-
     suspend fun insertArticle(title: String? = null,
                               body: String? = null,
                               url: String? = null,
@@ -26,7 +21,7 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
                               author: String? = null,
                               topic: String? = null) {
         val article = Articles(null, title, body, url, imageUrl, author, topic)
-        articlesDao.insert(article)
+        articlesDao.insertItem(article)
     }
 
 }

@@ -110,9 +110,7 @@ class BrowseFragment : Fragment() {
         dataset = ArrayList()
 
         viewManager = LinearLayoutManager(activity)
-        viewAdapter = NewsAdapter(dataset) {
-            recyclerViewOnClick(it)
-        }
+        viewAdapter = NewsAdapter(dataset)
 
         val dividerItemDecoration = DividerItemDecoration(activity, LinearLayout.VERTICAL).apply {
             activity?.getDrawable(R.drawable.divider)?.let {

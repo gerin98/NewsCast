@@ -62,6 +62,14 @@
             android:textIsSelectable="true"
             tools:text="https://en.wikipedia.org/wiki/News" />
 
+        <Button
+            android:id="@+id/test_favourite_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple1"
+            android:clickable="true"
+            android:text="Favourite" />
+
     </LinearLayout>
 
 </ScrollView>

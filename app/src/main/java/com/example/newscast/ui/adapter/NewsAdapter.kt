@@ -15,9 +15,8 @@ import com.example.newscast.utils.glide.miniThumbnail
 
 
 class NewsAdapter(
-        private val newsDataset: ArrayList<ResultsModel?>,
-        private val listener: (ResultsModel?) -> Unit
-    ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        private val newsDataset: ArrayList<ResultsModel?>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val SMALL_TILE = 0
     private val LARGE_TILE = 1
@@ -71,11 +70,6 @@ class NewsAdapter(
             // set item focus state
             largeHolder.largeNewsTileImage.isSelected = true
 
-            // set item click listener
-//            largeHolder.largeNewsTileLayout.setOnClickListener{
-//                listener(newsDataset[position])
-//            }
-
             // load image
             val imageUrl = newsDataset[position]?.image
             if (imageUrl != null) {
@@ -98,11 +92,6 @@ class NewsAdapter(
 
             // set item focus state
             smallHolder.smallNewsTileLayout.isSelected = true
-
-            // set item click listener
-//            smallHolder.smallNewsTileLayout.setOnClickListener{
-//                listener(newsDataset[position])
-//            }
 
             // load image
             val imageUrl = newsDataset[position]?.image

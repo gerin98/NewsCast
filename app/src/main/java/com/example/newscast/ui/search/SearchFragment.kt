@@ -2,12 +2,12 @@ package com.example.newscast.ui.search
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.databinding.FragmentSearchBinding
 import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.ui.adapter.NewsAdapter
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.SearchAdapter
 import com.example.newscast.ui.browse.BrowseActivity
