@@ -1,11 +1,13 @@
 package com.example.newscast.ui.browse
 
 import android.content.Intent
+import android.graphics.drawable.Animatable
+import android.opengl.Visibility
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.view.GestureDetectorCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,7 +20,12 @@ import com.example.newscast.databinding.FragmentBrowseBinding
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.NewsAdapter
+import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener
+import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener.OnItemClickEventListener
 import com.example.newscast.ui.newspaper.NewsPaperActivity
+import kotlinx.android.synthetic.main.news_tile.*
+import timber.log.Timber
+
 
 class BrowseFragment : Fragment() {
 
@@ -29,6 +36,8 @@ class BrowseFragment : Fragment() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var dataset: ArrayList<ResultsModel?>
     private var newsTopic = "Breaking News"
+
+    lateinit var detector: RecyclerViewItemTouchListener
 
     // Observers
     private val newsLiveDataObserver = Observer<List<ResultsModel?>?> {
@@ -60,6 +69,27 @@ class BrowseFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@BrowseFragment.viewModel
         }
+
+        detector = RecyclerViewItemTouchListener(activity, object: OnItemClickEventListener{
+            override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
+                Timber.d("gerin, onItemLongClick")
+            }
+
+            override fun onItemClick(clickedView: View?, adapterPosition: Int) {
+                Timber.d("gerin, onItemClick")
+                recyclerViewOnClick(dataset[adapterPosition])
+            }
+
+            override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
+                Timber.d("gerin, onItemDoubleClick")
+                val animateIcon = doubleClickedView?.findViewById<ImageView>(R.id.heart_animation)
+                animateIcon?.let {
+                    it.visibility = View.VISIBLE
+                    (it.drawable as? Animatable)?.start()
+                }
+            }
+
+        })
 
         return binding.root
     }
@@ -95,6 +125,7 @@ class BrowseFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
             addItemDecoration(dividerItemDecoration)
+            addOnItemTouchListener(detector)
         }
     }
 

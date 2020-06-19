@@ -3,6 +3,7 @@ package com.example.newscast.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -22,7 +23,7 @@ class NewsAdapter(
     private val LARGE_TILE = 1
 
     class SmallViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val smallNewsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_layout)
+        val smallNewsTileLayout: FrameLayout = view.findViewById(R.id.news_tile_layout)
         val smallNewsTileName: TextView = view.findViewById(R.id.news_tile_title)
         val smallNewsTileSource: TextView = view.findViewById(R.id.news_tile_source)
         val smallNewsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
@@ -71,9 +72,9 @@ class NewsAdapter(
             largeHolder.largeNewsTileImage.isSelected = true
 
             // set item click listener
-            largeHolder.largeNewsTileLayout.setOnClickListener{
-                listener(newsDataset[position])
-            }
+//            largeHolder.largeNewsTileLayout.setOnClickListener{
+//                listener(newsDataset[position])
+//            }
 
             // load image
             val imageUrl = newsDataset[position]?.image
@@ -99,9 +100,9 @@ class NewsAdapter(
             smallHolder.smallNewsTileLayout.isSelected = true
 
             // set item click listener
-            smallHolder.smallNewsTileLayout.setOnClickListener{
-                listener(newsDataset[position])
-            }
+//            smallHolder.smallNewsTileLayout.setOnClickListener{
+//                listener(newsDataset[position])
+//            }
 
             // load image
             val imageUrl = newsDataset[position]?.image

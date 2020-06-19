@@ -4,12 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import kotlinx.coroutines.CoroutineScope
-import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 val databaseModule = module {
-    single { (scope : CoroutineScope) -> NewsDatabase.getDatabase(androidApplication(), scope) }
+    single { NewsDatabase.getDatabase(get()) }
     single { get<NewsDatabase>().articlesDao() }
 }
 
@@ -24,7 +22,7 @@ abstract class NewsDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: NewsDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): NewsDatabase {
+        fun getDatabase(context: Context): NewsDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
