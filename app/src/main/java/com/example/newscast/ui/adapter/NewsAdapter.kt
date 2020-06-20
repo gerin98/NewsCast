@@ -68,7 +68,7 @@ class NewsAdapter(
             val largeHolder = holder as LargeViewHolder
 
             // set item focus state
-            largeHolder.largeNewsTileImage.isSelected = true
+            largeHolder.largeNewsTileLayout.isSelected = true
 
             // load image
             val imageUrl = newsDataset[position]?.image

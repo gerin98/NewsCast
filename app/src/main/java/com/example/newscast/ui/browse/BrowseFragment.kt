@@ -37,7 +37,7 @@ class BrowseFragment : Fragment() {
     private lateinit var dataset: ArrayList<ResultsModel?>
     private var newsTopic = "Breaking News"
 
-    lateinit var detector: RecyclerViewItemTouchListener
+    private lateinit var detector: RecyclerViewItemTouchListener
 
     // Observers
     private val newsLiveDataObserver = Observer<List<ResultsModel?>?> {
