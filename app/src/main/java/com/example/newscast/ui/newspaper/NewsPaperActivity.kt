@@ -8,9 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import androidx.lifecycle.Observer
 import com.example.newscast.R
+import com.example.newscast.data.room.Articles
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.ViewModelFactory
+import com.example.newscast.ui.browse.ArticlesToSortBy
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.utils.glide.loadImageFromUrl
 import com.example.newscast.utils.string.StringHelper
@@ -35,6 +37,12 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private val articleLiveDataObserver = Observer<List<Articles?>> {
+        if (it.isNotEmpty()) {
+            showNewsArticleFromDb(it[0])
+        }
+    }
+
     var source: SourceModel? = null
     var title: String? = null
     var body: String? = null
@@ -51,12 +59,46 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         initLiveData()
 
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
+        val favouriteUri = intent.extras?.get(BrowseActivity.FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS) as? String
         topic = intent.getStringExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS)
 
-        loadNewsArticle(result, topic)
+        if (result != null) {
+            loadNewsArticle(result, topic)
+        } else {
+            loadNewsArticleFromDb(favouriteUri)
+        }
 
         viewModel.checkIfFavourited(uri)
         news_paper_favourite_button.setOnClickListener(this)
+    }
+
+    private fun loadNewsArticleFromDb(uri: String?) {
+        viewModel.getArticleByUri(uri)
+    }
+
+    private fun showNewsArticleFromDb(article: Articles?) {
+        Timber.e("show article from db")
+        if (article != null) {
+            title = article.title
+            body = article.body
+            url = article.url
+            author = article.author
+            imageUrl = article.imageUrl
+            uri = article.uri
+        }
+
+        news_paper_article_title.text = title
+        news_paper_article_text.text = body
+        news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
+        val authorText =  String.format(getString(R.string.news_paper_author), author)
+        news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
+        topic?.let {
+            news_paper_article_tag.visibility = View.VISIBLE
+            news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
+        }
+        imageUrl?.let{
+            news_paper_article_image.loadImageFromUrl(this, it)
+        }
     }
 
     private fun loadNewsArticle(result: ResultsModel?, topic: String?) {
@@ -73,13 +115,13 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
             if (it.url?.isNotEmpty() == true) {
                 url = it.url
-                news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), it.url)
+                news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
             }
         }
 
         source?.let {
             author = it.title
-            val authorText =  String.format(getString(R.string.news_paper_author), it.title)
+            val authorText =  String.format(getString(R.string.news_paper_author), author)
             news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
         }
 
@@ -115,6 +157,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initLiveData() {
         viewModel.favouriteLiveData.observe(this, favouritesLiveDataObserver)
+        viewModel.articleLiveData.observe(this, articleLiveDataObserver)
     }
 
 }

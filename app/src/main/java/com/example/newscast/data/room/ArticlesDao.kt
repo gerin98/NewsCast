@@ -28,7 +28,10 @@ interface ArticlesDao {
     fun getAllArticles(): List<Articles>
 
     @Query("SELECT uri FROM articles_table WHERE uri = :uri")
-    fun getArticlesByUri(uri: String): List<String?>
+    fun getArticleUriByUri(uri: String): List<String?>
+
+    @Query("SELECT * FROM articles_table WHERE uri = :uri")
+    fun getArticlesByUri(uri: String): List<Articles?>
 
     @Query("DELETE FROM articles_table WHERE uri = :uri")
     fun deleteByUri(uri: String)

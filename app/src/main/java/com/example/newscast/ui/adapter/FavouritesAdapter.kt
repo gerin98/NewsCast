@@ -9,11 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
+import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.utils.glide.GlideApp
 import com.example.newscast.utils.glide.miniThumbnail
 
 class FavouritesAdapter(
-    private val newsDataset: ArrayList<Articles?>
+    private val newsDataset: ArrayList<Articles?>,
+    private val listener: (Articles?) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,6 +39,11 @@ class FavouritesAdapter(
 
         // set item focus state
         viewHolder.newsTileLayout.isSelected = true
+
+        // set item click listener
+        viewHolder.newsTileLayout.setOnClickListener{
+            listener(newsDataset[position])
+        }
 
         // load image
         val imageUrl = newsDataset[position]?.imageUrl

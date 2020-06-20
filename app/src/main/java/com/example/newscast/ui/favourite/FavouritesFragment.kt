@@ -1,5 +1,6 @@
 package com.example.newscast.ui.favourite
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +19,8 @@ import com.example.newscast.databinding.FragmentFavouritesBinding
 import com.example.newscast.databinding.FragmentSearchBinding
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.FavouritesAdapter
+import com.example.newscast.ui.browse.BrowseActivity
+import com.example.newscast.ui.newspaper.NewsPaperActivity
 import com.example.newscast.ui.search.SearchViewModel
 
 class FavouritesFragment : Fragment() {
@@ -66,7 +69,9 @@ class FavouritesFragment : Fragment() {
         dataset = ArrayList()
 
         viewManager = LinearLayoutManager(activity)
-        viewAdapter = FavouritesAdapter(dataset)
+        viewAdapter = FavouritesAdapter(dataset) {
+            recyclerViewOnClick(it)
+        }
 
         val dividerItemDecoration = DividerItemDecoration(activity, LinearLayout.VERTICAL).apply {
             activity?.getDrawable(R.drawable.divider)?.let {
@@ -80,6 +85,13 @@ class FavouritesFragment : Fragment() {
             adapter = viewAdapter
             addItemDecoration(dividerItemDecoration)
         }
+    }
+
+    private fun recyclerViewOnClick(item: Articles?) {
+        val intent = Intent(activity, NewsPaperActivity::class.java)
+        intent.putExtra(BrowseActivity.FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS, item?.uri)
+        intent.putExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS, item?.topic)
+        startActivity(intent)
     }
 
     private fun initLiveData() {

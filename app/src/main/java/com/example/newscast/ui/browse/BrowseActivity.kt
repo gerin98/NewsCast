@@ -29,6 +29,8 @@ class BrowseActivity : AppCompatActivity(),
     companion object {
         const val NEWS_ARTICLE_INTENT_FLAGS = "NEWS_ARTICLE_INTENT_FLAGS"
         const val NEWS_TOPIC_INTENT_FLAGS = "NEWS_TOPIC_INTENT_FLAGS"
+        const val FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS = "FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS"
+        const val FAVOURITE_NEWS_TOPIC_INTENT_FLAGS = "FAVOURITE_NEWS_TOPIC_INTENT_FLAGS"
     }
 
     private val viewModel: BrowseViewModel by viewModels { ViewModelFactory() }

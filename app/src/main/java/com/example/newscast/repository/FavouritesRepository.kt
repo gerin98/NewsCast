@@ -36,12 +36,20 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
             return false
         }
 
-        val uris = articlesDao.getArticlesByUri(uri)
+        val uris = articlesDao.getArticleUriByUri(uri)
         return uris.isEmpty().not()
     }
 
     suspend fun clearFavourites() {
         articlesDao.clearFavourites()
+    }
+
+    suspend fun getArticlesByUri(uri: String?): List<Articles?> {
+        return if (uri != null) {
+            articlesDao.getArticlesByUri(uri)
+        } else {
+            emptyList()
+        }
     }
 
 }

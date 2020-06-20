@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newscast.data.room.Articles
 import com.example.newscast.data.room.NewsDatabase
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.repository.FavouritesRepository
@@ -21,6 +22,10 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
     private val _favouriteLiveData = MutableLiveData<Boolean?>(null)
     val favouriteLiveData: LiveData<Boolean?>
         get() = _favouriteLiveData
+
+    private val _articleLiveData = MutableLiveData<List<Articles?>>()
+    val articleLiveData: LiveData<List<Articles?>>
+        get() = _articleLiveData
 
     private fun addToFavourites(uri: String? = null,
                                 title: String? = null,
@@ -50,6 +55,13 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
         viewModelScope.launch(Dispatchers.IO) {
             val status = favouritesRepository.isFavourited(uri)
             _favouriteLiveData.postValue(status)
+        }
+    }
+
+    fun getArticleByUri(uri: String?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val articles = favouritesRepository.getArticlesByUri(uri)
+            _articleLiveData.postValue(articles)
         }
     }
 
