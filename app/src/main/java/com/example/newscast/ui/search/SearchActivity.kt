@@ -83,8 +83,7 @@ class SearchActivity : AppCompatActivity() {
                 NavUtils.navigateUpTo(this, intent)
                 return true
             }
-            else -> {
-            }
+            else -> {}
         }
         return super.onOptionsItemSelected(item)
     }

@@ -21,7 +21,6 @@ class FavouritesViewModel : ViewModel(), KoinComponent {
     val favouritesLiveData: LiveData<List<Articles>?>
         get() = _favouritesLiveData
 
-
     fun getAllFavourites() {
         viewModelScope.launch(Dispatchers.IO) {
             val favouriteArticles = repo.getAllFavourites()
