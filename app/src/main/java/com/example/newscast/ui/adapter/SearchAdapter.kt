@@ -3,6 +3,7 @@ package com.example.newscast.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -19,7 +20,7 @@ class SearchAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val newsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_layout)
+        val newsTileLayout: FrameLayout = view.findViewById(R.id.news_tile_layout)
         val newsTileName: TextView = view.findViewById(R.id.news_tile_title)
         val newsTileSource: TextView = view.findViewById(R.id.news_tile_source)
         val newsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
