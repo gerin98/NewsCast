@@ -1,5 +1,6 @@
 package com.example.newscast.repository
 
+import androidx.lifecycle.LiveData
 import com.example.newscast.data.room.Articles
 import com.example.newscast.data.room.ArticlesDao
 import org.koin.dsl.module
@@ -12,6 +13,10 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
 
     suspend fun getAllFavourites(): List<Articles> {
         return articlesDao.getAllArticles()
+    }
+
+    fun getAllFavouritesLiveData(): LiveData<List<Articles>?> {
+        return articlesDao.getAllArticlesLiveData()
     }
 
     suspend fun insertArticle(uri: String? = null,

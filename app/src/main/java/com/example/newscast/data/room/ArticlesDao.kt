@@ -1,5 +1,6 @@
 package com.example.newscast.data.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.IGNORE
 
@@ -26,6 +27,9 @@ interface ArticlesDao {
 
     @Query("SELECT * FROM articles_table")
     fun getAllArticles(): List<Articles>
+
+    @Query("SELECT * FROM articles_table")
+    fun getAllArticlesLiveData(): LiveData<List<Articles>?>
 
     @Query("SELECT uri FROM articles_table WHERE uri = :uri")
     fun getArticleUriByUri(uri: String): List<String?>

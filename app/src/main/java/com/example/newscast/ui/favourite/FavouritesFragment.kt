@@ -16,12 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
 import com.example.newscast.databinding.FragmentFavouritesBinding
-import com.example.newscast.databinding.FragmentSearchBinding
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.FavouritesAdapter
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.ui.newspaper.NewsPaperActivity
-import com.example.newscast.ui.search.SearchViewModel
 
 class FavouritesFragment : Fragment() {
 
@@ -33,13 +31,16 @@ class FavouritesFragment : Fragment() {
     private lateinit var dataset: ArrayList<Articles?>
 
     // Observers
-    private val favouritesLiveDataObserver = Observer<List<Articles?>?> {
+    private val favouritesLiveDataObserver = Observer<List<Articles>?> {
         dataset.clear()
 
-        if (it != null) {
+        if (it != null && it.isNotEmpty()) {
             for (result in it) {
                 dataset.add(result)
             }
+            viewModel.foundResults()
+        } else {
+            viewModel.foundNoResults()
         }
 
         viewAdapter.notifyDataSetChanged()
@@ -96,7 +97,7 @@ class FavouritesFragment : Fragment() {
 
     private fun initLiveData() {
         viewModel.favouritesLiveData.observe(viewLifecycleOwner, favouritesLiveDataObserver)
-        viewModel.getAllFavourites()
+//        viewModel.getAllFavourites()
     }
 
 }
