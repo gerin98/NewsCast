@@ -101,5 +101,7 @@
 
     <string name="app_label">NewsCast</string>
     <string name="search_hint">Search for a keyword</string>
+    <string name="no_search_results_found">No Search Results Found</string>
+    <string name="add_favourites_to_get_started">Add favourites to get started</string>
 
 </resources>

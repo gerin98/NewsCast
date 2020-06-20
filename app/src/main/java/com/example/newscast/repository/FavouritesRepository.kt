@@ -32,7 +32,6 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
     }
 
     suspend fun isFavourited(uri: String?): Boolean {
-
         if (uri == null) {
             return false
         }

@@ -21,11 +21,24 @@ class FavouritesViewModel : ViewModel(), KoinComponent {
     val favouritesLiveData: LiveData<List<Articles>?>
         get() = _favouritesLiveData
 
+    private val _showZeroCaseLiveData = MutableLiveData<Boolean>(true)
+    val showZeroCaseLiveData: LiveData<Boolean>
+        get() = _showZeroCaseLiveData
+
     fun getAllFavourites() {
         viewModelScope.launch(Dispatchers.IO) {
             val favouriteArticles = repo.getAllFavourites()
-            _favouritesLiveData.postValue(favouriteArticles)
+            if (favouriteArticles.isEmpty()) {
+                noResults()
+            } else {
+                _favouritesLiveData.postValue(favouriteArticles)
+                _showZeroCaseLiveData.postValue(false)
+            }
         }
+    }
+
+    private fun noResults() {
+        _showZeroCaseLiveData.postValue(true)
     }
 
 }

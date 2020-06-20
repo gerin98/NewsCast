@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
+import com.example.newscast.databinding.FragmentFavouritesBinding
+import com.example.newscast.databinding.FragmentSearchBinding
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.FavouritesAdapter
 import com.example.newscast.ui.search.SearchViewModel
@@ -44,7 +47,12 @@ class FavouritesFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_favourites, container, false)
+        val binding: FragmentFavouritesBinding = DataBindingUtil.inflate<FragmentFavouritesBinding>(inflater, R.layout.fragment_favourites, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@FavouritesFragment.viewModel
+        }
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -81,7 +81,7 @@ class SearchFragment : Fragment() {
             }
         }
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.searchRecyclerView).apply {
+        recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
