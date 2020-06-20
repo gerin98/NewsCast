@@ -14,20 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.favourite.FavouritesActivity"
-            android:label=""
-            android:parentActivityName=".ui.browse.BrowseActivity"
-            android:theme="@style/AppTheme.ActionBar">
-
-        </activity>
-        <activity
-            android:name=".ui.browse.BrowseActivity"
-            android:launchMode="singleTop">
+            android:name=".ui.splashscreen.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.browse.BrowseActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ui.search.SearchActivity"
             android:label=""
@@ -46,9 +43,12 @@
             android:name=".ui.newspaper.NewsPaperActivity"
             android:label=""
             android:parentActivityName=".ui.browse.BrowseActivity"
-            android:theme="@style/AppTheme.ActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.ActionBar"/>
+        <activity
+            android:name=".ui.favourite.FavouritesActivity"
+            android:label=""
+            android:parentActivityName=".ui.browse.BrowseActivity"
+            android:theme="@style/AppTheme.ActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"
