@@ -64,41 +64,12 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
         if (result != null) {
             loadNewsArticle(result, topic)
+            viewModel.checkIfFavourited(uri)
         } else {
             loadNewsArticleFromDb(favouriteUri)
         }
 
-        viewModel.checkIfFavourited(uri)
         news_paper_favourite_button.setOnClickListener(this)
-    }
-
-    private fun loadNewsArticleFromDb(uri: String?) {
-        viewModel.getArticleByUri(uri)
-    }
-
-    private fun showNewsArticleFromDb(article: Articles?) {
-        Timber.e("show article from db")
-        if (article != null) {
-            title = article.title
-            body = article.body
-            url = article.url
-            author = article.author
-            imageUrl = article.imageUrl
-            uri = article.uri
-        }
-
-        news_paper_article_title.text = title
-        news_paper_article_text.text = body
-        news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
-        val authorText =  String.format(getString(R.string.news_paper_author), author)
-        news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
-        topic?.let {
-            news_paper_article_tag.visibility = View.VISIBLE
-            news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
-        }
-        imageUrl?.let{
-            news_paper_article_image.loadImageFromUrl(this, it)
-        }
     }
 
     private fun loadNewsArticle(result: ResultsModel?, topic: String?) {
@@ -133,6 +104,37 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         imageUrl?.let{
             news_paper_article_image.loadImageFromUrl(this, it)
         }
+    }
+
+    private fun loadNewsArticleFromDb(uri: String?) {
+        viewModel.getArticleByUri(uri)
+    }
+
+    private fun showNewsArticleFromDb(article: Articles?) {
+        Timber.e("show article from db")
+        if (article != null) {
+            title = article.title
+            body = article.body
+            url = article.url
+            author = article.author
+            imageUrl = article.imageUrl
+            uri = article.uri
+        }
+
+        news_paper_article_title.text = title
+        news_paper_article_text.text = body
+        news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
+        val authorText =  String.format(getString(R.string.news_paper_author), author)
+        news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
+        topic?.let {
+            news_paper_article_tag.visibility = View.VISIBLE
+            news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
+        }
+        imageUrl?.let{
+            news_paper_article_image.loadImageFromUrl(this, it)
+        }
+
+        viewModel.checkIfFavourited(uri)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
