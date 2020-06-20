@@ -31,14 +31,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="7dp"
                 tools:text="¬ Tech"
                 tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/news_paper_favourite_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="350dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="330dp"
                 android:src="@drawable/ic_favorite_border" />
 
         </RelativeLayout>
