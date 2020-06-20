@@ -27,4 +27,7 @@ interface ArticlesDao {
     @Query("SELECT * from articles_table")
     fun getAllArticles(): List<Articles>
 
+    @Query("SELECT article_uri from articles_table where article_uri = :uri")
+    fun getArticlesByUri(uri: String): List<String?>
+
 }

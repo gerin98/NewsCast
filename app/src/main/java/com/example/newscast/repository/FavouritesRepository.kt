@@ -14,14 +14,25 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
         return articlesDao.getAllArticles()
     }
 
-    suspend fun insertArticle(title: String? = null,
+    suspend fun insertArticle(uri: String? = null,
+                              title: String? = null,
                               body: String? = null,
                               url: String? = null,
                               imageUrl: String? = null,
                               author: String? = null,
                               topic: String? = null) {
-        val article = Articles(null, title, body, url, imageUrl, author, topic)
+        val article = Articles(null, uri, title, body, url, imageUrl, author, topic)
         articlesDao.insertItem(article)
+    }
+
+    suspend fun isFavourited(uri: String?): Boolean {
+
+        if (uri == null) {
+            return false
+        }
+
+        val uris = articlesDao.getArticlesByUri(uri)
+        return uris.isEmpty().not()
     }
 
 }

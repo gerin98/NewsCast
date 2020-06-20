@@ -216,6 +216,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
         var url: String? = null
         var imageUrl: String? = null
         var author: String? = null
+        var uri: String? = null
 
         result?.let {
             title = it.title
@@ -223,10 +224,11 @@ class BrowseViewModel: ViewModel(), KoinComponent {
             url = it.url
             imageUrl = it.image
             author = it.source?.title
+            uri = it.uri
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            favouritesRepository.insertArticle(title, body, url, imageUrl, author, topic)
+            favouritesRepository.insertArticle(uri, title, body, url, imageUrl, author, topic)
         }
     }
 
