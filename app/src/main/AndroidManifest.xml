@@ -13,13 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.favourite.FavouritesActivity"></activity>
+        <activity
+            android:name=".ui.favourite.FavouritesActivity"
+            android:label=""
+            android:parentActivityName=".ui.browse.BrowseActivity"
+            android:theme="@style/AppTheme.ActionBar">
+
+        </activity>
         <activity
             android:name=".ui.browse.BrowseActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -41,7 +46,9 @@
             android:name=".ui.newspaper.NewsPaperActivity"
             android:label=""
             android:parentActivityName=".ui.browse.BrowseActivity"
-            android:theme="@style/AppTheme.ActionBar"></activity>
+            android:theme="@style/AppTheme.ActionBar">
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
