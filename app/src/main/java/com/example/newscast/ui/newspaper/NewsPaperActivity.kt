@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
+import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.utils.glide.loadImageFromUrl
 import com.example.newscast.utils.string.StringHelper
@@ -20,12 +21,12 @@ import timber.log.Timber
 
 class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
-    /* Koin Components */
+    // Koin Components
     private val stringHelper by inject<StringHelper> ()
 
-    private val viewModel: NewsPaperViewModel by viewModels()
+    private val viewModel: NewsPaperViewModel by viewModels { ViewModelFactory() }
 
-    /* Observers */
+    // Observers
     private val favouritesLiveDataObserver = Observer<Boolean?> {
         if (it == true) {
             news_paper_favourite_button.setImageDrawable(resources.getDrawable(R.drawable.ic_favorite_filled, null))

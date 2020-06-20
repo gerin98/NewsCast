@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.example.newscast.R
 import com.example.newscast.ui.ViewModelFactory
+import com.example.newscast.ui.favourite.FavouritesActivity
 import com.example.newscast.ui.search.SearchActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -125,13 +126,13 @@ class BrowseActivity : AppCompatActivity(),
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when(item?.itemId) {
             R.id.menu_favourites -> {
-                // do something
+                val intent = Intent(this, FavouritesActivity::class.java)
+                startActivity(intent)
                 true
             }
             R.id.menu_search -> {
                 val intent = Intent(this, SearchActivity::class.java)
                 startActivity(intent)
-
                 true
             }
             R.id.menu_refresh -> {

@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.favourite.FavouritesActivity"></activity>
         <activity
             android:name=".ui.browse.BrowseActivity"
             android:launchMode="singleTop">
@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.search.SearchActivity"
             android:label=""
@@ -33,17 +32,16 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
-        </activity>
 
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity
             android:name=".ui.newspaper.NewsPaperActivity"
             android:label=""
             android:parentActivityName=".ui.browse.BrowseActivity"
-            android:theme="@style/AppTheme.ActionBar" >
-
-        </activity>
+            android:theme="@style/AppTheme.ActionBar"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
