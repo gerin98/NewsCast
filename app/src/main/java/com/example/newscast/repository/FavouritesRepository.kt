@@ -21,8 +21,10 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
                               imageUrl: String? = null,
                               author: String? = null,
                               topic: String? = null) {
-        val article = Articles(null, uri, title, body, url, imageUrl, author, topic)
-        articlesDao.insertItem(article)
+        uri?.let {
+            val article = Articles(uri, title, body, url, imageUrl, author, topic)
+            articlesDao.insertItem(article)
+        }
     }
 
     suspend fun deleteArticleByUri(uri: String) {
