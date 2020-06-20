@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- todo: delete this if unused -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/purple5" android:state_pressed="true"/>
 </selector>

@@ -40,4 +40,8 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
         return uris.isEmpty().not()
     }
 
+    suspend fun clearFavourites() {
+        articlesDao.clearFavourites()
+    }
+
 }

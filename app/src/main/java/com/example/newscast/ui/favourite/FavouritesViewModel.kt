@@ -37,7 +37,15 @@ class FavouritesViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    fun clearAllFavourites() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.clearFavourites()
+            noResults()
+        }
+    }
+
     private fun noResults() {
+        _favouritesLiveData.postValue(null)
         _showZeroCaseLiveData.postValue(true)
     }
 

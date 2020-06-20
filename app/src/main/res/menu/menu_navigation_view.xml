@@ -3,39 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_world"
-        android:title="World"
+        android:title="@string/world"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_us"
-        android:title="US"
+        android:title="@string/us"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_politics"
-        android:title="Politics"
+        android:title="@string/politics"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_business"
-        android:title="Business"
+        android:title="@string/business"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_tech"
-        android:title="Tech"
+        android:title="@string/tech"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_science"
-        android:title="Science"
+        android:title="@string/science"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_sports"
-        android:title="Sports"
+        android:title="@string/sports"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_travel"
-        android:title="Travel"
+        android:title="@string/travel"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_culture"
-        android:title="Culture"
+        android:title="@string/culture"
         app:showAsAction="always"/>
 
 </menu>

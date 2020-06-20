@@ -33,7 +33,7 @@
             android:label=""
             android:launchMode="singleTop"
             android:parentActivityName=".ui.browse.BrowseActivity"
-            android:theme="@style/searchTheme">
+            android:theme="@style/AppTheme.ActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

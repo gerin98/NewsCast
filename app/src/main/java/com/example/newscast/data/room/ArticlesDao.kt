@@ -33,4 +33,7 @@ interface ArticlesDao {
     @Query("DELETE FROM articles_table WHERE uri = :uri")
     fun deleteByUri(uri: String)
 
+    @Query("DELETE FROM articles_table")
+    fun clearFavourites()
+
 }

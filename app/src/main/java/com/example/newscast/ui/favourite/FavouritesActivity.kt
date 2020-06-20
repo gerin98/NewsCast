@@ -1,6 +1,7 @@
 package com.example.newscast.ui.favourite
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
 import androidx.activity.viewModels
@@ -35,11 +36,21 @@ class FavouritesActivity : AppCompatActivity() {
             .commit()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_favourites_activity, menu)
+
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 NavUtils.navigateUpTo(this, intent)
                 return true
+            }
+            R.id.menu_clear_favourites -> {
+                viewModel.clearAllFavourites()
             }
             else -> {}
         }
