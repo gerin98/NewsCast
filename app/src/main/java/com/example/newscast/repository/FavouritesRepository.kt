@@ -25,6 +25,10 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
         articlesDao.insertItem(article)
     }
 
+    suspend fun deleteArticleByUri(uri: String) {
+        articlesDao.deleteByUri(uri)
+    }
+
     suspend fun isFavourited(uri: String?): Boolean {
 
         if (uri == null) {

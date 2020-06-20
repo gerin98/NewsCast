@@ -25,10 +25,11 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
     private val viewModel: NewsPaperViewModel by viewModels()
 
-    private val favouritesLiveDataObserver = Observer<Boolean> {
-        if (it) {
+    /* Observers */
+    private val favouritesLiveDataObserver = Observer<Boolean?> {
+        if (it == true) {
             news_paper_favourite_button.setImageDrawable(resources.getDrawable(R.drawable.ic_favorite_filled, null))
-        } else {
+        } else if (it == false) {
             news_paper_favourite_button.setImageDrawable(resources.getDrawable(R.drawable.ic_favorite_border, null))
         }
     }
@@ -45,10 +46,12 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_paper)
+
         initLiveData()
 
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
         topic = intent.getStringExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS)
+
         loadNewsArticle(result, topic)
 
         viewModel.checkIfFavourited(uri)
@@ -103,7 +106,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.news_paper_favourite_button -> {
-                viewModel.addToFavourites(uri, title, body, url, imageUrl, author, topic)
+                viewModel.favouritesButtonClick(uri, title, body, url, imageUrl, author, topic)
             }
             else -> {}
         }

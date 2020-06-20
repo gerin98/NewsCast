@@ -24,10 +24,13 @@ interface ArticlesDao {
     @Update
     fun updateItems(vararg articles: Articles)
 
-    @Query("SELECT * from articles_table")
+    @Query("SELECT * FROM articles_table")
     fun getAllArticles(): List<Articles>
 
-    @Query("SELECT article_uri from articles_table where article_uri = :uri")
+    @Query("SELECT article_uri FROM articles_table WHERE article_uri = :uri")
     fun getArticlesByUri(uri: String): List<String?>
+
+    @Query("DELETE FROM articles_table WHERE article_uri = :uri")
+    fun deleteByUri(uri: String)
 
 }

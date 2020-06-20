@@ -18,21 +18,31 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
 
     private val favouritesRepository by inject<FavouritesRepository>()
 
-    private val _favouriteLiveData = MutableLiveData<Boolean>()
-    val favouriteLiveData: LiveData<Boolean>
+    private val _favouriteLiveData = MutableLiveData<Boolean?>(null)
+    val favouriteLiveData: LiveData<Boolean?>
         get() = _favouriteLiveData
 
-    fun addToFavourites(uri: String? = null,
-                        title: String? = null,
-                        body: String? = null,
-                        url: String? = null,
-                        imageUrl: String? = null,
-                        author: String? = null,
-                        topic: String? = null) {
-        Timber.e("inserting into db")
+    private fun addToFavourites(uri: String? = null,
+                                title: String? = null,
+                                body: String? = null,
+                                url: String? = null,
+                                imageUrl: String? = null,
+                                author: String? = null,
+                                topic: String? = null) {
+        Timber.e("inserting $uri into db")
         viewModelScope.launch(Dispatchers.IO) {
             favouritesRepository.insertArticle(uri, title, body, url, imageUrl, author, topic)
             _favouriteLiveData.postValue(true)
+        }
+    }
+
+    private fun removeFromFavourites(uri: String? = null) {
+        if (!uri.isNullOrEmpty()) {
+            Timber.e("removing $uri from db")
+            viewModelScope.launch(Dispatchers.IO) {
+                favouritesRepository.deleteArticleByUri(uri)
+                _favouriteLiveData.postValue(false)
+            }
         }
     }
 
@@ -41,6 +51,27 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
             val status = favouritesRepository.isFavourited(uri)
             _favouriteLiveData.postValue(status)
         }
+    }
+
+    fun favouritesButtonClick(uri: String? = null,
+                              title: String? = null,
+                              body: String? = null,
+                              url: String? = null,
+                              imageUrl: String? = null,
+                              author: String? = null,
+                              topic: String? = null) {
+        when (_favouriteLiveData.value) {
+            null -> {
+                return
+            }
+            false -> {
+                addToFavourites(uri, title, body, url, imageUrl, author, topic)
+            }
+            else -> {
+                removeFromFavourites(uri)
+            }
+        }
+
     }
 
 
