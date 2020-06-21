@@ -140,10 +140,12 @@ class BrowseFragment : Fragment() {
                 null
             }
 
-        val options = ActivityOptions.makeSceneTransitionAnimation(activity, image, transitionName)
-
         val intent = Intent(activity, NewsPaperActivity::class.java)
-        intent.putExtra(BrowseActivity.TRANSITION_INTENT_FLAGS, transitionName)
+        var options: ActivityOptions? = null
+        if (transitionName != null) {
+            intent.putExtra(BrowseActivity.TRANSITION_INTENT_FLAGS, transitionName)
+            options = ActivityOptions.makeSceneTransitionAnimation(activity, image, transitionName)
+        }
         intent.putExtra(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS, item)
         intent.putExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS, newsTopic)
         startActivity(intent, options?.toBundle())

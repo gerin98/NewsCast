@@ -56,11 +56,36 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     var topic: String? = null
     var uri: String? = null
 
+    private val glideListener = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            Timber.e("onLoadFailed")
+            startPostponedEnterTransition()
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            Timber.e("onResourceReady")
+            startPostponedTransition(news_paper_article_image)
+            return false
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        postponeEnterTransition()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_paper)
-
+        postponeEnterTransition()
         initLiveData()
 
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
@@ -179,32 +204,6 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             startPostponedEnterTransition()
             true
         }
-    }
-
-    private val glideListener = object : RequestListener<Drawable> {
-        override fun onLoadFailed(
-            e: GlideException?,
-            model: Any?,
-            target: Target<Drawable>?,
-            isFirstResource: Boolean
-        ): Boolean {
-            Timber.e("onLoadFailed")
-            startPostponedEnterTransition()
-            return false
-        }
-
-        override fun onResourceReady(
-            resource: Drawable?,
-            model: Any?,
-            target: Target<Drawable>?,
-            dataSource: DataSource?,
-            isFirstResource: Boolean
-        ): Boolean {
-            Timber.e("onResourceReady")
-            startPostponedTransition(news_paper_article_image)
-            return false
-        }
-
     }
 
 }
