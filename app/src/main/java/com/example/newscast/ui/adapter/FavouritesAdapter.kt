@@ -12,9 +12,8 @@ import com.example.newscast.R
 import com.example.newscast.data.room.Articles
 import com.example.newscast.utils.glide.loadThumbnailFromUrl
 
-class FavouritesAdapter(
-    private val newsDataset: ArrayList<Articles?>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val newsTileLayout: FrameLayout = view.findViewById(R.id.news_tile_layout)

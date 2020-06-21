@@ -11,15 +11,12 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.utils.glide.GlideApp
 import com.example.newscast.utils.glide.loadImageFromUrl
 import com.example.newscast.utils.glide.loadThumbnailFromUrl
-import com.example.newscast.utils.glide.miniThumbnail
 
 
-class NewsAdapter(
-        private val newsDataset: ArrayList<ResultsModel?>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsAdapter(private val newsDataset: ArrayList<ResultsModel?>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val SMALL_TILE = 0
     private val LARGE_TILE = 1
