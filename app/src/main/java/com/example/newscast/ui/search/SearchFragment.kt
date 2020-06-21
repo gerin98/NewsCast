@@ -20,7 +20,7 @@ import com.example.newscast.R
 import com.example.newscast.databinding.FragmentSearchBinding
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.ViewModelFactory
-import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener
+import com.example.newscast.ui.adapter.RecyclerViewTouchListener
 import com.example.newscast.ui.adapter.SearchAdapter
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.ui.newspaper.NewsPaperActivity
@@ -35,18 +35,14 @@ class SearchFragment : Fragment() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var dataset: ArrayList<ResultsModel?>
 
-    private val gestureDetector = RecyclerViewItemTouchListener(activity, object: RecyclerViewItemTouchListener.OnItemClickEventListener {
-        override fun onItemClick(clickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemClick")
+    private val gestureDetector = RecyclerViewTouchListener(activity, object: RecyclerViewTouchListener.OnTouchEventListener {
+        override fun onClick(clickedView: View?, adapterPosition: Int) {
+            Timber.d("onClick")
             recyclerViewOnClick(dataset[adapterPosition], clickedView)
         }
 
-        override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemLongClick")
-        }
-
-        override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemDoubleClick")
+        override fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
+            Timber.d("onDoubleClick")
         }
 
     })

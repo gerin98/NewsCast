@@ -21,7 +21,7 @@ import com.example.newscast.data.room.Articles
 import com.example.newscast.databinding.FragmentFavouritesBinding
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.FavouritesAdapter
-import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener
+import com.example.newscast.ui.adapter.RecyclerViewTouchListener
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.ui.newspaper.NewsPaperActivity
 import timber.log.Timber
@@ -35,18 +35,14 @@ class FavouritesFragment : Fragment() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var dataset: ArrayList<Articles?>
 
-    private val gestureDetector = RecyclerViewItemTouchListener(activity, object: RecyclerViewItemTouchListener.OnItemClickEventListener {
-        override fun onItemClick(clickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemClick")
+    private val gestureDetector = RecyclerViewTouchListener(activity, object: RecyclerViewTouchListener.OnTouchEventListener {
+        override fun onClick(clickedView: View?, adapterPosition: Int) {
+            Timber.d("onClick")
             recyclerViewOnClick(dataset[adapterPosition], clickedView)
         }
 
-        override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemLongClick")
-        }
-
-        override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemDoubleClick")
+        override fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
+            Timber.d("onDoubleClick")
         }
 
     })

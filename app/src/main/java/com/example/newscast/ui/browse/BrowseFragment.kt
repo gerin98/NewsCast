@@ -22,8 +22,8 @@ import com.example.newscast.databinding.FragmentBrowseBinding
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.NewsAdapter
-import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener
-import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener.OnItemClickEventListener
+import com.example.newscast.ui.adapter.RecyclerViewTouchListener
+import com.example.newscast.ui.adapter.RecyclerViewTouchListener.OnTouchEventListener
 import com.example.newscast.ui.newspaper.NewsPaperActivity
 import timber.log.Timber
 
@@ -38,18 +38,14 @@ class BrowseFragment : Fragment() {
     private lateinit var dataset: ArrayList<ResultsModel?>
     private var newsTopic = "Breaking News"
 
-    private val gestureDetector = RecyclerViewItemTouchListener(activity, object: OnItemClickEventListener{
-        override fun onItemClick(clickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemClick")
+    private val gestureDetector = RecyclerViewTouchListener(activity, object: OnTouchEventListener{
+        override fun onClick(clickedView: View?, adapterPosition: Int) {
+            Timber.d("onClick")
             recyclerViewOnClick(dataset[adapterPosition], clickedView)
         }
 
-        override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemLongClick")
-        }
-
-        override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
-            Timber.d("onItemDoubleClick")
+        override fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
+            Timber.d("onDoubleClick")
             val animateIcon = doubleClickedView?.findViewById<ImageView>(R.id.heart_animation)
             animateIcon?.let {
                 it.visibility = View.VISIBLE

@@ -67,15 +67,14 @@ class NewsAdapter(private val newsDataset: ArrayList<ResultsModel?>)
 
             val largeHolder = holder as LargeViewHolder
 
-            // set unique transition name
-            ViewCompat.setTransitionName(largeHolder.largeNewsTileImage, newsDataset[position]?.uri)
-
             // set item focus state
             largeHolder.largeNewsTileLayout.isSelected = true
 
             // load image
             val imageUrl = newsDataset[position]?.image
             if (imageUrl != null) {
+                // set unique transition name
+                ViewCompat.setTransitionName(largeHolder.largeNewsTileImage, newsDataset[position]?.uri)
                 largeHolder.largeNewsTileImage.loadImageFromUrl(largeHolder.largeNewsTileImage.context, imageUrl)
             } else {
                 largeHolder.largeNewsTileImage.setImageDrawable(null)
@@ -91,15 +90,14 @@ class NewsAdapter(private val newsDataset: ArrayList<ResultsModel?>)
 
             val smallHolder = holder as SmallViewHolder
 
-            // set unique transition name
-            ViewCompat.setTransitionName(smallHolder.smallNewsTileImage, newsDataset[position]?.uri)
-
             // set item focus state
             smallHolder.smallNewsTileLayout.isSelected = true
 
             // load image
             val imageUrl = newsDataset[position]?.image
             if (imageUrl != null) {
+                // set unique transition name
+                ViewCompat.setTransitionName(smallHolder.smallNewsTileImage, newsDataset[position]?.uri)
                 smallHolder.smallNewsTileImage.loadThumbnailFromUrl(smallHolder.smallNewsTileImage.context, imageUrl)
             } else {
                 smallHolder.smallNewsTileImage.setImageDrawable(null)

@@ -139,6 +139,10 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             news_paper_article_image.loadImageFromUrl(this, it, glideListener)
         }
 
+        if (imageUrl == null) {
+            startPostponedEnterTransition()
+        }
+
         viewModel.checkIfFavourited(uri)
     }
 
@@ -169,6 +173,10 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
         imageUrl?.let{
             news_paper_article_image.loadImageFromUrl(this, it, glideListener)
+        }
+        
+        if (imageUrl == null) {
+            startPostponedEnterTransition()
         }
 
         viewModel.checkIfFavourited(uri)
