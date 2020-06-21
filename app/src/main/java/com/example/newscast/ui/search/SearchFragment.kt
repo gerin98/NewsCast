@@ -1,11 +1,14 @@
 package com.example.newscast.ui.search
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -17,9 +20,11 @@ import com.example.newscast.R
 import com.example.newscast.databinding.FragmentSearchBinding
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.ui.ViewModelFactory
+import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener
 import com.example.newscast.ui.adapter.SearchAdapter
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.ui.newspaper.NewsPaperActivity
+import timber.log.Timber
 
 class SearchFragment : Fragment() {
 
@@ -29,6 +34,22 @@ class SearchFragment : Fragment() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var dataset: ArrayList<ResultsModel?>
+
+    private val gestureDetector = RecyclerViewItemTouchListener(activity, object: RecyclerViewItemTouchListener.OnItemClickEventListener {
+        override fun onItemClick(clickedView: View?, adapterPosition: Int) {
+            Timber.d("onItemClick")
+            recyclerViewOnClick(dataset[adapterPosition], clickedView)
+        }
+
+        override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
+            Timber.d("onItemLongClick")
+        }
+
+        override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
+            Timber.d("onItemDoubleClick")
+        }
+
+    })
 
     // Observers
     private val newsLiveDataObserver = Observer<List<ResultsModel?>?> {
@@ -71,9 +92,7 @@ class SearchFragment : Fragment() {
         dataset = ArrayList()
 
         viewManager = LinearLayoutManager(activity)
-        viewAdapter = SearchAdapter(dataset) {
-            recyclerViewOnClick(it)
-        }
+        viewAdapter = SearchAdapter(dataset)
 
         val dividerItemDecoration = DividerItemDecoration(activity, LinearLayout.VERTICAL).apply {
             activity?.getDrawable(R.drawable.divider)?.let {
@@ -86,13 +105,27 @@ class SearchFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
             addItemDecoration(dividerItemDecoration)
+            addOnItemTouchListener(gestureDetector)
         }
     }
 
-    private fun recyclerViewOnClick(item: ResultsModel?) {
+    private fun recyclerViewOnClick(item: ResultsModel?, clickedView: View?) {
+        val image = clickedView?.findViewById<ImageView>(R.id.news_tile_image)
+        val transitionName =
+            if (image != null) {
+                ViewCompat.getTransitionName(image)
+            } else {
+                null
+            }
+
         val intent = Intent(activity, NewsPaperActivity::class.java)
+        var options: ActivityOptions? = null
+        if (transitionName != null) {
+            intent.putExtra(BrowseActivity.TRANSITION_INTENT_FLAGS, transitionName)
+            options = ActivityOptions.makeSceneTransitionAnimation(activity, image, transitionName)
+        }
         intent.putExtra(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS, item)
-        startActivity(intent)
+        startActivity(intent, options?.toBundle())
     }
 
 }

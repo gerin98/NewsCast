@@ -67,6 +67,7 @@ class NewsAdapter(private val newsDataset: ArrayList<ResultsModel?>)
 
             val largeHolder = holder as LargeViewHolder
 
+            // set unique transition name
             ViewCompat.setTransitionName(largeHolder.largeNewsTileImage, newsDataset[position]?.uri)
 
             // set item focus state
@@ -90,6 +91,7 @@ class NewsAdapter(private val newsDataset: ArrayList<ResultsModel?>)
 
             val smallHolder = holder as SmallViewHolder
 
+            // set unique transition name
             ViewCompat.setTransitionName(smallHolder.smallNewsTileImage, newsDataset[position]?.uri)
 
             // set item focus state

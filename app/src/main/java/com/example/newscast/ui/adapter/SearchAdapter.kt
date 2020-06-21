@@ -5,19 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.utils.glide.GlideApp
-import com.example.newscast.utils.glide.miniThumbnail
+import com.example.newscast.utils.glide.loadThumbnailFromUrl
 
-
-class SearchAdapter(
-    private val newsDataset: ArrayList<ResultsModel?>,
-    private val listener: (ResultsModel?) -> Unit
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter(private val newsDataset: ArrayList<ResultsModel?>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val newsTileLayout: FrameLayout = view.findViewById(R.id.news_tile_layout)
@@ -37,21 +33,16 @@ class SearchAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as SearchViewHolder
 
+        // set unique transition name
+        ViewCompat.setTransitionName(viewHolder.newsTileImage, newsDataset[position]?.uri)
+
         // set item focus state
         viewHolder.newsTileLayout.isSelected = true
-
-        // set item click listener
-        viewHolder.newsTileLayout.setOnClickListener{
-            listener(newsDataset[position])
-        }
 
         // load image
         val imageUrl = newsDataset[position]?.image
         if (imageUrl != null) {
-            GlideApp.with(viewHolder.newsTileImage.context)
-                .load(imageUrl)
-                .miniThumbnail()
-                .into(viewHolder.newsTileImage)
+            viewHolder.newsTileImage.loadThumbnailFromUrl(viewHolder.newsTileImage.context, imageUrl)
         } else {
             viewHolder.newsTileImage.setImageDrawable(null)
         }

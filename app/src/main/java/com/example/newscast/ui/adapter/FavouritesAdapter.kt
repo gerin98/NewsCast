@@ -34,6 +34,7 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as SearchViewHolder
 
+        // set unique transition name
         ViewCompat.setTransitionName(viewHolder.newsTileImage, newsDataset[position]?.uri)
 
         // set item focus state
