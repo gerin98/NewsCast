@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.utils.glide.GlideApp
+import com.example.newscast.utils.glide.loadImageFromUrl
+import com.example.newscast.utils.glide.loadThumbnailFromUrl
 import com.example.newscast.utils.glide.miniThumbnail
 
 
@@ -76,9 +78,7 @@ class NewsAdapter(
             // load image
             val imageUrl = newsDataset[position]?.image
             if (imageUrl != null) {
-                GlideApp.with(largeHolder.largeNewsTileImage.context)
-                    .load(imageUrl)
-                    .into(largeHolder.largeNewsTileImage)
+                largeHolder.largeNewsTileImage.loadImageFromUrl(largeHolder.largeNewsTileImage.context, imageUrl)
             } else {
                 largeHolder.largeNewsTileImage.setImageDrawable(null)
             }
@@ -101,10 +101,7 @@ class NewsAdapter(
             // load image
             val imageUrl = newsDataset[position]?.image
             if (imageUrl != null) {
-                GlideApp.with(smallHolder.smallNewsTileImage.context)
-                    .load(imageUrl)
-                    .miniThumbnail()
-                    .into(smallHolder.smallNewsTileImage)
+                smallHolder.smallNewsTileImage.loadThumbnailFromUrl(smallHolder.smallNewsTileImage.context, imageUrl)
             } else {
                 smallHolder.smallNewsTileImage.setImageDrawable(null)
             }

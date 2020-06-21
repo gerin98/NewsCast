@@ -6,16 +6,14 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
-import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.utils.glide.GlideApp
-import com.example.newscast.utils.glide.miniThumbnail
+import com.example.newscast.utils.glide.loadThumbnailFromUrl
 
 class FavouritesAdapter(
-    private val newsDataset: ArrayList<Articles?>,
-    private val listener: (Articles?) -> Unit
+    private val newsDataset: ArrayList<Articles?>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,21 +35,15 @@ class FavouritesAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as SearchViewHolder
 
+        ViewCompat.setTransitionName(viewHolder.newsTileImage, newsDataset[position]?.uri)
+
         // set item focus state
         viewHolder.newsTileLayout.isSelected = true
-
-        // set item click listener
-        viewHolder.newsTileLayout.setOnClickListener{
-            listener(newsDataset[position])
-        }
 
         // load image
         val imageUrl = newsDataset[position]?.imageUrl
         if (imageUrl != null) {
-            GlideApp.with(viewHolder.newsTileImage.context)
-                .load(imageUrl)
-                .miniThumbnail()
-                .into(viewHolder.newsTileImage)
+            viewHolder.newsTileImage.loadThumbnailFromUrl(viewHolder.newsTileImage.context, imageUrl)
         } else {
             viewHolder.newsTileImage.setImageDrawable(null)
         }

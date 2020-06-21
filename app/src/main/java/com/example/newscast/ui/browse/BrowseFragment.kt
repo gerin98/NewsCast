@@ -38,7 +38,27 @@ class BrowseFragment : Fragment() {
     private lateinit var dataset: ArrayList<ResultsModel?>
     private var newsTopic = "Breaking News"
 
-    private lateinit var gestureDetector: RecyclerViewItemTouchListener
+    private val gestureDetector = RecyclerViewItemTouchListener(activity, object: OnItemClickEventListener{
+        override fun onItemClick(clickedView: View?, adapterPosition: Int) {
+            Timber.d("onItemClick")
+            recyclerViewOnClick(dataset[adapterPosition], clickedView)
+        }
+
+        override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
+            Timber.d("onItemLongClick")
+        }
+
+        override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
+            Timber.d("onItemDoubleClick")
+            val animateIcon = doubleClickedView?.findViewById<ImageView>(R.id.heart_animation)
+            animateIcon?.let {
+                it.visibility = View.VISIBLE
+                (it.drawable as? Animatable)?.start()
+            }
+            viewModel.addToDb(dataset[adapterPosition], newsTopic)
+        }
+
+    })
 
     // Observers
     private val newsLiveDataObserver = Observer<List<ResultsModel?>?> {
@@ -70,28 +90,6 @@ class BrowseFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@BrowseFragment.viewModel
         }
-
-        gestureDetector = RecyclerViewItemTouchListener(activity, object: OnItemClickEventListener{
-            override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
-                Timber.d("onItemLongClick")
-            }
-
-            override fun onItemClick(clickedView: View?, adapterPosition: Int) {
-                Timber.d("onItemClick")
-                recyclerViewOnClick(dataset[adapterPosition], clickedView)
-            }
-
-            override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
-                Timber.d("onItemDoubleClick")
-                val animateIcon = doubleClickedView?.findViewById<ImageView>(R.id.heart_animation)
-                animateIcon?.let {
-                    it.visibility = View.VISIBLE
-                    (it.drawable as? Animatable)?.start()
-                }
-                viewModel.addToDb(dataset[adapterPosition], newsTopic)
-            }
-
-        })
 
         return binding.root
     }
@@ -130,7 +128,6 @@ class BrowseFragment : Fragment() {
     }
 
     private fun recyclerViewOnClick(item: ResultsModel?, clickedView: View?) {
-
         val image = clickedView?.findViewById<ImageView>(R.id.news_tile_image)
         val transitionName =
             if (image != null) {
