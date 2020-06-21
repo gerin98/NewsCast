@@ -33,7 +33,7 @@ class NewsAdapter(
         val largeNewsTileLayout: LinearLayout = view.findViewById(R.id.news_tile_large_layout)
         val largeNewsTileName: TextView = view.findViewById(R.id.news_tile_large_title)
         val largeNewsTileSource: TextView = view.findViewById(R.id.news_tile_large_source)
-        val largeNewsTileImage: ImageView = view.findViewById(R.id.news_tile_large_image)
+        val largeNewsTileImage: ImageView = view.findViewById(R.id.news_tile_image)
     }
 
     override fun getItemViewType(position: Int): Int {

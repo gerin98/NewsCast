@@ -8,7 +8,7 @@
     android:layout_margin="5dp" >
 
     <ImageView
-        android:id="@+id/news_tile_large_image"
+        android:id="@+id/news_tile_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -3,12 +3,12 @@ package com.example.newscast.ui.browse
 import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.drawable.Animatable
-import android.opengl.Visibility
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -25,7 +25,6 @@ import com.example.newscast.ui.adapter.NewsAdapter
 import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener
 import com.example.newscast.ui.adapter.RecyclerViewItemTouchListener.OnItemClickEventListener
 import com.example.newscast.ui.newspaper.NewsPaperActivity
-import kotlinx.android.synthetic.main.news_tile.*
 import timber.log.Timber
 
 
@@ -39,7 +38,7 @@ class BrowseFragment : Fragment() {
     private lateinit var dataset: ArrayList<ResultsModel?>
     private var newsTopic = "Breaking News"
 
-    private lateinit var detector: RecyclerViewItemTouchListener
+    private lateinit var gestureDetector: RecyclerViewItemTouchListener
 
     // Observers
     private val newsLiveDataObserver = Observer<List<ResultsModel?>?> {
@@ -72,7 +71,7 @@ class BrowseFragment : Fragment() {
             viewModel = this@BrowseFragment.viewModel
         }
 
-        detector = RecyclerViewItemTouchListener(activity, object: OnItemClickEventListener{
+        gestureDetector = RecyclerViewItemTouchListener(activity, object: OnItemClickEventListener{
             override fun onItemLongClick(longClickedView: View?, adapterPosition: Int) {
                 Timber.d("onItemLongClick")
             }
@@ -126,7 +125,7 @@ class BrowseFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
             addItemDecoration(dividerItemDecoration)
-            addOnItemTouchListener(detector)
+            addOnItemTouchListener(gestureDetector)
         }
     }
 
