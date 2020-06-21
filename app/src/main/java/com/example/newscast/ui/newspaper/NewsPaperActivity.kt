@@ -1,5 +1,6 @@
 package com.example.newscast.ui.newspaper
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -7,12 +8,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import androidx.lifecycle.Observer
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.ViewModelFactory
-import com.example.newscast.ui.browse.ArticlesToSortBy
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.utils.glide.loadImageFromUrl
 import com.example.newscast.utils.string.StringHelper
@@ -23,10 +27,10 @@ import timber.log.Timber
 
 class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
+    private val viewModel: NewsPaperViewModel by viewModels { ViewModelFactory() }
+
     // Koin Components
     private val stringHelper by inject<StringHelper> ()
-
-    private val viewModel: NewsPaperViewModel by viewModels { ViewModelFactory() }
 
     // Observers
     private val favouritesLiveDataObserver = Observer<Boolean?> {
@@ -53,18 +57,23 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     var uri: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        postponeEnterTransition()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_paper)
 
         initLiveData()
 
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
-        val favouriteUri = intent.extras?.get(BrowseActivity.FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS) as? String
+        val favouriteUri = intent.getStringExtra(BrowseActivity.FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS)
+        val imageTransitionName = intent.getStringExtra(BrowseActivity.TRANSITION_INTENT_FLAGS)
         topic = intent.getStringExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS)
+
+        if (imageTransitionName != null) {
+            news_paper_article_image.transitionName = imageTransitionName
+        }
 
         if (result != null) {
             loadNewsArticle(result, topic)
-            viewModel.checkIfFavourited(uri)
         } else {
             loadNewsArticleFromDb(favouriteUri)
         }
@@ -102,8 +111,10 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         imageUrl?.let{
-            news_paper_article_image.loadImageFromUrl(this, it)
+            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
         }
+
+        viewModel.checkIfFavourited(uri)
     }
 
     private fun loadNewsArticleFromDb(uri: String?) {
@@ -111,7 +122,6 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showNewsArticleFromDb(article: Articles?) {
-        Timber.e("show article from db")
         if (article != null) {
             title = article.title
             body = article.body
@@ -126,12 +136,14 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
         val authorText =  String.format(getString(R.string.news_paper_author), author)
         news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
+
         topic?.let {
             news_paper_article_tag.visibility = View.VISIBLE
             news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
         }
+
         imageUrl?.let{
-            news_paper_article_image.loadImageFromUrl(this, it)
+            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
         }
 
         viewModel.checkIfFavourited(uri)
@@ -160,6 +172,39 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     private fun initLiveData() {
         viewModel.favouriteLiveData.observe(this, favouritesLiveDataObserver)
         viewModel.articleLiveData.observe(this, articleLiveDataObserver)
+    }
+
+    fun startPostponedTransition(sharedElement: View) {
+        sharedElement.viewTreeObserver?.addOnPreDrawListener {
+            startPostponedEnterTransition()
+            true
+        }
+    }
+
+    private val glideListener = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            Timber.e("onLoadFailed")
+            startPostponedEnterTransition()
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            Timber.e("onResourceReady")
+            startPostponedTransition(news_paper_article_image)
+            return false
+        }
+
     }
 
 }

@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.network.model.ResultsModel
@@ -67,6 +68,8 @@ class NewsAdapter(
 
             val largeHolder = holder as LargeViewHolder
 
+            ViewCompat.setTransitionName(largeHolder.largeNewsTileImage, newsDataset[position]?.uri)
+
             // set item focus state
             largeHolder.largeNewsTileLayout.isSelected = true
 
@@ -89,6 +92,8 @@ class NewsAdapter(
             // show small tile
 
             val smallHolder = holder as SmallViewHolder
+
+            ViewCompat.setTransitionName(smallHolder.smallNewsTileImage, newsDataset[position]?.uri)
 
             // set item focus state
             smallHolder.smallNewsTileLayout.isSelected = true

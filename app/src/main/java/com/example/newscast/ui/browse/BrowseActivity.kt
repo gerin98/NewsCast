@@ -1,5 +1,6 @@
 package com.example.newscast.ui.browse
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -31,6 +32,7 @@ class BrowseActivity : AppCompatActivity(),
         const val NEWS_TOPIC_INTENT_FLAGS = "NEWS_TOPIC_INTENT_FLAGS"
         const val FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS = "FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS"
         const val FAVOURITE_NEWS_TOPIC_INTENT_FLAGS = "FAVOURITE_NEWS_TOPIC_INTENT_FLAGS"
+        const val TRANSITION_INTENT_FLAGS = "TRANSITION_INTENT_FLAGS"
     }
 
     private val viewModel: BrowseViewModel by viewModels { ViewModelFactory() }
@@ -133,6 +135,9 @@ class BrowseActivity : AppCompatActivity(),
                 true
             }
             R.id.menu_search -> {
+//                val options = ActivityOptions.makeSceneTransitionAnimation(this)
+//                val intent = Intent(this, SearchActivity::class.java)
+//                startActivity(intent, options.toBundle())
                 val intent = Intent(this, SearchActivity::class.java)
                 startActivity(intent)
                 true

@@ -1,5 +1,6 @@
 package com.example.newscast.ui.browse
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.drawable.Animatable
 import android.opengl.Visibility
@@ -8,6 +9,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -77,7 +79,7 @@ class BrowseFragment : Fragment() {
 
             override fun onItemClick(clickedView: View?, adapterPosition: Int) {
                 Timber.d("onItemClick")
-                recyclerViewOnClick(dataset[adapterPosition])
+                recyclerViewOnClick(dataset[adapterPosition], clickedView)
             }
 
             override fun onItemDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
@@ -128,11 +130,23 @@ class BrowseFragment : Fragment() {
         }
     }
 
-    private fun recyclerViewOnClick(item: ResultsModel?) {
+    private fun recyclerViewOnClick(item: ResultsModel?, clickedView: View?) {
+
+        val image = clickedView?.findViewById<ImageView>(R.id.news_tile_image)
+        val transitionName =
+            if (image != null) {
+                ViewCompat.getTransitionName(image)
+            } else {
+                null
+            }
+
+        val options = ActivityOptions.makeSceneTransitionAnimation(activity, image, transitionName)
+
         val intent = Intent(activity, NewsPaperActivity::class.java)
+        intent.putExtra(BrowseActivity.TRANSITION_INTENT_FLAGS, transitionName)
         intent.putExtra(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS, item)
         intent.putExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS, newsTopic)
-        startActivity(intent)
+        startActivity(intent, options?.toBundle())
     }
 
 }

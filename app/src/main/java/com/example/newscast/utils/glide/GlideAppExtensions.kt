@@ -1,9 +1,10 @@
 package com.example.newscast.utils.glide
 
 import android.app.Activity
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.activity_news_paper.*
 
 const val MINI_THUMB_SIZE: Int = 500
 
@@ -14,8 +15,9 @@ fun <T> GlideRequest<T>.miniThumbnail() : GlideRequest<T> {
     return apply(options)
 }
 
-fun ImageView.loadImageFromUrl(activity: Activity, imageUrl: String) {
+fun ImageView.loadImageFromUrl(activity: Activity, imageUrl: String, listener: RequestListener<Drawable>? = null) {
     GlideApp.with(activity)
         .load(imageUrl)
+        .listener(listener)
         .into(this)
 }
