@@ -14,7 +14,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[Author](#author)**<br>
 **[License](#license)**<br>
 
-<video src="screenshots/newscast_news_paper.mp4" poster="screenshots/Screenshot_20200621-223615.png" width="500" height="" controls preload></video>
+<video src="screenshots/newscast_news_paper.mp4" poster="screenshots/Screenshot_20200621-223615.png" width="500" controls preload></video>
 
 ## Tech Stack:
 
