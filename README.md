@@ -6,8 +6,8 @@ NewsCast lets you find and and read articles you care about natively within the 
 ### Table of Contents
 **[Tech Stack](#tech-stack)**<br>
 **[Api](#api)**<br>
-**[Troubleshooting](#Troubleshooting)**<br>
-**[Sources](#sources)**<br>
+**[Troubleshooting](#troubleshooting)**<br>
+**[Credits](#credits)**<br>
 
 ## Tech Stack:
 
