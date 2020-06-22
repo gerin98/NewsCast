@@ -1,5 +1,8 @@
 ![Alt text](screenshots/Screenshot_20200621-223615.png?raw=true "Title")
 
+[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
+
+
 ## A modern News App for Android written in Kotlin
 NewsCast lets you find and and read articles you care about natively within the app. Browse from a wide assortment of categories and save interesting articles for later!
 
