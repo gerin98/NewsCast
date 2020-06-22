@@ -21,6 +21,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 - Architecture
   - [MVVM & Repository pattern](https://developer.android.com/jetpack/docs/guide#overview)
   - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html)
+  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
 - Dependency Injection
   - [Koin](https://insert-koin.io/)
 - Network
