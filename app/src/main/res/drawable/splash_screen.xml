@@ -2,6 +2,15 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/splash_screen_image"/>
+        android:gravity="end"
+        android:start="15dp"
+        android:drawable="@drawable/ic_newscast"/>
+
+    <item
+        android:gravity="start"
+        android:width="10dp"
+        android:height="10dp"
+        android:drawable="@drawable/ic_news"/>
+
 
 </layer-list>

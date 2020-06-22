@@ -174,7 +174,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         imageUrl?.let{
             news_paper_article_image.loadImageFromUrl(this, it, glideListener)
         }
-        
+
         if (imageUrl == null) {
             startPostponedEnterTransition()
         }

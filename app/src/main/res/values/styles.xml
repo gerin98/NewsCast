@@ -8,10 +8,6 @@
         <item name="actionOverflowButtonStyle">@style/OverflowButtonTheme</item>
     </style>
 
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
-    </style>
-
     <!-- This style is where you define the tint color of your overflow menu button -->
     <style name="OverflowButtonTheme" parent="@style/Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">@color/black2</item>
