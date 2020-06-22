@@ -7,6 +7,7 @@
 NewsCast lets you find and and read articles you care about natively within the app. Browse from a wide assortment of categories and save interesting articles for later!
 
 ### Table of Contents
+**[Features](#features)**<br>
 **[Tech Stack](#tech-stack)**<br>
 **[Api](#api)**<br>
 **[Troubleshooting](#troubleshooting)**<br>
@@ -14,7 +15,20 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[Author](#author)**<br>
 **[License](#license)**<br>
 
+### Features
+#### Beatiful News Viewer
+Read your news articles directly within the app. No redirects. No switching back and forth. Just you and your news.
+
 <video src="screenshots/newscast_news_paper.mp4" width="300" controls preload></video>
+
+#### Browse News from a variety of curated categories
+Simply choose a news topic from the sidebar to browse the latest articles
+
+#### Save important news for later
+We don't always have time to read through the whole article. Double tap to add an article to your favourites and come back to it later.
+
+#### Search at your fingertips
+Can't find what you're looking for? Search for keywords to find articles for practically any topic
 
 ## Tech Stack:
 
