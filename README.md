@@ -49,5 +49,10 @@ Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"
 Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
 
 ### Author
+
+<img src="https://github.com/gerin98.png" width="60" align="left">
+
+**Gerin Amalaraj**
+
 [![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/gerin-amalaraj/)
 
