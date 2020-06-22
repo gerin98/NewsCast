@@ -1,9 +1,9 @@
 # NewsCast
 
 ### A modern News App for Android written in Kotlin
-#### Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
+Find and read you news articles without leaving the app!
 
-### Dev Tools:
+### Tech Stack:
 
 - Language
   - [Kotlin](https://kotlinlang.org/)
@@ -31,3 +31,8 @@
 
 ### Api
 - All news articles obtained from [Event Registry](http://eventregistry.org/)
+
+### Sources
+Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
+Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
