@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/black1</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="actionOverflowButtonStyle">@style/OverflowButtonTheme</item>
     </style>
@@ -15,6 +15,8 @@
 
     <style name="AppTheme.ActionBar" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/white1</item>
+        <item name="colorPrimaryDark">@color/black3</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="searchTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">

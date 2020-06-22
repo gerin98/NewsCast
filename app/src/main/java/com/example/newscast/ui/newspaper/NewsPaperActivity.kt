@@ -185,7 +185,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                NavUtils.navigateUpTo(this, intent)
+                supportFinishAfterTransition()
                 return true
             }
             else -> {}
