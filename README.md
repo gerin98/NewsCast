@@ -1,7 +1,7 @@
-# NewsCast
+![Alt text](screenshots/Screenshot_20200621-223615.png?raw=true "Title")
 
-### A modern News App for Android written in Kotlin
-Find and read you news articles without leaving the app!
+## A modern News App for Android written in Kotlin
+NewsCast lets you find and and read articles you care about natively within the app. Browse from a wide assortment of categories and save interesting articles for later!
 
 ### Tech Stack:
 
