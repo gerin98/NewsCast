@@ -36,6 +36,7 @@ NewsCast lets you find and and read articles you care about natively within the 
   - [Timber](https://github.com/JakeWharton/timber)
 - Testing
   - [Robolectric](https://github.com/robolectric/robolectric)
+  - [Stetho](http://facebook.github.io/stetho/)
 
 ### Api
 - NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
