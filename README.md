@@ -8,6 +8,8 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[Api](#api)**<br>
 **[Troubleshooting](#troubleshooting)**<br>
 **[Credits](#credits)**<br>
+**[Author](#author)**<br>
+
 
 ## Tech Stack:
 
