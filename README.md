@@ -42,10 +42,10 @@ NewsCast lets you find and and read articles you care about natively within the 
   - [Stetho](http://facebook.github.io/stetho/)
 
 ### Api
-- NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
+NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
 
 ### Troubleshooting
-- If you are unable to load news articles, the token limit for my api key may have been reached. Please make an account with [Event Registry](http://eventregistry.org/) and use your own api key.
+If you are unable to load news articles, the token limit for my api key may have been reached. Please make an account with [Event Registry](http://eventregistry.org/) and use your own api key.
 
 ### Credits
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
