@@ -45,3 +45,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
+
+### Author
+[![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/gerin-amalaraj/)
+
