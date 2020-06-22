@@ -10,10 +10,8 @@ NewsCast lets you find and and read articles you care about natively within the 
   <img src="screenshots/newscast_browse_view.jpg" width="200" height="400" />
   <img src="screenshots/newscast_news_paper_view.jpg" width="200" height="400" />
   <img src="screenshots/newscast_search_view.jpg" width="200" height="400" />
+  <img src="screenshots/newscast_favourites_view.jpg" width="200" height="400" />
 </p>
-
-
-
 
 ### Table of Contents
 **[Features](#features)**<br>
