@@ -12,5 +12,4 @@
         android:height="10dp"
         android:drawable="@drawable/ic_news"/>
 
-
 </layer-list>

@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         activityScope.launch {
-            delay(2000L)
+            delay(1000L)
 
             val newIntent = Intent(this@SplashActivity, BrowseActivity::class.java)
             startActivity(newIntent)
