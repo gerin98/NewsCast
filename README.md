@@ -13,7 +13,7 @@ NewsCast lets you find and and read articles you care about natively within the 
   <img src="screenshots/newscast_favourites_view.jpg" width="200" height="400" />
 </p>
 
-### Table of Contents
+## Table of Contents
 **[1. Features](#features-bulb)**<br>
 **[2. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
 **[3. Api](#api-newspaper)**<br>
@@ -23,7 +23,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[7. Author](#author)**<br>
 **[8. License](#license)**<br>
 
-### Features :bulb:
+## Features :bulb:
 #### Beatiful News Viewer
 Read your news articles directly within the app. No redirects. No switching back and forth. Just you and your news.
 
@@ -65,25 +65,25 @@ Can't find what you're looking for? Search for keywords to find articles for pra
   - [Robolectric](https://github.com/robolectric/robolectric)
   - [Stetho](http://facebook.github.io/stetho/)
 
-### Api :newspaper:
+## Api :newspaper:
 NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
 
-### Troubleshooting :warning:
+## Troubleshooting :warning:
 If you are unable to load news articles, the token limit for my api key may have been reached. Please make an account with [Event Registry](http://eventregistry.org/) and use your own api key.
 
-### See it in Action
+## See it in Action
 
 <p align="center">
   <img src="screenshots/newscast_browse_video.gif" width="300" />
   <img src="screenshots/newscast_favourite_video.gif" width="300" />
 </p>
 
-### Credits
+## Credits
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
 
-### Author
+## Author
 
 <img src="https://github.com/gerin98.png" width="60" align="left">
 
@@ -91,7 +91,7 @@ Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightl
 
 [![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/gerin-amalaraj/)
 
-### License
+## License
 ```
 MIT License
 
