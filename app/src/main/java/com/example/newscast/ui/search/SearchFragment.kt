@@ -2,6 +2,7 @@ package com.example.newscast.ui.search
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +44,12 @@ class SearchFragment : Fragment() {
 
         override fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
             Timber.d("onDoubleClick")
+            val animateIcon = doubleClickedView?.findViewById<ImageView>(R.id.heart_animation)
+            animateIcon?.let {
+                it.visibility = View.VISIBLE
+                (it.drawable as? Animatable)?.start()
+            }
+            viewModel.addToDb(dataset[adapterPosition])
         }
 
     })
