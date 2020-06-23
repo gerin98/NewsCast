@@ -85,7 +85,7 @@ Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightl
 
 ## Author
 
-<img src="screenshots/gerinamalaraj.jpg" width="100" align="left">   <br /> 
+<img src="screenshots/gerinamalaraj.jpg" width="80" align="left">
 
 **Gerin Amalaraj**  
 
