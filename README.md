@@ -39,11 +39,12 @@ Can't find what you're looking for? Search for keywords to find articles for pra
 ## Tech Stack :hammer_and_wrench:
 
 - Language
-  - [Kotlin](https://kotlinlang.org/)
+  - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - Architecture
   - [MVVM & Repository pattern](https://developer.android.com/jetpack/docs/guide#overview)
-  - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html)
-  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
+    - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - an observable lifecycle-aware data holder class
+  - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html) - for asynchronous programming and more
+  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - easily write code that interacts with views
 - Dependency Injection
   - [Koin](https://insert-koin.io/)
 - Network
