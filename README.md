@@ -89,7 +89,7 @@ Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightl
 
 **Gerin Amalaraj**  
 
-[![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/gerin-amalaraj/)
+[![Linkedin](https://img.shields.io/badge/-linkedin-grey?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/gerin-amalaraj/)
 
 ## License
 ```
