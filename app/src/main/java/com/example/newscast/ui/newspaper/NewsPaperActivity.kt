@@ -1,12 +1,13 @@
 package com.example.newscast.ui.newspaper
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NavUtils
 import androidx.lifecycle.Observer
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -181,12 +182,21 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
         viewModel.checkIfFavourited(uri)
     }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_news_paper_activity, menu)
+
+        return true
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 supportFinishAfterTransition()
                 return true
+            }
+            R.id.menu_share_news -> {
+                shareNewsArticle()
             }
             else -> {}
         }
@@ -212,6 +222,18 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             startPostponedEnterTransition()
             true
         }
+    }
+
+    private fun shareNewsArticle() {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, url ?: "")
+            putExtra(Intent.EXTRA_TITLE, title)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
 }

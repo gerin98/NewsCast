@@ -50,7 +50,7 @@ class SearchActivity : AppCompatActivity() {
 
         // Get the SearchView and set the searchable configuration
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.searchView).actionView as SearchView).apply {
+        (menu.findItem(R.id.menu_search_view).actionView as SearchView).apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
             setIconifiedByDefault(false)
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
