@@ -52,11 +52,11 @@ Can't find what you're looking for? Search for keywords to find articles for pra
   - [OkHttp](https://square.github.io/okhttp/) - an HTTP client that’s efficient by default
   - [Moshi](https://github.com/square/moshi) - a modern JSON library for Android and Java
 - Database
-  - [Room](https://developer.android.com/training/data-storage/room)
+  - [Room](https://developer.android.com/training/data-storage/room) - robust database access while harnessing the full power of SQLite
 - UI
-  - [Databinding](https://developer.android.com/topic/libraries/data-binding)
-  - [Material Design](https://material.io/design)
-  - [Icons](https://material.io/resources/icons/?style=baseline)
+  - [Databinding](https://developer.android.com/topic/libraries/data-binding) - bind UI components in your layouts to data sources in your app
+  - [Material Design](https://material.io/design) - a visual language that synthesizes the classic principles of good design with the innovation of technology and science
+  - [Icons](https://material.io/resources/icons/?style=baseline) - delightful, beautifully crafted symbols for common actions and items
 - Image loading
   - [Glide](https://github.com/bumptech/glide)
 - Logging
