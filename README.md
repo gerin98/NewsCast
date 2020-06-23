@@ -17,7 +17,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[1. Features](#features-bulb)**<br>
 **[2. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
 **[3. Api](#api-newspaper)**<br>
-**[4. Troubleshooting](#troubleshooting)**<br>
+**[4. Troubleshooting](#troubleshooting-warning)**<br>
 **[5. See it in Action](#see-it-in-action)**<br>
 **[6. Credits](#credits)**<br>
 **[7. Author](#author)**<br>
@@ -67,7 +67,7 @@ Can't find what you're looking for? Search for keywords to find articles for pra
 ### Api :newspaper:
 NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
 
-### Troubleshooting
+### Troubleshooting :warning:
 If you are unable to load news articles, the token limit for my api key may have been reached. Please make an account with [Event Registry](http://eventregistry.org/) and use your own api key.
 
 ### See it in Action
