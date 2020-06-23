@@ -45,7 +45,7 @@
             android:theme="@style/AppTheme.ActionBar"/>
         <activity
             android:name=".ui.favourite.FavouritesActivity"
-            android:label=""
+            android:label="Favourites"
             android:parentActivityName=".ui.browse.BrowseActivity"
             android:theme="@style/AppTheme.ActionBar"/>
 
