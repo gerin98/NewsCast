@@ -14,9 +14,9 @@ NewsCast lets you find and and read articles you care about natively within the 
 </p>
 
 ### Table of Contents
-**[1. Features](#features)**<br>
-**[2. Tech Stack](#tech-stack)**<br>
-**[3. Api](#api)**<br>
+**[1. Features](#features-bulb)**<br>
+**[2. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
+**[3. Api](#api-newspaper)**<br>
 **[4. Troubleshooting](#troubleshooting)**<br>
 **[5. See it in Action](#see-it-in-action)**<br>
 **[6. Credits](#credits)**<br>
