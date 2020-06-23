@@ -46,11 +46,11 @@ Can't find what you're looking for? Search for keywords to find articles for pra
   - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html) - for asynchronous programming and more
   - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - easily write code that interacts with views
 - Dependency Injection
-  - [Koin](https://insert-koin.io/)
+  - [Koin](https://insert-koin.io/) - A pragmatic lightweight dependency injection framework
 - Network
-  - [Retrofit](https://square.github.io/retrofit/)
-  - [OkHttp](https://square.github.io/okhttp/)
-  - [Moshi](https://github.com/square/moshi)
+  - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java
+  - [OkHttp](https://square.github.io/okhttp/) - an HTTP client that’s efficient by default
+  - [Moshi](https://github.com/square/moshi) - a modern JSON library for Android and Java
 - Database
   - [Room](https://developer.android.com/training/data-storage/room)
 - UI
