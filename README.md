@@ -28,13 +28,13 @@ NewsCast lets you find and and read articles you care about natively within the 
 Read your news articles directly within the app. No redirects. No switching back and forth. Just you and your news.
 
 #### Browse News from a variety of curated categories
-Simply choose a news topic from the sidebar to browse the latest articles
+Simply choose a news topic from the sidebar to browse the latest articles.
 
 #### Save important news for later
 We don't always have time to read through the whole article. Double tap to add an article to your favourites and come back to it later.
 
 #### Search at your fingertips
-Can't find what you're looking for? Search for keywords to find articles for practically any topic
+Can't find what you're looking for? Search for keywords to find articles for practically any topic.
 
 ## Tech Stack :hammer_and_wrench:
 
