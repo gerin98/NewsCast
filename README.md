@@ -1,6 +1,6 @@
 ![](screenshots/Screenshot_20200621-223615.png?raw=true "Title")
 
-[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=for-the-badge)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE) [![download](https://img.shields.io/badge/NewsCast-apk-brightgreen?style=for-the-badge&logo=android)]()
+[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=for-the-badge)](https://github.com/gerin98/NewsCast/blob/master/LICENSE) [![download](https://img.shields.io/badge/NewsCast-apk-brightgreen?style=for-the-badge&logo=android)](https://github.com/gerin98/NewsCast/releases)
 
 
 ## A modern News App for Android written in Kotlin
