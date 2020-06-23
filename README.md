@@ -23,7 +23,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[7. Author](#author)**<br>
 **[8. License](#license)**<br>
 
-### Features
+### Features :bulb:
 #### Beatiful News Viewer
 Read your news articles directly within the app. No redirects. No switching back and forth. Just you and your news.
 
@@ -36,7 +36,7 @@ We don't always have time to read through the whole article. Double tap to add a
 #### Search at your fingertips
 Can't find what you're looking for? Search for keywords to find articles for practically any topic
 
-## Tech Stack:
+## Tech Stack :hammer_and_wrench:
 
 - Language
   - [Kotlin](https://kotlinlang.org/)
@@ -64,7 +64,7 @@ Can't find what you're looking for? Search for keywords to find articles for pra
   - [Robolectric](https://github.com/robolectric/robolectric)
   - [Stetho](http://facebook.github.io/stetho/)
 
-### Api
+### Api :newspaper:
 NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
 
 ### Troubleshooting
