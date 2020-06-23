@@ -42,7 +42,7 @@ Can't find what you're looking for? Search for keywords to find articles for pra
   - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - Architecture
   - [MVVM & Repository pattern](https://developer.android.com/jetpack/docs/guide#overview) - separate ui logic from business logic
-    - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - an observable lifecycle-aware data holder class
+  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - an observable lifecycle-aware data holder class
   - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html) - for asynchronous programming and more
   - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - easily write code that interacts with views
 - Dependency Injection
