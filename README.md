@@ -18,6 +18,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[Tech Stack](#tech-stack)**<br>
 **[Api](#api)**<br>
 **[Troubleshooting](#troubleshooting)**<br>
+**[See it in Action](#see-it-in-action)**<br>
 **[Credits](#credits)**<br>
 **[Author](#author)**<br>
 **[License](#license)**<br>
@@ -26,19 +27,11 @@ NewsCast lets you find and and read articles you care about natively within the 
 #### Beatiful News Viewer
 Read your news articles directly within the app. No redirects. No switching back and forth. Just you and your news.
 
-<p align="center">
-  <img src="screenshots/newscast_browse_video.gif" width="300" />
-</p>
-
 #### Browse News from a variety of curated categories
 Simply choose a news topic from the sidebar to browse the latest articles
 
 #### Save important news for later
 We don't always have time to read through the whole article. Double tap to add an article to your favourites and come back to it later.
-
-<p align="center">
-  <img src="screenshots/newscast_favourite_video.gif" width="300" />
-</p>
 
 #### Search at your fingertips
 Can't find what you're looking for? Search for keywords to find articles for practically any topic
@@ -76,6 +69,13 @@ NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to sear
 
 ### Troubleshooting
 If you are unable to load news articles, the token limit for my api key may have been reached. Please make an account with [Event Registry](http://eventregistry.org/) and use your own api key.
+
+### See it in Action
+
+<p align="center">
+  <img src="screenshots/newscast_browse_video.gif" width="300" />
+  <img src="screenshots/newscast_favourite_video.gif" width="300" />
+</p>
 
 ### Credits
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
