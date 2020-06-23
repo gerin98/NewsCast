@@ -85,11 +85,11 @@ Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightl
 
 ## Author
 
-<img src="screenshots/gerinamalaraj.jpg" width="80" align="left">
+<img src="screenshots/gerinamalaraj.jpg" width="80" align="left"> <br>
 
 **Gerin Amalaraj**  
 
-[![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/gerin-amalaraj/)<br>
+[![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/gerin-amalaraj/)
 
 ## License
 ```
