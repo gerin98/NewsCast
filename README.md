@@ -34,6 +34,8 @@ Simply choose a news topic from the sidebar to browse the latest articles
 #### Save important news for later
 We don't always have time to read through the whole article. Double tap to add an article to your favourites and come back to it later.
 
+<video src="screenshots/newscast_favourite_video.gif" width="300" controls preload></video>
+
 #### Search at your fingertips
 Can't find what you're looking for? Search for keywords to find articles for practically any topic
 
