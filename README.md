@@ -58,12 +58,12 @@ Can't find what you're looking for? Search for keywords to find articles for pra
   - [Material Design](https://material.io/design) - a visual language that synthesizes the classic principles of good design with the innovation of technology and science
   - [Icons](https://material.io/resources/icons/?style=baseline) - delightful, beautifully crafted symbols for common actions and items
 - Image loading
-  - [Glide](https://github.com/bumptech/glide)
+  - [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling
 - Logging
-  - [Timber](https://github.com/JakeWharton/timber)
+  - [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
 - Testing
-  - [Robolectric](https://github.com/robolectric/robolectric)
-  - [Stetho](http://facebook.github.io/stetho/)
+  - [Robolectric](https://github.com/robolectric/robolectric) - a framework that brings fast and reliable unit tests to Android
+  - [Stetho](http://facebook.github.io/stetho/) - a sophisticated debug bridge for Android applications
 
 ## Api :newspaper:
 NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
