@@ -18,9 +18,9 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[2. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
 **[3. Api](#api-newspaper)**<br>
 **[4. Troubleshooting](#troubleshooting-warning)**<br>
-**[5. See it in Action](#see-it-in-action)**<br>
-**[6. Credits](#credits)**<br>
-**[7. Author](#author)**<br>
+**[5. See it in Action](#see-it-in-action-eyeglasses)**<br>
+**[6. Credits](#credits-closed_book)**<br>
+**[7. Author](#author-pencil2)**<br>
 **[8. License](#license)**<br>
 
 ## Features :bulb:
@@ -71,19 +71,19 @@ NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to sear
 ## Troubleshooting :warning:
 If you are unable to load news articles, the token limit for my api key may have been reached. Please make an account with [Event Registry](http://eventregistry.org/) and use your own api key.
 
-## See it in Action
+## See it in Action :eyeglasses:
 
 <p align="center">
   <img src="screenshots/newscast_browse_video.gif" width="300" />
   <img src="screenshots/newscast_favourite_video.gif" width="300" />
 </p>
 
-## Credits
+## Credits :closed_book:
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 Inspired by [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
 
-## Author
+## Author :pencil2:
 
 <img src="screenshots/gerinamalaraj.jpg" width="80" align="left"> <br>
 
