@@ -14,14 +14,14 @@ NewsCast lets you find and and read articles you care about natively within the 
 </p>
 
 ### Table of Contents
-**[1.Features](#features)**<br>
-**[2.Tech Stack](#tech-stack)**<br>
-**[Api](#api)**<br>
-**[Troubleshooting](#troubleshooting)**<br>
-**[See it in Action](#see-it-in-action)**<br>
-**[Credits](#credits)**<br>
-**[Author](#author)**<br>
-**[License](#license)**<br>
+**[1. Features](#features)**<br>
+**[2. Tech Stack](#tech-stack)**<br>
+**[3. Api](#api)**<br>
+**[4. Troubleshooting](#troubleshooting)**<br>
+**[5. See it in Action](#see-it-in-action)**<br>
+**[6. Credits](#credits)**<br>
+**[7. Author](#author)**<br>
+**[8. License](#license)**<br>
 
 ### Features
 #### Beatiful News Viewer
