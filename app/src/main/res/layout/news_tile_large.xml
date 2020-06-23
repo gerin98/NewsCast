@@ -4,6 +4,8 @@
     android:id="@+id/news_tile_large_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:background="@drawable/custom_ripple"
     android:orientation="vertical"
     android:layout_margin="5dp" >
 

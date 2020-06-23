@@ -33,9 +33,6 @@ class SearchAdapter(private val newsDataset: ArrayList<ResultsModel?>)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as SearchViewHolder
 
-        // set item focus state
-        viewHolder.newsTileLayout.isSelected = true
-
         // load image
         val imageUrl = newsDataset[position]?.image
         if (imageUrl != null) {

@@ -67,9 +67,6 @@ class NewsAdapter(private val newsDataset: ArrayList<ResultsModel?>)
 
             val largeHolder = holder as LargeViewHolder
 
-            // set item focus state
-            largeHolder.largeNewsTileLayout.isSelected = true
-
             // load image
             val imageUrl = newsDataset[position]?.image
             if (imageUrl != null) {
@@ -89,9 +86,6 @@ class NewsAdapter(private val newsDataset: ArrayList<ResultsModel?>)
             // show small tile
 
             val smallHolder = holder as SmallViewHolder
-
-            // set item focus state
-            smallHolder.smallNewsTileLayout.isSelected = true
 
             // load image
             val imageUrl = newsDataset[position]?.image

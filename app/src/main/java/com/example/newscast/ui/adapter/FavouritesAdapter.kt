@@ -34,9 +34,6 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as SearchViewHolder
 
-        // set item focus state
-        viewHolder.newsTileLayout.isSelected = true
-
         // load image
         val imageUrl = newsDataset[position]?.imageUrl
         if (imageUrl != null) {
