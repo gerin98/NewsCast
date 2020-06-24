@@ -6,11 +6,11 @@ import androidx.databinding.BindingAdapter
 object DataBindingExtensions {
 
     /**
-     * DataBinding adapter to map a boolean live data to a progress bar's visibility
+     * DataBinding adapter to map a boolean live data to a view's visibility
      */
     @BindingAdapter("android:booleanVisibility")
     @JvmStatic
-    fun setProgressBarVisibility(targetView: View, data: Boolean?) {
+    fun setVisibility(targetView: View, data: Boolean?) {
         targetView.visibility = when (data) {
             true -> View.VISIBLE
             else -> View.GONE

@@ -7,6 +7,9 @@
         <variable
             name="newsPaper"
             type="com.example.newscast.ui.newspaper.NewsPaperObservable" />
+        <variable
+            name="viewModel"
+            type="com.example.newscast.ui.newspaper.NewsPaperViewModel" />
     </data>
 
     <ScrollView
@@ -41,6 +44,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="7dp"
                     android:text="@{newsPaper.topic}"
+                    android:booleanVisibility="@{viewModel.topicVisibility}"
                     tools:text="¬ Tech"
                     tools:visibility="visible" />
 

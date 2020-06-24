@@ -22,11 +22,12 @@ import timber.log.Timber
 
 class NewsPaperViewModel: ViewModel(), KoinComponent {
 
+    // Koin Components
     private val favouritesRepository by inject<FavouritesRepository>()
     private val resources : ResourceHelper by inject()
     private val stringHelper by inject<StringHelper> ()
 
-
+    // Observables
     private val _favouriteLiveData = MutableLiveData<Boolean?>(null)
     val favouriteLiveData: LiveData<Boolean?>
         get() = _favouriteLiveData
@@ -34,6 +35,12 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
     private val _articleLiveData = MutableLiveData<List<Articles?>>()
     val articleLiveData: LiveData<List<Articles?>>
         get() = _articleLiveData
+
+    private val _topicVisibilityLiveData = MutableLiveData<Boolean>()
+    val topicVisibility: LiveData<Boolean>
+        get() = _topicVisibilityLiveData
+
+    val newsPaperObservable = NewsPaperObservable()
 
     private fun addToFavourites(uri: String? = null,
                                 title: String? = null,
@@ -94,8 +101,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
 
     }
 
-    fun prepareNewsPaper(result: ResultsModel?, newsPaperObservable: NewsPaperObservable, topic: String?) {
-
+    fun prepareNewsPaper(result: ResultsModel?, topic: String?) {
         if (result != null) {
             Timber.d("Preparing article: ${result.title}")
 
@@ -118,6 +124,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
         if (topic != null) {
             val formattedTopic = resources.getString(R.string.news_paper_news_topic, topic)
             newsPaperObservable.topic = formattedTopic
+            _topicVisibilityLiveData.value = true
         }
     }
 

@@ -86,12 +86,11 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     var topic: String? = null
     var uri: String? = null
 
-    private val newsPaperObservable: NewsPaperObservable = NewsPaperObservable()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityNewsPaperBinding>(this, R.layout.activity_news_paper)
-        binding.newsPaper = newsPaperObservable
+        binding.newsPaper = viewModel.newsPaperObservable
+        binding.viewModel = viewModel
         postponeEnterTransition()
         initLiveData()
 
@@ -150,11 +149,8 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
     // load news article from network request
     private fun loadNewsArticle(result: ResultsModel?, topic: String?) {
-        viewModel.prepareNewsPaper(result, newsPaperObservable, topic)
-
-        topic?.let {
-            news_paper_article_tag.visibility = View.VISIBLE
-        }
+        viewModel.prepareNewsPaper(result, topic)
+        viewModel.checkIfFavourited(uri)
 
         imageUrl = result?.image?.also {
             news_paper_article_image.loadImageFromUrl(this@NewsPaperActivity, it, glideListener)
@@ -163,8 +159,6 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         if (imageUrl == null) {
             startPostponedEnterTransition()
         }
-
-        viewModel.checkIfFavourited(uri)
     }
 
     // request news article to be shown from db
