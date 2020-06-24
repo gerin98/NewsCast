@@ -156,8 +156,8 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             news_paper_article_tag.visibility = View.VISIBLE
         }
 
-        imageUrl?.let{
-            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
+        imageUrl = result?.image?.also {
+            news_paper_article_image.loadImageFromUrl(this@NewsPaperActivity, it, glideListener)
         }
 
         if (imageUrl == null) {
