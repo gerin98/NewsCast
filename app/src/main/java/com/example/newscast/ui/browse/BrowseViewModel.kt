@@ -61,6 +61,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 parseArticles(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
+                Timber.e(response.message)
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -82,6 +83,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 parseArticles(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
+                Timber.e(response.message)
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -159,6 +161,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 parseArticles(response.data)
                 _newsTopicLiveData.postValue(title)
             } else if (response.status == Status.ERROR) {
+                Timber.e(response.message)
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -174,6 +177,10 @@ class BrowseViewModel: ViewModel(), KoinComponent {
             return
         }
 
+        with(lastRequest) {
+            this?.refresh()
+        }
+
         lastRequest?.let {
             _progressBarVisibilityLiveData.value = true
 
@@ -183,6 +190,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 if (response.status == Status.SUCCESS) {
                     parseArticles(response.data)
                 } else if (response.status == Status.ERROR) {
+                    Timber.e(response.message)
                     _errorMessageLiveData.postValue(true)
                 }
 
@@ -203,6 +211,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
     }
 
     private fun noResults() {
+        Timber.e("no results")
         _showZeroCaseLiveData.postValue(true)
         _newsLiveData.postValue(null)
         _errorMessageLiveData.postValue(true)

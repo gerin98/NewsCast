@@ -52,6 +52,7 @@
         app:menu="@menu/menu_navigation_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -68,10 +69,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/settings_button" />
+                app:layout_constraintEnd_toStartOf="@id/settings_button_text" />
 
             <TextView
-                android:id="@+id/settings_button"
+                android:id="@+id/settings_button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Menu1"

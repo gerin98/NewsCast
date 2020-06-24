@@ -1,5 +1,10 @@
 package com.example.newscast.network
 
+import android.content.SharedPreferences
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.koin.core.qualifier.named
+
 /**
  * articlesSortBy = "rel" for relevant sources otherwise "date" to sort by new
  */
@@ -17,9 +22,20 @@ class NewsRequestBody(
     val includeArticleImage: Boolean = true,
     val dataType: Array<String> = arrayOf("news"),
     val apiKey: String = "63eed15f-9dd0-41c9-b511-ed6efaea22fb",
-    val lang: String = "eng",
+    var lang: String = "eng",
     val forceMaxDataTimeWindow: Int = 30
-) {
+): KoinComponent {
+
+    private val sharedPreferences: SharedPreferences by inject(named("preference_manager"))
+
+    init {
+        lang = sharedPreferences.getString("language", "eng") ?: "eng"
+    }
+
+    fun refresh() : NewsRequestBody {
+        lang = sharedPreferences.getString("language", "eng") ?: "eng"
+        return this
+    }
 
     /**
      * Parameters

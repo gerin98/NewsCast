@@ -95,13 +95,15 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
 
-    // timber
+    // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Preferences
+    implementation 'androidx.preference:preference:1.1.1'
 
 }
 
 dependencies {
-
     // Testing with Koin
     testImplementation 'org.koin:koin-test:2.0.1'
 

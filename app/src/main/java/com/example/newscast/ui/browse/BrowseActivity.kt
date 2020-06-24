@@ -1,6 +1,5 @@
 package com.example.newscast.ui.browse
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -19,8 +18,9 @@ import com.example.newscast.R
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.favourite.FavouritesActivity
 import com.example.newscast.ui.search.SearchActivity
+import com.example.newscast.ui.settings.SettingsActivity
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_browse.*
 
 class BrowseActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener,
@@ -47,7 +47,7 @@ class BrowseActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_browse)
         this.setSupportActionBar(newsBottomAppBar)
 
         navigationView.setNavigationItemSelectedListener(this)
@@ -57,6 +57,7 @@ class BrowseActivity : AppCompatActivity(),
             drawerLayout.openDrawer(GravityCompat.START)
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        settings_button.setOnClickListener(this)
 
         initLiveData()
 
@@ -154,6 +155,11 @@ class BrowseActivity : AppCompatActivity(),
         when(view?.id) {
             R.id.news_button -> {
                 viewModel.getLatestNews()
+            }
+            R.id.settings_button -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                drawerLayout.closeDrawer(GravityCompat.START)
             }
             else -> {}
         }

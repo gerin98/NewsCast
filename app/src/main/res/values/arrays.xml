@@ -1,0 +1,90 @@
+<resources>
+    <string-array name="language_entries">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Catalan</item>
+        <item>Portuguese</item>
+        <item>German</item>
+        <item>Slovene</item>
+        <item>Italian</item>
+        <item>Croatian</item>
+        <item>Serbian</item>
+        <item>French</item>
+        <item>Czech</item>
+        <item>Slovak</item>
+        <item>Basque</item>
+        <item>Polish</item>
+        <item>Hungarian</item>
+        <item>Dutch</item>
+        <item>Swedish</item>
+        <item>Finnish</item>
+        <item>Danish</item>
+        <item>Greek</item>
+        <item>Romanian</item>
+        <item>Bulgarian</item>
+        <item>Russian</item>
+        <item>Arabic</item>
+        <item>Turkish</item>
+        <item>Indonesian</item>
+        <item>Vietnamese</item>
+        <item>Chinese</item>
+        <item>Ukrainian</item>
+        <item>Persian</item>
+        <item>Hindi</item>
+        <item>Urdu</item>
+        <item>Kannada</item>
+        <item>Bengali</item>
+        <item>Malayalam</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>eng</item>
+        <item>spa</item>
+        <item>cat</item>
+        <item>por</item>
+        <item>deu</item>
+        <item>slv</item>
+        <item>ita</item>
+        <item>hrv</item>
+        <item>srp</item>
+        <item>fra</item>
+        <item>ces</item>
+        <item>slk</item>
+        <item>eus</item>
+        <item>pol</item>
+        <item>hun</item>
+        <item>nld</item>
+        <item>swe</item>
+        <item>fin</item>
+        <item>dan</item>
+        <item>ell</item>
+        <item>ron</item>
+        <item>bul</item>
+        <item>rus</item>
+        <item>ara</item>
+        <item>tur</item>
+        <item>ind</item>
+        <item>vie</item>
+        <item>zho</item>
+        <item>ukr</item>
+        <item>fas</item>
+        <item>hin</item>
+        <item>urd</item>
+        <item>kan</item>
+        <item>ben</item>
+        <item>mal</item>
+    </string-array>
+
+    <string-array name="text_size_entries">
+        <item>Large</item>
+        <item>Normal</item>
+        <item>Small</item>
+    </string-array>
+
+    <string-array name="text_size_values">
+        <item>14dp</item>
+        <item>10dp</item>
+        <item>6dp</item>
+    </string-array>
+
+</resources>
