@@ -27,6 +27,9 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
     private val resources : ResourceHelper by inject()
     private val stringHelper by inject<StringHelper> ()
 
+    var articleUrl = ""
+    var articleTitle = ""
+
     // Observables
     private val _favouriteLiveData = MutableLiveData<Boolean?>(null)
     val favouriteLiveData: LiveData<Boolean?>
@@ -105,7 +108,10 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
         if (result != null) {
             Timber.d("Preparing article: ${result.title}")
 
-            newsPaperObservable.title = result.title ?: ""
+            result.title.also {
+                newsPaperObservable.title = it ?: ""
+                articleTitle = it ?: ""
+            }
             newsPaperObservable.body = result.body ?: ""
 
             if (result.source != null) {
@@ -116,6 +122,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
             }
 
             if (result.url?.isNotEmpty() == true) {
+                articleUrl = result.url
                 val formattedUrl = resources.getString(R.string.news_paper_news_url, result.url)
                 newsPaperObservable.url = formattedUrl
             }

@@ -211,8 +211,8 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     private fun shareNewsArticle() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, url ?: "")
-            putExtra(Intent.EXTRA_TITLE, title)
+            putExtra(Intent.EXTRA_TEXT, viewModel.articleUrl)
+            putExtra(Intent.EXTRA_TITLE, viewModel.articleTitle)
             type = "text/plain"
         }
 
