@@ -1,83 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.newspaper.NewsPaperActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="newsPaper"
+            type="com.example.newscast.ui.newspaper.NewsPaperObservable" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.newspaper.NewsPaperActivity">
 
-        <ImageView
-            android:id="@+id/news_paper_article_image"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            tools:src="@tools:sample/avatars" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
-
-            <TextView
-                android:id="@+id/news_paper_article_tag"
-                style="@style/Subtitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="7dp"
-                tools:text="¬ Tech"
-                tools:visibility="visible" />
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/news_paper_favourite_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="330dp"
-                android:src="@drawable/ic_favorite_border" />
+                android:id="@+id/news_paper_article_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@tools:sample/avatars" />
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
 
-        <TextView
-            android:id="@+id/news_paper_article_title"
-            style="@style/Headline1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            tools:text="Llama Patrol The Central Coast of California" />
+                <TextView
+                    android:id="@+id/news_paper_article_tag"
+                    style="@style/Subtitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="7dp"
+                    android:text="@{newsPaper.topic}"
+                    tools:text="¬ Tech"
+                    tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/news_paper_article_author"
-            style="@style/Headline3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            tools:text="by Betty Eghan" />
+                <ImageView
+                    android:id="@+id/news_paper_favourite_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="330dp"
+                    android:src="@drawable/ic_favorite_border" />
 
-        <TextView
-            android:id="@+id/news_paper_article_text"
-            style="@style/Content1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            tools:text="@string/large_text" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/news_paper_article_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:autoLink="web"
-            android:textColorLink="@color/link"
-            android:textIsSelectable="true"
-            tools:text="https://en.wikipedia.org/wiki/News" />
+            <TextView
+                android:id="@+id/news_paper_article_title"
+                style="@style/Headline1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@{newsPaper.title}"
+                tools:text="Llama Patrol The Central Coast of California" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/news_paper_article_author"
+                style="@style/Headline3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@{newsPaper.author}"
+                tools:text="by Betty Eghan" />
 
-</ScrollView>
+            <TextView
+                android:id="@+id/news_paper_article_text"
+                style="@style/Content1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@{newsPaper.body}"
+                tools:text="@string/large_text" />
+
+            <TextView
+                android:id="@+id/news_paper_article_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@{newsPaper.url}"
+                android:autoLink="web"
+                android:textColorLink="@color/link"
+                android:textIsSelectable="true"
+                tools:text="https://en.wikipedia.org/wiki/News" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

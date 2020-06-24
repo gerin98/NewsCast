@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -15,6 +16,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
+import com.example.newscast.databinding.ActivityNewsPaperBinding
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.ViewModelFactory
@@ -48,15 +50,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    var source: SourceModel? = null
-    var title: String? = null
-    var body: String? = null
-    var url: String? = null
-    var author: String? = null
-    var imageUrl: String? = null
-    var topic: String? = null
-    var uri: String? = null
-
+    // glide callback for shared element transitions
     private val glideListener = object : RequestListener<Drawable> {
         override fun onLoadFailed(
             e: GlideException?,
@@ -83,9 +77,21 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    var source: SourceModel? = null
+    var title: String? = null
+    var body: String? = null
+    var url: String? = null
+    var author: String? = null
+    var imageUrl: String? = null
+    var topic: String? = null
+    var uri: String? = null
+
+    private val newsPaperObservable: NewsPaperObservable = NewsPaperObservable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_news_paper)
+        val binding = DataBindingUtil.setContentView<ActivityNewsPaperBinding>(this, R.layout.activity_news_paper)
+        binding.newsPaper = newsPaperObservable
         postponeEnterTransition()
         initLiveData()
 
@@ -107,81 +113,6 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         news_paper_favourite_button.setOnClickListener(this)
     }
 
-    private fun loadNewsArticle(result: ResultsModel?, topic: String?) {
-        result?.let {
-            Timber.d("Article to be displayed: ${it.title}")
-            title = it.title
-            body = it.body
-            uri = it.uri
-            imageUrl = it.image
-            source = it.source
-
-            news_paper_article_title.text = title
-            news_paper_article_text.text = body
-
-            if (it.url?.isNotEmpty() == true) {
-                url = it.url
-                news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
-            }
-        }
-
-        source?.let {
-            author = it.title
-            val authorText =  String.format(getString(R.string.news_paper_author), author)
-            news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
-        }
-
-        topic?.let {
-            news_paper_article_tag.visibility = View.VISIBLE
-            news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
-        }
-
-        imageUrl?.let{
-            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
-        }
-
-        if (imageUrl == null) {
-            startPostponedEnterTransition()
-        }
-
-        viewModel.checkIfFavourited(uri)
-    }
-
-    private fun loadNewsArticleFromDb(uri: String?) {
-        viewModel.getArticleByUri(uri)
-    }
-
-    private fun showNewsArticleFromDb(article: Articles?) {
-        if (article != null) {
-            title = article.title
-            body = article.body
-            url = article.url
-            author = article.author
-            imageUrl = article.imageUrl
-            uri = article.uri
-        }
-
-        news_paper_article_title.text = title
-        news_paper_article_text.text = body
-        news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
-        val authorText =  String.format(getString(R.string.news_paper_author), author)
-        news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
-
-        topic?.let {
-            news_paper_article_tag.visibility = View.VISIBLE
-            news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
-        }
-
-        imageUrl?.let{
-            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
-        }
-
-        if (imageUrl == null) {
-            startPostponedEnterTransition()
-        }
-
-        viewModel.checkIfFavourited(uri)
-    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_news_paper_activity, menu)
@@ -217,6 +148,64 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.articleLiveData.observe(this, articleLiveDataObserver)
     }
 
+    // load news article from network request
+    private fun loadNewsArticle(result: ResultsModel?, topic: String?) {
+        viewModel.prepareNewsPaper(result, newsPaperObservable, topic)
+
+        topic?.let {
+            news_paper_article_tag.visibility = View.VISIBLE
+        }
+
+        imageUrl?.let{
+            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
+        }
+
+        if (imageUrl == null) {
+            startPostponedEnterTransition()
+        }
+
+        viewModel.checkIfFavourited(uri)
+    }
+
+    // request news article to be shown from db
+    private fun loadNewsArticleFromDb(uri: String?) {
+        viewModel.getArticleByUri(uri)
+    }
+
+    // display news article from db
+    private fun showNewsArticleFromDb(article: Articles?) {
+        if (article != null) {
+            title = article.title
+            body = article.body
+            url = article.url
+            author = article.author
+            imageUrl = article.imageUrl
+            uri = article.uri
+        }
+
+        news_paper_article_title.text = title
+        news_paper_article_text.text = body
+        news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
+        val authorText =  String.format(getString(R.string.news_paper_author), author)
+        news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
+
+        topic?.let {
+            news_paper_article_tag.visibility = View.VISIBLE
+            news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
+        }
+
+        imageUrl?.let{
+            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
+        }
+
+        if (imageUrl == null) {
+            startPostponedEnterTransition()
+        }
+
+        viewModel.checkIfFavourited(uri)
+    }
+
+    // postponed translations for shared element transitions
     fun startPostponedTransition(sharedElement: View) {
         sharedElement.viewTreeObserver?.addOnPreDrawListener {
             startPostponedEnterTransition()
@@ -224,6 +213,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // share the current news article
     private fun shareNewsArticle() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND

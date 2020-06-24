@@ -59,20 +59,19 @@
         <item name="android:textColor">@color/black1</item>
     </style>
 
+    <style name="ContentCustom1" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/merriweather</item>
+        <item name="android:textColor">@color/black1</item>
+    </style>
+
     <style name="Menu1" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/black1</item>
-    </style>
-
-    <style name="MenuTitle1" parent="TextAppearance.AppCompat">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">32sp</item>
-        <item name="android:fontFamily">@font/megrim</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/white5</item>
     </style>
 
 </resources>

@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.newscast.BuildConfig
 import com.example.newscast.data.room.databaseModule
 import com.example.newscast.di.preferenceModule
+import com.example.newscast.di.resourceModule
 import com.example.newscast.network.networkModule
 import com.example.newscast.repository.favouritesModule
 import com.example.newscast.repository.newsModule
@@ -30,7 +31,8 @@ class NewsCastApplication : Application() {
                 favouritesModule,
                 stringHelperModule,
                 databaseModule,
-                preferenceModule
+                preferenceModule,
+                resourceModule
             ))
         }
 

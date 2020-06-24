@@ -4,12 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newscast.R
 import com.example.newscast.data.room.Articles
 import com.example.newscast.data.room.NewsDatabase
+import com.example.newscast.di.ResourceHelper
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.repository.FavouritesRepository
+import com.example.newscast.utils.string.StringHelper
+import kotlinx.android.synthetic.main.activity_news_paper.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
@@ -18,6 +23,9 @@ import timber.log.Timber
 class NewsPaperViewModel: ViewModel(), KoinComponent {
 
     private val favouritesRepository by inject<FavouritesRepository>()
+    private val resources : ResourceHelper by inject()
+    private val stringHelper by inject<StringHelper> ()
+
 
     private val _favouriteLiveData = MutableLiveData<Boolean?>(null)
     val favouriteLiveData: LiveData<Boolean?>
@@ -84,6 +92,33 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
             }
         }
 
+    }
+
+    fun prepareNewsPaper(result: ResultsModel?, newsPaperObservable: NewsPaperObservable, topic: String?) {
+
+        if (result != null) {
+            Timber.d("Preparing article: ${result.title}")
+
+            newsPaperObservable.title = result.title ?: ""
+            newsPaperObservable.body = result.body ?: ""
+
+            if (result.source != null) {
+                var author =  result.source.title ?: ""
+                author = resources.getString(R.string.news_paper_author, author)
+                val formattedAuthor = stringHelper.underlineText(author, 3)
+                newsPaperObservable.author = formattedAuthor
+            }
+
+            if (result.url?.isNotEmpty() == true) {
+                val formattedUrl = resources.getString(R.string.news_paper_news_url, result.url)
+                newsPaperObservable.url = formattedUrl
+            }
+        }
+
+        if (topic != null) {
+            val formattedTopic = resources.getString(R.string.news_paper_news_topic, topic)
+            newsPaperObservable.topic = formattedTopic
+        }
     }
 
 
