@@ -177,17 +177,6 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             uri = article.uri
         }
 
-        news_paper_article_title.text = title
-        news_paper_article_text.text = body
-        news_paper_article_url.text = String.format(getString(R.string.news_paper_news_url), url)
-        val authorText =  String.format(getString(R.string.news_paper_author), author)
-        news_paper_article_author.text = stringHelper.underlineText(authorText, 3)
-
-        topic?.let {
-            news_paper_article_tag.visibility = View.VISIBLE
-            news_paper_article_tag.text = String.format(getString(R.string.news_paper_news_topic), it)
-        }
-
         imageUrl?.let{
             news_paper_article_image.loadImageFromUrl(this, it, glideListener)
         }

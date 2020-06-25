@@ -79,6 +79,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
     fun getArticleByUri(uri: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             val articles = favouritesRepository.getArticlesByUri(uri)
+            prepareNewsPaper(articles)
             _articleLiveData.postValue(articles)
         }
     }
@@ -135,5 +136,35 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
         }
     }
 
+    private fun prepareNewsPaper(articles: List<Articles?>) {
+        if (articles.isNotEmpty()) {
+            val article = articles[0]
+
+            if (article != null) {
+                Timber.e("$article")
+
+                article.title.also {
+                    newsPaperObservable.title = it ?: ""
+                    articleTitle = it ?: ""
+                }
+
+                newsPaperObservable.body = article.body ?: ""
+
+                articleUrl = article.url ?: ""
+                val formattedUrl = resources.getString(R.string.news_paper_news_url, articleUrl)
+                newsPaperObservable.url = formattedUrl
+
+                var author = article.author ?: ""
+                author = resources.getString(R.string.news_paper_author, author)
+                val formattedAuthor = stringHelper.underlineText(author, 3)
+                newsPaperObservable.author = formattedAuthor
+
+                if (article.topic != null) {
+                    val formattedTopic = resources.getString(R.string.news_paper_news_topic, article.topic)
+                    newsPaperObservable.topic = formattedTopic
+                }
+            }
+        }
+    }
 
 }
