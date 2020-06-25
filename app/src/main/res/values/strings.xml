@@ -127,6 +127,7 @@
     <string name="signature_title">Your signature</string>
     <string name="language_title">Default language</string>
     <string name="text_size_title">Text Size</string>
+    <string name="background_colour_title">Background</string>
 
 
     <!-- Sync Preferences -->

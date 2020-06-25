@@ -136,7 +136,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
             }
         }
 
-        if (topic != null) {
+        if (!topic.isNullOrEmpty()) {
             articleTopic = topic
             val formattedTopic = resources.getString(R.string.news_paper_news_topic, topic)
             newsPaperObservable.topic = formattedTopic
@@ -175,7 +175,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
                 val formattedUrl = resources.getString(R.string.news_paper_news_url, articleUrl)
                 newsPaperObservable.url = formattedUrl
 
-                if (article.topic != null) {
+                if (!article.topic.isNullOrEmpty()) {
                     articleTopic = article.topic
                     val formattedTopic = resources.getString(R.string.news_paper_news_topic, article.topic)
                     newsPaperObservable.topic = formattedTopic

@@ -18,6 +18,14 @@
             app:title="@string/text_size_title"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            app:defaultValue="Light"
+            app:entries="@array/background_colour_entries"
+            app:entryValues="@array/background_colour_values"
+            app:key="backgroundTheme"
+            app:title="@string/background_colour_title"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

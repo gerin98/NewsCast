@@ -3,6 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccentDark">#029788</color>
 
     <color name="black1">#000000</color>
     <color name="black2">#CC000000</color>
@@ -23,5 +24,9 @@
     <color name="purple5">#336200EE</color>
 
     <color name="link">#0645AD</color>
+
+    <color name="light">#FFFFFF</color>
+    <color name="sepia">#80714A23</color>
+    <color name="dark">#803C3C3C</color>
 
 </resources>

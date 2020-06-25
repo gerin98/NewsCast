@@ -87,4 +87,16 @@
         <item>Compact</item>
     </string-array>
 
+    <string-array name="background_colour_entries">
+        <item>Light</item>
+        <item>Sepia</item>
+        <item>Dark</item>
+    </string-array>
+
+    <string-array name="background_colour_values">
+        <item>Light</item>
+        <item>Sepia</item>
+        <item>Dark</item>
+    </string-array>
+
 </resources>

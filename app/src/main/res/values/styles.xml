@@ -19,6 +19,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Preferences" parent="AppTheme.ActionBar">
+        <item name="colorAccent">@color/colorAccentDark</item>
+    </style>
+
     <style name="searchTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
 
     </style>

@@ -96,6 +96,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         postponeEnterTransition()
         initLiveData()
         setTextTheme()
+        setBackgroundTheme()
 
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
         val favouriteUri = intent.getStringExtra(BrowseActivity.FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS)
@@ -232,6 +233,24 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
                 news_paper_article_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline1Compact))
                 news_paper_article_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Content1Compact))
                 news_paper_article_author.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline3Compact))
+            }
+        }
+    }
+
+    private fun setBackgroundTheme() {
+        val stringArray = resources.getStringArray(R.array.background_colour_values)
+        when(sharedPreferences.getString("backgroundTheme", "Light")) {
+            stringArray[0] -> {
+                // Light
+                news_paper_parent_layout.setBackgroundColor(resources.getColor(R.color.light, null))
+            }
+            stringArray[1] -> {
+                // Sepia
+                news_paper_parent_layout.setBackgroundColor(resources.getColor(R.color.sepia, null))
+            }
+            stringArray[2] -> {
+                // Dark
+                news_paper_parent_layout.setBackgroundColor(resources.getColor(R.color.dark, null))
             }
         }
     }
