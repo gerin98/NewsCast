@@ -6,18 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
-import com.example.newscast.data.room.NewsDatabase
 import com.example.newscast.di.ResourceHelper
 import com.example.newscast.network.model.ResultsModel
 import com.example.newscast.repository.FavouritesRepository
 import com.example.newscast.utils.string.StringHelper
-import kotlinx.android.synthetic.main.activity_news_paper.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class NewsPaperViewModel: ViewModel(), KoinComponent {

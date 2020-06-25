@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Headline1Compact">16sp</dimen>
+    <dimen name="Headline1Normal">28sp</dimen>
+    <dimen name="Headline1Comfortable">40sp</dimen>
+</resources>

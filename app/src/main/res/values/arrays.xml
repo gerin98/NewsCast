@@ -76,15 +76,15 @@
     </string-array>
 
     <string-array name="text_size_entries">
-        <item>Large</item>
+        <item>Comfortable</item>
         <item>Normal</item>
-        <item>Small</item>
+        <item>Compact</item>
     </string-array>
 
     <string-array name="text_size_values">
-        <item>14dp</item>
-        <item>10dp</item>
-        <item>6dp</item>
+        <item>Comfortable</item>
+        <item>Normal</item>
+        <item>Compact</item>
     </string-array>
 
 </resources>

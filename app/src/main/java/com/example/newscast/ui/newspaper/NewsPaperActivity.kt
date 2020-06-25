@@ -1,8 +1,10 @@
 package com.example.newscast.ui.newspaper
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -22,9 +24,9 @@ import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.utils.glide.loadImageFromUrl
-import com.example.newscast.utils.string.StringHelper
 import kotlinx.android.synthetic.main.activity_news_paper.*
 import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
 import timber.log.Timber
 
 
@@ -33,7 +35,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     private val viewModel: NewsPaperViewModel by viewModels { ViewModelFactory() }
 
     // Koin Components
-    private val stringHelper by inject<StringHelper> ()
+    private val sharedPreferences: SharedPreferences by inject(named("preference_manager"))
 
     // Observers
     private val favouritesLiveDataObserver = Observer<Boolean?> {
@@ -93,6 +95,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         binding.viewModel = viewModel
         postponeEnterTransition()
         initLiveData()
+        setTextTheme()
 
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
         val favouriteUri = intent.getStringExtra(BrowseActivity.FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS)
@@ -207,6 +210,22 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+
+    private fun setTextTheme() {
+        val stringArray = resources.getStringArray(R.array.text_size_values)
+        when(sharedPreferences.getString("textTheme", "Normal")) {
+            stringArray[0] -> {
+                news_paper_article_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline1Comfortable))
+            }
+            stringArray[1] -> {
+                news_paper_article_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline1Normal))
+            }
+            stringArray[2] -> {
+                news_paper_article_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline1Compact))
+            }
+        }
     }
 
 }

@@ -1,7 +1,6 @@
 package com.example.newscast.di
 
 import android.app.Application
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val resourceModule = module {
