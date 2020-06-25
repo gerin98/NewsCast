@@ -44,7 +44,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="7dp"
                     android:text="@{newsPaper.topic}"
-                    android:booleanVisibility="@{viewModel.topicVisibility}"
+                    android:visibility="visible"
                     tools:text="¬ Tech"
                     tools:visibility="visible" />
 
