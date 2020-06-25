@@ -21,7 +21,6 @@ import com.example.newscast.R
 import com.example.newscast.data.room.Articles
 import com.example.newscast.databinding.ActivityNewsPaperBinding
 import com.example.newscast.network.model.ResultsModel
-import com.example.newscast.network.model.SourceModel
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.utils.glide.loadImageFromUrl
@@ -29,7 +28,6 @@ import kotlinx.android.synthetic.main.activity_news_paper.*
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import timber.log.Timber
-
 
 class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -80,15 +78,6 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    var source: SourceModel? = null
-    var title: String? = null
-    var body: String? = null
-    var url: String? = null
-    var author: String? = null
-    var imageUrl: String? = null
-    var topic: String? = null
-    var uri: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityNewsPaperBinding>(this, R.layout.activity_news_paper)
@@ -102,7 +91,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         val result: ResultsModel? = intent.extras?.get(BrowseActivity.NEWS_ARTICLE_INTENT_FLAGS) as? ResultsModel
         val favouriteUri = intent.getStringExtra(BrowseActivity.FAVOURITE_NEWS_ARTICLE_INTENT_FLAGS)
         val imageTransitionName = intent.getStringExtra(BrowseActivity.TRANSITION_INTENT_FLAGS)
-        topic = intent.getStringExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS)
+        val topic = intent.getStringExtra(BrowseActivity.NEWS_TOPIC_INTENT_FLAGS)
 
         if (imageTransitionName != null) {
             news_paper_article_image.transitionName = imageTransitionName
@@ -157,11 +146,10 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.prepareNewsPaper(result, topic)
         viewModel.checkIfFavourited()
 
-        imageUrl = result?.image?.also {
-            news_paper_article_image.loadImageFromUrl(this@NewsPaperActivity, it, glideListener)
-        }
-
-        if (imageUrl == null) {
+        val imageUrl = result?.image
+        if (imageUrl != null) {
+            news_paper_article_image.loadImageFromUrl(this, imageUrl, glideListener)
+        } else {
             startPostponedEnterTransition()
         }
     }
@@ -173,24 +161,14 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
 
     // display news article from db
     private fun showNewsArticleFromDb(article: Articles?) {
-        if (article != null) {
-            title = article.title
-            body = article.body
-            url = article.url
-            author = article.author
-            imageUrl = article.imageUrl
-            uri = article.uri
-        }
+        viewModel.checkIfFavourited()
 
-        imageUrl?.let{
-            news_paper_article_image.loadImageFromUrl(this, it, glideListener)
-        }
-
-        if (imageUrl == null) {
+        val imageUrl = article?.imageUrl
+        if (imageUrl != null) {
+            news_paper_article_image.loadImageFromUrl(this, imageUrl, glideListener)
+        } else {
             startPostponedEnterTransition()
         }
-
-        viewModel.checkIfFavourited()
     }
 
     // postponed translations for shared element transitions
@@ -214,6 +192,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(shareIntent)
     }
 
+    // set text theme from preferences
     private fun setTextTheme() {
         val stringArray = resources.getStringArray(R.array.text_size_values)
         when(sharedPreferences.getString("textTheme", "Normal")) {
@@ -238,6 +217,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // set background theme from preferences
     private fun setBackgroundTheme() {
         val stringArray = resources.getStringArray(R.array.background_colour_values)
         when(sharedPreferences.getString("backgroundTheme", "Light")) {
