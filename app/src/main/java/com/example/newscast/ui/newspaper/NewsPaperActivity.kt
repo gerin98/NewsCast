@@ -139,7 +139,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.news_paper_favourite_button -> {
-                viewModel.favouritesButtonClick(uri, title, body, url, imageUrl, author, topic)
+                viewModel.favouritesButtonClick()
             }
             else -> {}
         }
@@ -153,7 +153,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
     // load news article from network request
     private fun loadNewsArticle(result: ResultsModel?, topic: String?) {
         viewModel.prepareNewsPaper(result, topic)
-        viewModel.checkIfFavourited(uri)
+        viewModel.checkIfFavourited()
 
         imageUrl = result?.image?.also {
             news_paper_article_image.loadImageFromUrl(this@NewsPaperActivity, it, glideListener)
@@ -188,7 +188,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             startPostponedEnterTransition()
         }
 
-        viewModel.checkIfFavourited(uri)
+        viewModel.checkIfFavourited()
     }
 
     // postponed translations for shared element transitions

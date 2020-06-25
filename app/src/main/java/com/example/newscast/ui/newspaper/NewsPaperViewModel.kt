@@ -23,8 +23,13 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
     private val resources : ResourceHelper by inject()
     private val stringHelper by inject<StringHelper> ()
 
-    var articleUrl = ""
+    var articleUri = ""
     var articleTitle = ""
+    var articleBody = ""
+    var articleUrl = ""
+    var articleImageUrl = ""
+    var articleAuthor = ""
+    var articleTopic = ""
 
     // Observables
     private val _favouriteLiveData = MutableLiveData<Boolean?>(null)
@@ -65,9 +70,9 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
         }
     }
 
-    fun checkIfFavourited(uri: String?) {
+    fun checkIfFavourited() {
         viewModelScope.launch(Dispatchers.IO) {
-            val status = favouritesRepository.isFavourited(uri)
+            val status = favouritesRepository.isFavourited(articleUri)
             _favouriteLiveData.postValue(status)
         }
     }
@@ -80,22 +85,19 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
         }
     }
 
-    fun favouritesButtonClick(uri: String? = null,
-                              title: String? = null,
-                              body: String? = null,
-                              url: String? = null,
-                              imageUrl: String? = null,
-                              author: String? = null,
-                              topic: String? = null) {
+    fun favouritesButtonClick() {
         when (_favouriteLiveData.value) {
             null -> {
+                Timber.e("favourites unchanged")
                 return
             }
             false -> {
-                addToFavourites(uri, title, body, url, imageUrl, author, topic)
+                Timber.e("add to favourites")
+                addToFavourites(articleUri, articleTitle, articleBody, articleUrl, articleImageUrl, articleAuthor, articleTopic)
             }
             else -> {
-                removeFromFavourites(uri)
+                Timber.e("remove from favourites")
+                removeFromFavourites(articleUri)
             }
         }
 
@@ -109,10 +111,19 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
                 newsPaperObservable.title = it ?: ""
                 articleTitle = it ?: ""
             }
-            newsPaperObservable.body = result.body ?: ""
+
+            result.body.also {
+                newsPaperObservable.body = it ?: ""
+                articleBody = it ?: ""
+            }
+
+            articleImageUrl = result.image ?: ""
+
+            articleUri = result.uri ?: ""
 
             if (result.source != null) {
                 var author =  result.source.title ?: ""
+                articleAuthor = author
                 author = resources.getString(R.string.news_paper_author, author)
                 val formattedAuthor = stringHelper.underlineText(author, 3)
                 newsPaperObservable.author = formattedAuthor
@@ -126,6 +137,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
         }
 
         if (topic != null) {
+            articleTopic = topic
             val formattedTopic = resources.getString(R.string.news_paper_news_topic, topic)
             newsPaperObservable.topic = formattedTopic
             _topicVisibilityLiveData.value = true
@@ -144,18 +156,27 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
                     articleTitle = it ?: ""
                 }
 
-                newsPaperObservable.body = article.body ?: ""
+                article.body.also {
+                    newsPaperObservable.body = it ?: ""
+                    articleBody = it ?: ""
+                }
+
+                articleImageUrl = article.imageUrl ?: ""
+
+                articleUri = article.uri
+
+                var author = article.author ?: ""
+                articleAuthor = author
+                author = resources.getString(R.string.news_paper_author, author)
+                val formattedAuthor = stringHelper.underlineText(author, 3)
+                newsPaperObservable.author = formattedAuthor
 
                 articleUrl = article.url ?: ""
                 val formattedUrl = resources.getString(R.string.news_paper_news_url, articleUrl)
                 newsPaperObservable.url = formattedUrl
 
-                var author = article.author ?: ""
-                author = resources.getString(R.string.news_paper_author, author)
-                val formattedAuthor = stringHelper.underlineText(author, 3)
-                newsPaperObservable.author = formattedAuthor
-
                 if (article.topic != null) {
+                    articleTopic = article.topic
                     val formattedTopic = resources.getString(R.string.news_paper_news_topic, article.topic)
                     newsPaperObservable.topic = formattedTopic
                 }
