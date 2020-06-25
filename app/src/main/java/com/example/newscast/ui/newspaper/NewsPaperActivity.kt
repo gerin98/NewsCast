@@ -212,18 +212,26 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(shareIntent)
     }
 
-
     private fun setTextTheme() {
         val stringArray = resources.getStringArray(R.array.text_size_values)
         when(sharedPreferences.getString("textTheme", "Normal")) {
             stringArray[0] -> {
+                // Comfortable
                 news_paper_article_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline1Comfortable))
+                news_paper_article_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Content1Comfortable))
+                news_paper_article_author.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline3Comfortable))
             }
             stringArray[1] -> {
+                // Normal
                 news_paper_article_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline1Normal))
+                news_paper_article_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Content1Normal))
+                news_paper_article_author.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline3Normal))
             }
             stringArray[2] -> {
+                // Compact
                 news_paper_article_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline1Compact))
+                news_paper_article_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Content1Compact))
+                news_paper_article_author.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.Headline3Compact))
             }
         }
     }

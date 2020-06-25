@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="Headline1Compact">16sp</dimen>
+    <dimen name="Headline1Compact">20sp</dimen>
     <dimen name="Headline1Normal">28sp</dimen>
     <dimen name="Headline1Comfortable">40sp</dimen>
+
+    <dimen name="Headline3Compact">16sp</dimen>
+    <dimen name="Headline3Normal">18sp</dimen>
+    <dimen name="Headline3Comfortable">20sp</dimen>
+
+    <dimen name="Content1Compact">12sp</dimen>
+    <dimen name="Content1Normal">14sp</dimen>
+    <dimen name="Content1Comfortable">16sp</dimen>
 </resources>
