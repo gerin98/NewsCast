@@ -2,6 +2,7 @@ package com.example.newscast.ui.newspaper
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.TypedValue
@@ -242,15 +243,21 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         when(sharedPreferences.getString("backgroundTheme", "Light")) {
             stringArray[0] -> {
                 // Light
-                news_paper_parent_layout.setBackgroundColor(resources.getColor(R.color.light, null))
+                val color = resources.getColor(R.color.light, null)
+                supportActionBar?.setBackgroundDrawable(ColorDrawable(color)) ?: Timber.e("action bar is null")
+                news_paper_parent_layout.setBackgroundColor(color)
             }
             stringArray[1] -> {
                 // Sepia
-                news_paper_parent_layout.setBackgroundColor(resources.getColor(R.color.sepia, null))
+                val color = resources.getColor(R.color.sepia, null)
+                supportActionBar?.setBackgroundDrawable(ColorDrawable(color)) ?: Timber.e("action bar is null")
+                news_paper_parent_layout.setBackgroundColor(color)
             }
             stringArray[2] -> {
                 // Dark
-                news_paper_parent_layout.setBackgroundColor(resources.getColor(R.color.dark, null))
+                val color = resources.getColor(R.color.dark, null)
+                supportActionBar?.setBackgroundDrawable(ColorDrawable(color)) ?: Timber.e("action bar is null")
+                news_paper_parent_layout.setBackgroundColor(color)
             }
         }
     }
