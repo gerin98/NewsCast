@@ -3,10 +3,7 @@ package com.example.newscast.ui.browse
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +38,9 @@ class BrowseActivity : AppCompatActivity(),
     // Observers
     private val errorMessageLiveDataObserver = Observer<Boolean> { error ->
         if (error) {
-            Toast.makeText(this, "Sorry something went wrong. Please try again later.", Toast.LENGTH_LONG).show()
+            val toast = Toast.makeText(this, "Sorry something went wrong. Please try again later.", Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.BOTTOM, 0, 250)
+            toast.show()
         }
     }
 
