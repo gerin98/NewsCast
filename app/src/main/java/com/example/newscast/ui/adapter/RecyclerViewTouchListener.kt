@@ -38,15 +38,12 @@ class RecyclerViewTouchListener(context: Context?, listener: OnTouchEventListene
             return false
         }
 
-        override fun onLongPress(e: MotionEvent): Boolean {
-            if (onTouchEventListener != null) {
-                if (childView != null) {
-                    onTouchEventListener.onLongPress(childView, childViewAdapterPosition)
-                    return true
-                }
+        override fun onLongPress(e: MotionEvent) {
+            if (onTouchEventListener != null && childView != null) {
+                onTouchEventListener.onLongPress(childView, childViewAdapterPosition)
             }
-            return false
         }
+
     }
 
     private val onTouchEventListener: OnTouchEventListener?
