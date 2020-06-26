@@ -1,31 +1,35 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/black1</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="actionOverflowButtonStyle">@style/OverflowButtonTheme</item>
+
+        <!-- enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/change_image_transform</item>
+        <item name="android:windowExitTransition">@transition/change_image_transform</item>
     </style>
 
-    <!-- This style is where you define the tint color of your overflow menu button -->
+    <!-- Style to define the tint color of the overflow menu button -->
     <style name="OverflowButtonTheme" parent="@style/Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">@color/black2</item>
     </style>
 
+    <!-- Style to define a custom action bar theme -->
     <style name="AppTheme.ActionBar" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/white1</item>
         <item name="colorPrimaryDark">@color/black3</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Style to define the text color in Preferences -->
     <style name="AppTheme.Preferences" parent="AppTheme.ActionBar">
         <item name="colorAccent">@color/colorAccentDark</item>
     </style>
 
-    <style name="searchTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-
-    </style>
+    <!-- Style for search bar -->
+    <style name="searchTheme" parent="Theme.MaterialComponents.Light.DarkActionBar"/>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

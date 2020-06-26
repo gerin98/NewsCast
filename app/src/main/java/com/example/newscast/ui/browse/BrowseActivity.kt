@@ -1,5 +1,6 @@
 package com.example.newscast.ui.browse
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -135,11 +136,9 @@ class BrowseActivity : AppCompatActivity(),
                 true
             }
             R.id.menu_search -> {
-//                val options = ActivityOptions.makeSceneTransitionAnimation(this)
-//                val intent = Intent(this, SearchActivity::class.java)
-//                startActivity(intent, options.toBundle())
+                val options = ActivityOptions.makeSceneTransitionAnimation(this)
                 val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
+                startActivity(intent, options.toBundle())
                 true
             }
             R.id.menu_refresh -> {
