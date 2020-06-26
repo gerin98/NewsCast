@@ -60,7 +60,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             target: Target<Drawable>?,
             isFirstResource: Boolean
         ): Boolean {
-            Timber.e("onLoadFailed")
+            Timber.d("onLoadFailed")
             startPostponedEnterTransition()
             return false
         }
@@ -72,7 +72,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             dataSource: DataSource?,
             isFirstResource: Boolean
         ): Boolean {
-            Timber.e("onResourceReady")
+            Timber.d("onResourceReady")
             animateContentUp()
             startPostponedTransition(news_paper_article_image)
             return false

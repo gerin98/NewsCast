@@ -50,7 +50,7 @@ class SearchViewModel : ViewModel(), KoinComponent {
             if (response.status == Status.SUCCESS) {
                 parseArticles(response.data)
             } else if (response.status == Status.ERROR) {
-                Timber.e(response.message)
+                Timber.d(response.message)
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -69,7 +69,7 @@ class SearchViewModel : ViewModel(), KoinComponent {
     }
 
     private fun noResults() {
-        Timber.e("no search results")
+        Timber.d("no search results")
         _showZeroCaseLiveData.postValue(true)
         _searchLiveData.postValue(null)
         _errorMessageLiveData.postValue(true)
@@ -77,7 +77,7 @@ class SearchViewModel : ViewModel(), KoinComponent {
 
     /* Database operations */
     fun addToDb(result: ResultsModel?) {
-        Timber.e("inserting into db from Search")
+        Timber.d("inserting into db from Search")
         var title: String? = null
         var body: String? = null
         var url: String? = null

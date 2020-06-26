@@ -14,6 +14,7 @@ class RecyclerViewTouchListener(context: Context?, listener: OnTouchEventListene
     interface OnTouchEventListener {
         fun onClick(clickedView: View?, adapterPosition: Int)
         fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int)
+        fun onLongPress(longPressedView: View?, adapterPosition: Int)
     }
 
     private inner class GestureListener : SimpleOnGestureListener() {
@@ -31,6 +32,16 @@ class RecyclerViewTouchListener(context: Context?, listener: OnTouchEventListene
             if (onTouchEventListener != null) {
                 if (childView != null) {
                     onTouchEventListener.onDoubleClick(childView, childViewAdapterPosition)
+                    return true
+                }
+            }
+            return false
+        }
+
+        override fun onLongPress(e: MotionEvent): Boolean {
+            if (onTouchEventListener != null) {
+                if (childView != null) {
+                    onTouchEventListener.onLongPress(childView, childViewAdapterPosition)
                     return true
                 }
             }

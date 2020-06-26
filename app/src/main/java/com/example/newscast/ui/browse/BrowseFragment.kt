@@ -54,6 +54,10 @@ class BrowseFragment : Fragment() {
             viewModel.addToDb(dataset[adapterPosition], newsTopic)
         }
 
+        override fun onLongPress(longPressedView: View?, adapterPosition: Int) {
+            Timber.d("onLongPress")
+        }
+
     })
 
     // Observers

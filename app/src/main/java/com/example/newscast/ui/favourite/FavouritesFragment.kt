@@ -45,6 +45,10 @@ class FavouritesFragment : Fragment() {
             Timber.d("onDoubleClick")
         }
 
+        override fun onLongPress(longPressedView: View?, adapterPosition: Int) {
+            Timber.d("onLongPress")
+        }
+
     })
 
     // Observers
