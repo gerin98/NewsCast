@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Zero case message -->
         <TextView
             android:id="@+id/search_zero_case"
             android:layout_width="wrap_content"
@@ -23,6 +24,7 @@
             android:booleanVisibility="@{viewModel.showZeroCaseLiveData}"
             android:text="@string/no_search_results_found" />
 
+        <!-- Progress bar -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler_view"
             android:layout_width="match_parent"
@@ -43,6 +45,5 @@
             tools:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </layout>

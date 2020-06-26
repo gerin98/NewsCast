@@ -27,7 +27,7 @@ import com.example.newscast.ui.adapter.RecyclerViewTouchListener.OnTouchEventLis
 import com.example.newscast.ui.newspaper.NewsPaperActivity
 import timber.log.Timber
 
-
+//todo: don't reload on rotate
 class BrowseFragment : Fragment() {
 
     private val viewModel: BrowseViewModel by activityViewModels { ViewModelFactory() }

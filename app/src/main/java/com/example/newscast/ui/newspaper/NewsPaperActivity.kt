@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -72,6 +73,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
             isFirstResource: Boolean
         ): Boolean {
             Timber.e("onResourceReady")
+            animateContentUp()
             startPostponedTransition(news_paper_article_image)
             return false
         }
@@ -150,6 +152,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         if (imageUrl != null) {
             news_paper_article_image.loadImageFromUrl(this, imageUrl, glideListener)
         } else {
+            animateContentUp()
             startPostponedEnterTransition()
         }
     }
@@ -167,6 +170,7 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
         if (imageUrl != null) {
             news_paper_article_image.loadImageFromUrl(this, imageUrl, glideListener)
         } else {
+            animateContentUp()
             startPostponedEnterTransition()
         }
     }
@@ -240,6 +244,11 @@ class NewsPaperActivity : AppCompatActivity(), View.OnClickListener {
                 news_paper_parent_layout.setBackgroundColor(color)
             }
         }
+    }
+
+    private fun animateContentUp() {
+        val slideUpAnimation = AnimationUtils.loadAnimation(this@NewsPaperActivity, R.anim.slide_up)
+        news_paper_text_layout.startAnimation(slideUpAnimation)
     }
 
 }

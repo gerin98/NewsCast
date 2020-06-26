@@ -32,69 +32,77 @@
                 android:layout_gravity="center"
                 tools:src="@tools:sample/avatars" />
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/news_paper_text_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/news_paper_article_tag"
+                        style="@style/Subtitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="7dp"
+                        android:text="@{newsPaper.topic}"
+                        android:visibility="visible"
+                        tools:text="¬ Tech"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/news_paper_favourite_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="330dp"
+                        android:src="@drawable/ic_favorite_border" />
+
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/news_paper_article_tag"
-                    style="@style/Subtitle1"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/news_paper_article_title"
+                    style="@style/Headline1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="7dp"
-                    android:text="@{newsPaper.topic}"
-                    android:visibility="visible"
-                    tools:text="¬ Tech"
-                    tools:visibility="visible" />
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@{newsPaper.title}"
+                    tools:text="Llama Patrol The Central Coast of California" />
 
-                <ImageView
-                    android:id="@+id/news_paper_favourite_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="330dp"
-                    android:src="@drawable/ic_favorite_border" />
+                <TextView
+                    android:id="@+id/news_paper_article_author"
+                    style="@style/Headline3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@{newsPaper.author}"
+                    tools:text="by Betty Eghan" />
 
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/news_paper_article_text"
+                    style="@style/Content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@{newsPaper.body}"
+                    tools:text="@string/large_text" />
 
-            <TextView
-                android:id="@+id/news_paper_article_title"
-                style="@style/Headline1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@{newsPaper.title}"
-                tools:text="Llama Patrol The Central Coast of California" />
+                <TextView
+                    android:id="@+id/news_paper_article_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@{newsPaper.url}"
+                    android:autoLink="web"
+                    android:textColorLink="@color/link"
+                    android:textIsSelectable="true"
+                    tools:text="https://en.wikipedia.org/wiki/News" />
 
-            <TextView
-                android:id="@+id/news_paper_article_author"
-                style="@style/Headline3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@{newsPaper.author}"
-                tools:text="by Betty Eghan" />
-
-            <TextView
-                android:id="@+id/news_paper_article_text"
-                style="@style/Content1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@{newsPaper.body}"
-                tools:text="@string/large_text" />
-
-            <TextView
-                android:id="@+id/news_paper_article_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@{newsPaper.url}"
-                android:autoLink="web"
-                android:textColorLink="@color/link"
-                android:textIsSelectable="true"
-                tools:text="https://en.wikipedia.org/wiki/News" />
+            </LinearLayout>
 
         </LinearLayout>
 
