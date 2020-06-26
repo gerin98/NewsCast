@@ -144,7 +144,7 @@ class FavouritesFragment : Fragment() {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
             // Inflate a menu resource providing context menu items
             val inflater: MenuInflater = mode.menuInflater
-            inflater.inflate(R.menu.favourites_action_mode_menu, menu)
+            inflater.inflate(R.menu.menu_favourites_action_mode, menu)
             return true
         }
 
