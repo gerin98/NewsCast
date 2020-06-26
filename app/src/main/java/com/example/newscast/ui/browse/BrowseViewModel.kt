@@ -46,9 +46,18 @@ class BrowseViewModel: ViewModel(), KoinComponent {
 
     /* Variables */
     private var lastRequest: NewsRequestBody? = null
+    private var initialFetch = false
 
     /** Get News **/
     fun getInitialNews() {
+        _errorMessageLiveData.postValue(false)
+        if (!initialFetch) {
+            initialFetch = true
+            getDefaultNews()
+        }
+    }
+
+    private fun getDefaultNews() {
         _progressBarVisibilityLiveData.value = true
 
         viewModelScope.launch {
@@ -67,7 +76,6 @@ class BrowseViewModel: ViewModel(), KoinComponent {
 
             _progressBarVisibilityLiveData.postValue(false)
         }
-
     }
 
     fun getLatestNews() {
@@ -173,7 +181,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
     fun refreshNews() {
 
         if (lastRequest == null) {
-            getInitialNews()
+            getDefaultNews()
             return
         }
 
