@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.selection.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,18 +27,35 @@ import timber.log.Timber
 
 class FavouritesFragment : Fragment() {
 
+    class MyLookup(private val rv: RecyclerView): ItemDetailsLookup<Long>() {
+        override fun getItemDetails(event: MotionEvent): ItemDetails<Long>? {
+            val view = rv.findChildViewUnder(event.x, event.y)
+            if(view != null) {
+                return (rv.getChildViewHolder(view) as FavouritesAdapter.FavouritesViewHolder)
+                    .getItemDetails()
+            }
+            return null
+        }
+    }
+
+    var tracker : SelectionTracker<Long>? = null
+
     private val viewModel: FavouritesViewModel by activityViewModels { ViewModelFactory() }
     private var actionMode: ActionMode? = null
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: FavouritesAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var dataset: ArrayList<Articles?>
+
+    private var selectionModeOn = false
 
     private val gestureDetector = RecyclerViewTouchListener(activity, object: RecyclerViewTouchListener.OnTouchEventListener {
         override fun onClick(clickedView: View?, adapterPosition: Int) {
             Timber.d("onClick")
-            recyclerViewOnClick(dataset[adapterPosition], clickedView)
+            if (!selectionModeOn) {
+                recyclerViewOnClick(dataset[adapterPosition], clickedView)
+            }
         }
 
         override fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
@@ -97,22 +114,44 @@ class FavouritesFragment : Fragment() {
     private fun setupRecyclerView(view: View) {
         dataset = ArrayList()
 
-        viewManager = LinearLayoutManager(activity)
-        viewAdapter = FavouritesAdapter(dataset)
-
         val dividerItemDecoration = DividerItemDecoration(activity, LinearLayout.VERTICAL).apply {
             activity?.getDrawable(R.drawable.divider)?.let {
                 setDrawable(it)
             }
         }
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.favourites_recycler_view).apply {
+        viewManager = LinearLayoutManager(activity)
+        viewAdapter = FavouritesAdapter(dataset)
+        recyclerView = view.findViewById(R.id.favourites_recycler_view)
+
+        recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
             addItemDecoration(dividerItemDecoration)
             addOnItemTouchListener(gestureDetector)
         }
+
+        tracker = SelectionTracker.Builder("selection-1",
+            recyclerView,
+            StableIdKeyProvider(recyclerView),
+            MyLookup(recyclerView),
+            StorageStrategy.createLongStorage()
+        ).withSelectionPredicate(
+            SelectionPredicates.createSelectAnything()
+        ).build()
+
+        (recyclerView.adapter as FavouritesAdapter).apply {
+            setTracker(tracker)
+        }
+
+        tracker?.addObserver(object: SelectionTracker.SelectionObserver<Long>() {
+            override fun onSelectionChanged() {
+                val nItems: Int? = tracker?.selection?.size()
+                Timber.e("onSelectionChanged, $nItems")
+            }
+        })
+
     }
 
     private fun recyclerViewOnClick(item: Articles?, clickedView: View?) {
@@ -145,6 +184,12 @@ class FavouritesFragment : Fragment() {
             // Inflate a menu resource providing context menu items
             val inflater: MenuInflater = mode.menuInflater
             inflater.inflate(R.menu.menu_favourites_action_mode, menu)
+            selectionModeOn = true
+//            val animateIcon = activity?.findViewById<ImageView>(R.id.action_mode_close_button)
+//            animateIcon?.let {
+//                it.visibility = View.VISIBLE
+//                (it.drawable as? Animatable)?.start()
+//            }
             return true
         }
 
@@ -167,6 +212,14 @@ class FavouritesFragment : Fragment() {
 
         // Called when the user exits the action mode
         override fun onDestroyActionMode(mode: ActionMode) {
+//            val cancelButton = activity?.findViewById(R.id.action_mode_close_button) as ImageView?
+//            val animation = AnimationUtils.loadAnimation(activity, R.anim.anim_backk)
+//            val animateIcon = activity?.findViewById<ImageView>(R.id.action_mode_close_button)
+//            animateIcon?.let {
+//                it.visibility = View.VISIBLE
+//                (it.drawable as? Animatable)?.start()
+//            }
+            selectionModeOn = false
             actionMode = null
         }
     }

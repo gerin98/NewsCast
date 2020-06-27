@@ -31,11 +31,6 @@
     </style>
 
     <!-- Style for search bar -->
-    <style name="searchTheme" parent="Theme.MaterialComponents.Light.DarkActionBar"/>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Action Mode action bar style -->
     <style name="ActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
