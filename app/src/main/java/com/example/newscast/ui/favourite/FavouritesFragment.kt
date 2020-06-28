@@ -218,7 +218,7 @@ class FavouritesFragment : Fragment(), KoinComponent {
 
     fun addSelectionTracker() {
         selectionModeOn = true
-        (recyclerView.adapter as FavouritesAdapter).apply {
+        viewAdapter.apply {
             setTracker(tracker)
         }
     }
@@ -226,7 +226,7 @@ class FavouritesFragment : Fragment(), KoinComponent {
     fun removeSelectionTracker() {
         selectionModeOn = false
         tracker?.clearSelection()
-        (recyclerView.adapter as FavouritesAdapter).apply {
+        viewAdapter.apply {
             selectedItems.clear()
             removeTracker()
         }
