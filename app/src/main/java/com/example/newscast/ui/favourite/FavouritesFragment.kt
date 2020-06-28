@@ -32,7 +32,6 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-// todo: delete doesn't work on first try
 class FavouritesFragment : Fragment(), KoinComponent {
 
     private val viewModel: FavouritesViewModel by activityViewModels { ViewModelFactory() }
