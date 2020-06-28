@@ -63,7 +63,6 @@ class FavouritesFragment : Fragment(), KoinComponent {
             when (actionMode) {
                 null -> {
                     actionMode = activity?.startActionMode(actionModeCallback)
-                    view?.isSelected = true
                 }
                 else -> {}
             }
