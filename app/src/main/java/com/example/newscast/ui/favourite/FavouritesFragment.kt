@@ -208,6 +208,7 @@ class FavouritesFragment : Fragment() {
 
         override fun onDestroyActionMode(mode: ActionMode) {
             selectionModeOn = false
+            tracker?.clearSelection()
             actionMode = null
         }
     }
