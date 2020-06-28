@@ -52,6 +52,10 @@ class SearchFragment : Fragment() {
             viewModel.addToDb(dataset[adapterPosition])
         }
 
+        override fun onLongPress(longPressedView: View?, adapterPosition: Int) {
+            Timber.d("onLongPress")
+        }
+
     })
 
     // Observers

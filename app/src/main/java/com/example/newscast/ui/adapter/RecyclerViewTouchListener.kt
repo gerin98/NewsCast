@@ -14,6 +14,7 @@ class RecyclerViewTouchListener(context: Context?, listener: OnTouchEventListene
     interface OnTouchEventListener {
         fun onClick(clickedView: View?, adapterPosition: Int)
         fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int)
+        fun onLongPress(longPressedView: View?, adapterPosition: Int)
     }
 
     private inner class GestureListener : SimpleOnGestureListener() {
@@ -36,6 +37,13 @@ class RecyclerViewTouchListener(context: Context?, listener: OnTouchEventListene
             }
             return false
         }
+
+        override fun onLongPress(e: MotionEvent) {
+            if (onTouchEventListener != null && childView != null) {
+                onTouchEventListener.onLongPress(childView, childViewAdapterPosition)
+            }
+        }
+
     }
 
     private val onTouchEventListener: OnTouchEventListener?

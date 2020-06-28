@@ -70,7 +70,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 parseArticles(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
-                Timber.e(response.message)
+                Timber.d(response.message)
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -91,7 +91,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 parseArticles(response.data)
                 _newsTopicLiveData.postValue("Breaking News")
             } else if (response.status == Status.ERROR) {
-                Timber.e(response.message)
+                Timber.d(response.message)
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -169,7 +169,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 parseArticles(response.data)
                 _newsTopicLiveData.postValue(title)
             } else if (response.status == Status.ERROR) {
-                Timber.e(response.message)
+                Timber.d(response.message)
                 _errorMessageLiveData.postValue(true)
             }
 
@@ -198,7 +198,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
                 if (response.status == Status.SUCCESS) {
                     parseArticles(response.data)
                 } else if (response.status == Status.ERROR) {
-                    Timber.e(response.message)
+                    Timber.d(response.message)
                     _errorMessageLiveData.postValue(true)
                 }
 
@@ -219,7 +219,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
     }
 
     private fun noResults() {
-        Timber.e("no results")
+        Timber.d("no results")
         _showZeroCaseLiveData.postValue(true)
         _newsLiveData.postValue(null)
         _errorMessageLiveData.postValue(true)
@@ -227,7 +227,7 @@ class BrowseViewModel: ViewModel(), KoinComponent {
 
     /* Database operations */
     fun addToDb(result: ResultsModel?, topic: String?) {
-        Timber.e("inserting into db from Browse")
+        Timber.d("inserting into db from Browse")
         var title: String? = null
         var body: String? = null
         var url: String? = null

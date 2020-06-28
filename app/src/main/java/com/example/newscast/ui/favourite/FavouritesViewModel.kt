@@ -32,6 +32,12 @@ class FavouritesViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    fun deleteSelectedFavourites(selectionItems: Array<String>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.deleteArticleByUris(selectionItems)
+        }
+    }
+
     fun foundNoResults() {
         _showZeroCaseLiveData.postValue(true)
     }

@@ -53,7 +53,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
                                 imageUrl: String? = null,
                                 author: String? = null,
                                 topic: String? = null) {
-        Timber.e("inserting $uri into db")
+        Timber.d("inserting $uri into db")
         viewModelScope.launch(Dispatchers.IO) {
             favouritesRepository.insertArticle(uri, title, body, url, imageUrl, author, topic)
             _favouriteLiveData.postValue(true)
@@ -62,7 +62,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
 
     private fun removeFromFavourites(uri: String? = null) {
         if (!uri.isNullOrEmpty()) {
-            Timber.e("removing $uri from db")
+            Timber.d("removing $uri from db")
             viewModelScope.launch(Dispatchers.IO) {
                 favouritesRepository.deleteArticleByUri(uri)
                 _favouriteLiveData.postValue(false)
@@ -88,15 +88,15 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
     fun favouritesButtonClick() {
         when (_favouriteLiveData.value) {
             null -> {
-                Timber.e("favourites unchanged")
+                Timber.d("favourites unchanged")
                 return
             }
             false -> {
-                Timber.e("add to favourites")
+                Timber.d("add to favourites")
                 addToFavourites(articleUri, articleTitle, articleBody, articleUrl, articleImageUrl, articleAuthor, articleTopic)
             }
             else -> {
-                Timber.e("remove from favourites")
+                Timber.d("remove from favourites")
                 removeFromFavourites(articleUri)
             }
         }
@@ -149,7 +149,7 @@ class NewsPaperViewModel: ViewModel(), KoinComponent {
             val article = articles[0]
 
             if (article != null) {
-                Timber.e("$article")
+                Timber.d("$article")
 
                 article.title.also {
                     newsPaperObservable.title = it ?: ""

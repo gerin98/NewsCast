@@ -23,6 +23,12 @@
     <color name="purple4">#666200EE</color>
     <color name="purple5">#336200EE</color>
 
+    <color name="accent1">#03DAC5</color>
+    <color name="accent2">#CC03DAC5</color>
+    <color name="accent3">#9903DAC5</color>
+    <color name="accent4">#6603DAC5</color>
+    <color name="accent5">#3303DAC5</color>
+
     <color name="link">#0645AD</color>
 
     <color name="light">#FFFFFF</color>

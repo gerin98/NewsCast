@@ -55,7 +55,7 @@ class SearchActivity : AppCompatActivity() {
             setIconifiedByDefault(false)
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    Timber.e("Search query: $query")
+                    Timber.d("Search query: $query")
                     viewModel.searchNews(query)
                     clearFocus()
                     return true
