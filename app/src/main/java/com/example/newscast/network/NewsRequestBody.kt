@@ -1,6 +1,7 @@
 package com.example.newscast.network
 
 import android.content.SharedPreferences
+import com.example.newscast.BuildConfig
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.qualifier.named
@@ -21,7 +22,7 @@ class NewsRequestBody(
     val resultType: String = "articles",
     val includeArticleImage: Boolean = true,
     val dataType: Array<String> = arrayOf("news"),
-    val apiKey: String = "63eed15f-9dd0-41c9-b511-ed6efaea22fb",
+    val apiKey: String = BuildConfig.API_KEY,
     var lang: String = "eng",
     val forceMaxDataTimeWindow: Int = 30
 ): KoinComponent {

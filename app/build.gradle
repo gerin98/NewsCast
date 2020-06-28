@@ -34,11 +34,19 @@ android {
     }
 
     buildTypes {
+        def API_KEY = "API_KEY"
+        def CONFIG = { k -> "\"${project.properties.get(k)}\"" }
+
+        debug {
+            buildConfigField "String", API_KEY, CONFIG("debug.api.key")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", API_KEY, CONFIG("release.api.key")
         }
     }
+
 }
 
 dependencies {
