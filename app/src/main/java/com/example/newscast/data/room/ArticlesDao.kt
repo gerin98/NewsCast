@@ -41,7 +41,7 @@ interface ArticlesDao {
     fun deleteByUri(uri: String)
 
     @Query("DELETE FROM articles_table WHERE uri IN (:uriList)")
-    fun deleteByUris(uriList: HashSet<String>)
+    fun deleteByUris(uriList: Array<String>)
 
     @Query("DELETE FROM articles_table")
     fun clearFavourites()

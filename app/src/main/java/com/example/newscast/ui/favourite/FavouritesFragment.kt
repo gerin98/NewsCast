@@ -32,7 +32,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-// todo: delete doesn't work on first try, article open doesn't work on first try
+// todo: delete doesn't work on first try
 class FavouritesFragment : Fragment(), KoinComponent {
 
     private val viewModel: FavouritesViewModel by activityViewModels { ViewModelFactory() }
@@ -128,11 +128,9 @@ class FavouritesFragment : Fragment(), KoinComponent {
         override fun onSelectionChanged() {
             val numberOfItems: Int = tracker?.selection?.size() ?: 0
             Timber.e("onSelectionChanged, $numberOfItems")
-            if (numberOfItems == 0) {
+            if (numberOfItems == 0 && actionMode != null) {
                 unselectedAllItems = true
-                if (actionMode != null) {
-                    actionMode?.finish()
-                }
+                actionMode?.finish()
             }
         }
     }
@@ -234,7 +232,7 @@ class FavouritesFragment : Fragment(), KoinComponent {
 
     fun deleteSelectedItems() {
         val selectedItems = (recyclerView.adapter as FavouritesAdapter).selectedItems
-        viewModel.deleteSelectedFavourites(selectedItems)
+        viewModel.deleteSelectedFavourites(selectedItems.toTypedArray())
     }
 
 }

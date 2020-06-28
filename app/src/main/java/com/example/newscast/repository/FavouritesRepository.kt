@@ -36,7 +36,7 @@ class FavouritesRepository(private val articlesDao: ArticlesDao) {
         articlesDao.deleteByUri(uri)
     }
 
-    suspend fun deleteArticleByUris(uris: HashSet<String>) {
+    suspend fun deleteArticleByUris(uris: Array<String>) {
         articlesDao.deleteByUris(uris)
     }
 
