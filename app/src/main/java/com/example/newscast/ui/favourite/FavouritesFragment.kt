@@ -199,6 +199,9 @@ class FavouritesFragment : Fragment() {
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
             return when (item.itemId) {
                 R.id.menu_garbage -> {
+                    val selectionItems = (recyclerView.adapter as FavouritesAdapter).selectedItems
+                    Timber.e("items selected for deletion $selectionItems")
+                    viewModel.deleteSelectedFavourites(selectionItems)
                     mode.finish()
                     true
                 }

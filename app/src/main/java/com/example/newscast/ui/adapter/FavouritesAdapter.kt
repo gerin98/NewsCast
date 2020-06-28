@@ -76,9 +76,15 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
         viewHolder.newsTileSource.text = newsDataset[position]?.author
 
         if (tracker?.isSelected(position.toLong()) == true) {
-            holder.newsTileLayout.background = ColorDrawable(resourceHelper.getColor(R.color.accent3))
+            holder.newsTileLayout.background = ColorDrawable(resourceHelper.getColor(R.color.accent5))
+            newsDataset[position]?.uri?.also {
+                selectedItems.add(it)
+            }
         } else {
             holder.newsTileLayout.background = ColorDrawable(Color.WHITE)
+            newsDataset[position]?.uri?.also {
+                selectedItems.remove(it)
+            }
         }
 
     }
@@ -87,6 +93,8 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
     override fun getItemCount(): Int = newsDataset.size
 
     override fun getItemId(position: Int): Long = position.toLong()
+
+    val selectedItems = HashSet<String>()
 
 }
 
