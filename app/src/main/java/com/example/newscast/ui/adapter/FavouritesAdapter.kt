@@ -14,11 +14,16 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
+import com.example.newscast.di.ResourceHelper
 import com.example.newscast.di.resourceModule
 import com.example.newscast.utils.glide.loadThumbnailFromUrl
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinComponent {
+
+    val resourceHelper by inject<ResourceHelper>()
 
     init {
         setHasStableIds(true)
@@ -71,7 +76,7 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
         viewHolder.newsTileSource.text = newsDataset[position]?.author
 
         if (tracker?.isSelected(position.toLong()) == true) {
-            holder.newsTileLayout.background = ColorDrawable(Color.parseColor("#80deea"))
+            holder.newsTileLayout.background = ColorDrawable(resourceHelper.getColor(R.color.accent3))
         } else {
             holder.newsTileLayout.background = ColorDrawable(Color.WHITE)
         }

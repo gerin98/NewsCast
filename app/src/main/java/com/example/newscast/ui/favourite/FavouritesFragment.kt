@@ -27,11 +27,11 @@ import timber.log.Timber
 
 class FavouritesFragment : Fragment() {
 
-    class MyLookup(private val rv: RecyclerView): ItemDetailsLookup<Long>() {
+    class MyLookup(private val recyclerView: RecyclerView): ItemDetailsLookup<Long>() {
         override fun getItemDetails(event: MotionEvent): ItemDetails<Long>? {
-            val view = rv.findChildViewUnder(event.x, event.y)
+            val view = recyclerView.findChildViewUnder(event.x, event.y)
             if(view != null) {
-                return (rv.getChildViewHolder(view) as FavouritesAdapter.FavouritesViewHolder)
+                return (recyclerView.getChildViewHolder(view) as FavouritesAdapter.FavouritesViewHolder)
                     .getItemDetails()
             }
             return null
@@ -49,13 +49,15 @@ class FavouritesFragment : Fragment() {
     private lateinit var dataset: ArrayList<Articles?>
 
     private var selectionModeOn = false
+    private var unselectedAllItems = false
 
     private val gestureDetector = RecyclerViewTouchListener(activity, object: RecyclerViewTouchListener.OnTouchEventListener {
         override fun onClick(clickedView: View?, adapterPosition: Int) {
             Timber.d("onClick")
-            if (!selectionModeOn) {
+            if (!selectionModeOn && !unselectedAllItems) {
                 recyclerViewOnClick(dataset[adapterPosition], clickedView)
             }
+            unselectedAllItems = false
         }
 
         override fun onDoubleClick(doubleClickedView: View?, adapterPosition: Int) {
@@ -132,14 +134,14 @@ class FavouritesFragment : Fragment() {
             addOnItemTouchListener(gestureDetector)
         }
 
-        tracker = SelectionTracker.Builder("selection-1",
-            recyclerView,
-            StableIdKeyProvider(recyclerView),
-            MyLookup(recyclerView),
-            StorageStrategy.createLongStorage()
-        ).withSelectionPredicate(
-            SelectionPredicates.createSelectAnything()
-        ).build()
+        tracker = SelectionTracker
+            .Builder("selectionId",
+                recyclerView,
+                StableIdKeyProvider(recyclerView),
+                MyLookup(recyclerView),
+                StorageStrategy.createLongStorage())
+            .withSelectionPredicate(SelectionPredicates.createSelectAnything())
+            .build()
 
         (recyclerView.adapter as FavouritesAdapter).apply {
             setTracker(tracker)
@@ -147,8 +149,12 @@ class FavouritesFragment : Fragment() {
 
         tracker?.addObserver(object: SelectionTracker.SelectionObserver<Long>() {
             override fun onSelectionChanged() {
-                val nItems: Int? = tracker?.selection?.size()
-                Timber.e("onSelectionChanged, $nItems")
+                val numberOfItems: Int = tracker?.selection?.size() ?: 0
+                Timber.e("onSelectionChanged, $numberOfItems")
+                if (numberOfItems == 0) {
+                    unselectedAllItems = true
+                    actionMode?.finish()
+                }
             }
         })
 
@@ -179,46 +185,28 @@ class FavouritesFragment : Fragment() {
     }
 
     private val actionModeCallback = object : ActionMode.Callback {
-        // Called when the action mode is created; startActionMode() was called
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-            // Inflate a menu resource providing context menu items
             val inflater: MenuInflater = mode.menuInflater
             inflater.inflate(R.menu.menu_favourites_action_mode, menu)
             selectionModeOn = true
-//            val animateIcon = activity?.findViewById<ImageView>(R.id.action_mode_close_button)
-//            animateIcon?.let {
-//                it.visibility = View.VISIBLE
-//                (it.drawable as? Animatable)?.start()
-//            }
             return true
         }
 
-        // Called each time the action mode is shown. Always called after onCreateActionMode, but
-        // may be called multiple times if the mode is invalidated.
         override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-            return false // Return false if nothing is done
+            return false
         }
 
-        // Called when the user selects a contextual menu item
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
             return when (item.itemId) {
                 R.id.menu_garbage -> {
-                    mode.finish() // Action picked, so close the CAB
+                    mode.finish()
                     true
                 }
                 else -> false
             }
         }
 
-        // Called when the user exits the action mode
         override fun onDestroyActionMode(mode: ActionMode) {
-//            val cancelButton = activity?.findViewById(R.id.action_mode_close_button) as ImageView?
-//            val animation = AnimationUtils.loadAnimation(activity, R.anim.anim_backk)
-//            val animateIcon = activity?.findViewById<ImageView>(R.id.action_mode_close_button)
-//            animateIcon?.let {
-//                it.visibility = View.VISIBLE
-//                (it.drawable as? Animatable)?.start()
-//            }
             selectionModeOn = false
             actionMode = null
         }
