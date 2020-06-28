@@ -11,45 +11,40 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.selection.*
+import androidx.recyclerview.selection.SelectionPredicates
+import androidx.recyclerview.selection.SelectionTracker
+import androidx.recyclerview.selection.StableIdKeyProvider
+import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
 import com.example.newscast.databinding.FragmentFavouritesBinding
+import com.example.newscast.di.ResourceHelper
 import com.example.newscast.ui.ViewModelFactory
 import com.example.newscast.ui.adapter.FavouritesAdapter
+import com.example.newscast.ui.adapter.RecyclerViewLookup
 import com.example.newscast.ui.adapter.RecyclerViewTouchListener
 import com.example.newscast.ui.browse.BrowseActivity
 import com.example.newscast.ui.newspaper.NewsPaperActivity
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class FavouritesFragment : Fragment() {
-
-    class MyLookup(private val recyclerView: RecyclerView): ItemDetailsLookup<Long>() {
-        override fun getItemDetails(event: MotionEvent): ItemDetails<Long>? {
-            val view = recyclerView.findChildViewUnder(event.x, event.y)
-            if(view != null) {
-                return (recyclerView.getChildViewHolder(view) as FavouritesAdapter.FavouritesViewHolder)
-                    .getItemDetails()
-            }
-            return null
-        }
-    }
-
-    var tracker : SelectionTracker<Long>? = null
+// todo: delete doesn't work on first try, article open doesn't work on first try
+class FavouritesFragment : Fragment(), KoinComponent {
 
     private val viewModel: FavouritesViewModel by activityViewModels { ViewModelFactory() }
-    private var actionMode: ActionMode? = null
 
+    // Koin components
+    private val resourceHelper by inject<ResourceHelper>()
+
+    // recycler view
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: FavouritesAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var dataset: ArrayList<Articles?>
-
-    private var selectionModeOn = false
-    private var unselectedAllItems = false
 
     private val gestureDetector = RecyclerViewTouchListener(activity, object: RecyclerViewTouchListener.OnTouchEventListener {
         override fun onClick(clickedView: View?, adapterPosition: Int) {
@@ -77,6 +72,42 @@ class FavouritesFragment : Fragment() {
 
     })
 
+    // selection mode
+    var tracker : SelectionTracker<Long>? = null
+    private var actionMode: ActionMode? = null
+    private var selectionModeOn = false
+    private var unselectedAllItems = false
+
+    private val actionModeCallback = object : ActionMode.Callback {
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            val inflater: MenuInflater = mode.menuInflater
+            inflater.inflate(R.menu.menu_favourites_action_mode, menu)
+            addSelectionTracker()
+            return true
+        }
+
+        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.menu_garbage -> {
+                    deleteSelectedItems()
+                    mode.finish()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode) {
+            removeSelectionTracker()
+            actionMode = null
+            viewAdapter.notifyDataSetChanged()
+        }
+    }
+
     // Observers
     private val favouritesLiveDataObserver = Observer<List<Articles>?> {
         dataset.clear()
@@ -93,8 +124,17 @@ class FavouritesFragment : Fragment() {
         viewAdapter.notifyDataSetChanged()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val trackerObserver =  object : SelectionTracker.SelectionObserver<Long>() {
+        override fun onSelectionChanged() {
+            val numberOfItems: Int = tracker?.selection?.size() ?: 0
+            Timber.e("onSelectionChanged, $numberOfItems")
+            if (numberOfItems == 0) {
+                unselectedAllItems = true
+                if (actionMode != null) {
+                    actionMode?.finish()
+                }
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -113,6 +153,11 @@ class FavouritesFragment : Fragment() {
         initLiveData()
     }
 
+    private fun initLiveData() {
+        viewModel.favouritesLiveData.observe(viewLifecycleOwner, favouritesLiveDataObserver)
+    }
+
+    // Recycler view functions
     private fun setupRecyclerView(view: View) {
         dataset = ArrayList()
 
@@ -123,7 +168,7 @@ class FavouritesFragment : Fragment() {
         }
 
         viewManager = LinearLayoutManager(activity)
-        viewAdapter = FavouritesAdapter(dataset)
+        viewAdapter = FavouritesAdapter(dataset, resourceHelper)
         recyclerView = view.findViewById(R.id.favourites_recycler_view)
 
         recyclerView.apply {
@@ -134,30 +179,7 @@ class FavouritesFragment : Fragment() {
             addOnItemTouchListener(gestureDetector)
         }
 
-        tracker = SelectionTracker
-            .Builder("selectionId",
-                recyclerView,
-                StableIdKeyProvider(recyclerView),
-                MyLookup(recyclerView),
-                StorageStrategy.createLongStorage())
-            .withSelectionPredicate(SelectionPredicates.createSelectAnything())
-            .build()
-
-        (recyclerView.adapter as FavouritesAdapter).apply {
-            setTracker(tracker)
-        }
-
-        tracker?.addObserver(object: SelectionTracker.SelectionObserver<Long>() {
-            override fun onSelectionChanged() {
-                val numberOfItems: Int = tracker?.selection?.size() ?: 0
-                Timber.e("onSelectionChanged, $numberOfItems")
-                if (numberOfItems == 0) {
-                    unselectedAllItems = true
-                    actionMode?.finish()
-                }
-            }
-        })
-
+        setupTracker(recyclerView)
     }
 
     private fun recyclerViewOnClick(item: Articles?, clickedView: View?) {
@@ -180,40 +202,39 @@ class FavouritesFragment : Fragment() {
         startActivity(intent, options?.toBundle())
     }
 
-    private fun initLiveData() {
-        viewModel.favouritesLiveData.observe(viewLifecycleOwner, favouritesLiveDataObserver)
+    // Action mode functions
+    private fun setupTracker(recyclerView: RecyclerView) {
+        tracker = SelectionTracker
+            .Builder("selectionId",
+                recyclerView,
+                StableIdKeyProvider(recyclerView),
+                RecyclerViewLookup(recyclerView),
+                StorageStrategy.createLongStorage())
+            .withSelectionPredicate(SelectionPredicates.createSelectAnything())
+            .build()
+
+        tracker?.addObserver(trackerObserver)
     }
 
-    private val actionModeCallback = object : ActionMode.Callback {
-        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-            val inflater: MenuInflater = mode.menuInflater
-            inflater.inflate(R.menu.menu_favourites_action_mode, menu)
-            selectionModeOn = true
-            return true
+    fun addSelectionTracker() {
+        selectionModeOn = true
+        (recyclerView.adapter as FavouritesAdapter).apply {
+            setTracker(tracker)
         }
+    }
 
-        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-            return false
+    fun removeSelectionTracker() {
+        selectionModeOn = false
+        tracker?.clearSelection()
+        (recyclerView.adapter as FavouritesAdapter).apply {
+            selectedItems.clear()
+            removeTracker()
         }
+    }
 
-        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            return when (item.itemId) {
-                R.id.menu_garbage -> {
-                    val selectionItems = (recyclerView.adapter as FavouritesAdapter).selectedItems
-                    Timber.e("items selected for deletion $selectionItems")
-                    viewModel.deleteSelectedFavourites(selectionItems)
-                    mode.finish()
-                    true
-                }
-                else -> false
-            }
-        }
-
-        override fun onDestroyActionMode(mode: ActionMode) {
-            selectionModeOn = false
-            tracker?.clearSelection()
-            actionMode = null
-        }
+    fun deleteSelectedItems() {
+        val selectedItems = (recyclerView.adapter as FavouritesAdapter).selectedItems
+        viewModel.deleteSelectedFavourites(selectedItems)
     }
 
 }

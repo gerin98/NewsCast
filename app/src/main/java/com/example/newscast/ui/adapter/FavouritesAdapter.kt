@@ -15,24 +15,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newscast.R
 import com.example.newscast.data.room.Articles
 import com.example.newscast.di.ResourceHelper
-import com.example.newscast.di.resourceModule
 import com.example.newscast.utils.glide.loadThumbnailFromUrl
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import timber.log.Timber
 
-class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinComponent {
-
-    val resourceHelper by inject<ResourceHelper>()
+class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>,
+                        private val resourceHelper: ResourceHelper)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     init {
         setHasStableIds(true)
     }
 
+    val selectedItems = HashSet<String>()
     private var tracker: SelectionTracker<Long>? = null
 
     fun setTracker(tracker: SelectionTracker<Long>?) {
         this.tracker = tracker
+    }
+
+    fun removeTracker() {
+        this.tracker = null
     }
 
     class FavouritesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -47,15 +49,11 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
         }
     }
 
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        // create a new view based on the view type
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.news_tile, parent, false) as View
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.news_tile, parent, false) as View
         return FavouritesViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as FavouritesViewHolder
 
@@ -76,11 +74,13 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
         viewHolder.newsTileSource.text = newsDataset[position]?.author
 
         if (tracker?.isSelected(position.toLong()) == true) {
+            Timber.d("item selected: $position")
             holder.newsTileLayout.background = ColorDrawable(resourceHelper.getColor(R.color.accent5))
             newsDataset[position]?.uri?.also {
                 selectedItems.add(it)
             }
         } else {
+            Timber.d("item un-selected: $position")
             holder.newsTileLayout.background = ColorDrawable(Color.WHITE)
             newsDataset[position]?.uri?.also {
                 selectedItems.remove(it)
@@ -94,7 +94,4 @@ class FavouritesAdapter(private val newsDataset: ArrayList<Articles?>)
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    val selectedItems = HashSet<String>()
-
 }
-
