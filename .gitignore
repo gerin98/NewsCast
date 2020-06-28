@@ -54,3 +54,6 @@ _sandbox
 
 # Android Studio captures folder
 captures/
+
+# Gradle properties
+gradle.properties
