@@ -6,20 +6,20 @@
 ## A modern News App for Android written in Kotlin
 NewsCast lets you find and and read articles you care about natively within the app. Browse from a wide assortment of categories and save interesting articles for later!
 
-  <img src="screenshots/clay_mock_overview.png"/>
-  
+<img src="screenshots/clay_mock_overview.png"/>  
 
 ## Table of Contents
-**[1. Features](#features-bulb)**<br>
+**[1. Main Features](#main-features-bulb)**<br>
 **[2. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
 **[3. Api](#api-newspaper)**<br>
 **[4. Getting Started](#getting-started-rocket)**<br>
+**[4. Even More Features](#even-more-features)**<br>
 **[5. See it in Action](#see-it-in-action-eyeglasses)**<br>
 **[6. Credits](#credits-closed_book)**<br>
 **[7. Author](#author-pencil2)**<br>
 **[8. License](#license)**<br>
 
-## Features :bulb:
+## Main Features :bulb:
 #### Beatiful News Viewer
 Read your news articles directly within the app. No redirects. No switching back and forth. Just you and your news.
 
@@ -80,6 +80,12 @@ android.enableJetifier=true
 API_KEY=YOUR_API_KEY
 ```
 7. That's it! Sync and rebuild your project with Gradle and you're good to go!
+
+## Even more features
+
+#### Customize you reader the way you want to read comfortably
+
+<img src="screenshots/clay_mockup_colours.png"/>  
 
 ## See it in Action :eyeglasses:
 
