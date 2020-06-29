@@ -17,7 +17,7 @@ NewsCast lets you find and and read articles you care about natively within the 
 **[1. Features](#features-bulb)**<br>
 **[2. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
 **[3. Api](#api-newspaper)**<br>
-**[4. Troubleshooting](#getting-started-warning)**<br>
+**[4. Getting Started](#getting-started-rocket)**<br>
 **[5. See it in Action](#see-it-in-action-eyeglasses)**<br>
 **[6. Credits](#credits-closed_book)**<br>
 **[7. Author](#author-pencil2)**<br>
@@ -68,8 +68,9 @@ Can't find what you're looking for? Search for keywords to find articles for pra
 ## Api :newspaper:
 NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
 
-## Getting Started :warning:
-Unfortunately, I can't afford to subscribe to Event Registry's api to keep this project running indefinitely. Don't worry though, you can sign up to obtain your own API key to use in this project!
+## Getting Started :rocket:
+Unfortunately, I can't afford to stay subscribed to Event Registry's API to keep this project running indefinitely. Don't worry though, you can sign up to obtain your own API key to run this project!
+
 1. Sign up for an account on Event Registry. You can either use a [Free Trial](http://eventregistry.org/news_api) or subscribe to one of their [Monthly Plans](http://eventregistry.org/plans)
 2. Install [Android Studio](https://developer.android.com/studio/?gclid=Cj0KCQjwoub3BRC6ARIsABGhnyYV0yPOYCiElQFHF-beeHsTu1yhqHWvNYrWBGz8hSg9RyjkidfYXQUaAhbqEALw_wcB&gclsrc=aw.ds)
 3. Clone this repo
@@ -78,6 +79,7 @@ Unfortunately, I can't afford to subscribe to Event Registry's api to keep this 
 6. Add you API key for event registry into this file like this: `API_KEY=my_api_key`
 You file should look something like this
 ```
+...
 android.useAndroidX=true
 android.enableJetifier=true
 API_KEY=36ea9552-f8b4-454c-8a4e-6ac4eb4c1ca9
