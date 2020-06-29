@@ -78,11 +78,10 @@ Unfortunately, I can't afford to stay subscribed to Event Registry's API to keep
 5. Create a file called `gradle.properties` if it doesn't already exist in your root project directory
 6. Add you API key for event registry into this file like this: `API_KEY=my_api_key`
 You file should look something like this
-```
-...
+``` gradle
 android.useAndroidX=true
 android.enableJetifier=true
-API_KEY=36ea9552-f8b4-454c-8a4e-6ac4eb4c1ca9
+API_KEY=my_api_key
 ```
 7. That's it! Sync and rebuild your project with Gradle and you're good to go!
 
