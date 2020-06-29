@@ -83,7 +83,7 @@ API_KEY=YOUR_API_KEY
 
 ## Even more features
 
-#### Customize you reader the way you want to read comfortably
+#### Customize you news reader and read comfortably
 
 <img src="screenshots/clay_mockup_colours.png"/>  
 
