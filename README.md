@@ -6,12 +6,8 @@
 ## A modern News App for Android written in Kotlin
 NewsCast lets you find and and read articles you care about natively within the app. Browse from a wide assortment of categories and save interesting articles for later!
 
-<p align="center">
-  <img src="screenshots/newscast_browse_view.jpg" width="200" height="400" />
-  <img src="screenshots/newscast_news_paper_view.jpg" width="200" height="400" />
-  <img src="screenshots/newscast_search_view.jpg" width="200" height="400" />
-  <img src="screenshots/newscast_favourites_view.jpg" width="200" height="400" />
-</p>
+  <img src="screenshots/clay_mock_overview.png"/>
+  
 
 ## Table of Contents
 **[1. Features](#features-bulb)**<br>
