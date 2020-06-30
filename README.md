@@ -83,11 +83,12 @@ API_KEY=YOUR_API_KEY
 ## Even more features
 
 #### Customize your news reader and read comfortably
+NewsCast allows you to change your background colour and text size in Settings.
 
 <img src="screenshots/clay_mockup_colours.png"/>  
 
 #### Manage all your favourites
-Save you favourites and coma back to them later. Favourites are available to read offline. When you're done with them, simply select them to remove them from your list.
+Save your favourites and come back to them later. Favourites are available to read offline. When you're done, simply select them to remove them from your list.
 
 <img src="screenshots/clay_mocks_fav.png"/>  
 
