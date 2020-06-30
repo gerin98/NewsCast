@@ -1,4 +1,4 @@
-![](screenshots/Screenshot_20200621-223615.png?raw=true "Title")
+[<img src="screenshots/Screenshot_20200621-223615.png"/>](https://github.com/gerin98/NewsCast)
 
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=for-the-badge)](https://github.com/gerin98/NewsCast/blob/master/LICENSE) [![download](https://img.shields.io/badge/NewsCast-apk-brightgreen?style=for-the-badge&logo=android)](https://github.com/gerin98/NewsCast/releases)
 
@@ -6,7 +6,7 @@
 ## A modern News App for Android written in Kotlin
 NewsCast lets you find and and read articles you care about natively within the app. Browse from a wide assortment of categories and save interesting articles for later!
 
-<img src="screenshots/clay_mock_overview.png"/>  
+<img src="screenshots/clay_mock_overview.png"/>
 
 ## Table of Contents
 **[1. Main Features](#main-features-bulb)**<br>
