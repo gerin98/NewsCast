@@ -10,11 +10,10 @@ NewsCast lets you find and and read articles you care about natively within the 
 
 ## Table of Contents
 **[1. Main Features](#main-features-bulb)**<br>
-**[2. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
-**[3. Api](#api-newspaper)**<br>
-**[4. Getting Started](#getting-started-rocket)**<br>
-**[4. Even More Features](#even-more-features)**<br>
-**[5. See it in Action](#see-it-in-action-eyeglasses)**<br>
+**[2. Api](#api-newspaper)**<br>
+**[3. Getting Started](#getting-started-rocket)**<br>
+**[4. Tech Stack](#tech-stack-hammer_and_wrench)**<br>
+**[5. Even More Features](#even-more-features)**<br>
 **[6. Credits](#credits-closed_book)**<br>
 **[7. Author](#author-pencil2)**<br>
 **[8. License](#license)**<br>
@@ -31,6 +30,26 @@ We don't always have time to read through the whole article. Double tap to add a
 
 #### Search at your fingertips
 Can't find what you're looking for? Search for keywords to find articles for practically any topic.
+
+## Api :newspaper:
+NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
+
+## Getting Started :rocket:
+Unfortunately, I can't afford to stay subscribed to Event Registry's API to keep this project running indefinitely. Don't worry though, you can sign up to obtain your own API key to run this project!
+
+1. Sign up for an account on Event Registry. You can either use a [Free Trial](http://eventregistry.org/news_api) or subscribe to one of their [Monthly Plans](http://eventregistry.org/plans)
+2. Install [Android Studio](https://developer.android.com/studio/?gclid=Cj0KCQjwoub3BRC6ARIsABGhnyYV0yPOYCiElQFHF-beeHsTu1yhqHWvNYrWBGz8hSg9RyjkidfYXQUaAhbqEALw_wcB&gclsrc=aw.ds)
+3. Clone this repo
+4. Open the project in Android Studio
+5. Create a file called `gradle.properties` if it doesn't already exist in your root project directory
+6. Add you API key for event registry into this file like this: `API_KEY=YOUR_API_KEY`
+You file should look something like this
+``` gradle
+android.useAndroidX=true
+android.enableJetifier=true
+API_KEY=YOUR_API_KEY
+```
+7. That's it! Sync and rebuild your project with Gradle and you're good to go!
 
 ## Tech Stack :hammer_and_wrench:
 
@@ -61,38 +80,16 @@ Can't find what you're looking for? Search for keywords to find articles for pra
   - [Robolectric](https://github.com/robolectric/robolectric) - a framework that brings fast and reliable unit tests to Android
   - [Stetho](http://facebook.github.io/stetho/) - a sophisticated debug bridge for Android applications
 
-## Api :newspaper:
-NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to search and provide relevant news articles.
-
-## Getting Started :rocket:
-Unfortunately, I can't afford to stay subscribed to Event Registry's API to keep this project running indefinitely. Don't worry though, you can sign up to obtain your own API key to run this project!
-
-1. Sign up for an account on Event Registry. You can either use a [Free Trial](http://eventregistry.org/news_api) or subscribe to one of their [Monthly Plans](http://eventregistry.org/plans)
-2. Install [Android Studio](https://developer.android.com/studio/?gclid=Cj0KCQjwoub3BRC6ARIsABGhnyYV0yPOYCiElQFHF-beeHsTu1yhqHWvNYrWBGz8hSg9RyjkidfYXQUaAhbqEALw_wcB&gclsrc=aw.ds)
-3. Clone this repo
-4. Open the project in Android Studio
-5. Create a file called `gradle.properties` if it doesn't already exist in your root project directory
-6. Add you API key for event registry into this file like this: `API_KEY=YOUR_API_KEY`
-You file should look something like this
-``` gradle
-android.useAndroidX=true
-android.enableJetifier=true
-API_KEY=YOUR_API_KEY
-```
-7. That's it! Sync and rebuild your project with Gradle and you're good to go!
-
 ## Even more features
 
-#### Customize you news reader and read comfortably
+#### Customize your news reader and read comfortably
 
 <img src="screenshots/clay_mockup_colours.png"/>  
 
-## See it in Action :eyeglasses:
+#### Manage all your favourites
+Save you favourites and coma back to them later. Favourites are available to read offline. When you're done with them, simply select them to remove them from your list.
 
-<p align="center">
-  <img src="screenshots/newscast_browse_video.gif" width="300" />
-  <img src="screenshots/newscast_favourite_video.gif" width="300" />
-</p>
+<img src="screenshots/clay_mocks_fav.png"/>  
 
 ## Credits :closed_book:
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
