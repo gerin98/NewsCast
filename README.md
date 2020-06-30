@@ -37,13 +37,13 @@ NewsCast is powered by [Event Registry's](http://eventregistry.org/) api to sear
 ## Getting Started :rocket:
 Unfortunately, I can't afford to stay subscribed to Event Registry's API to keep this project running indefinitely. Don't worry though, you can sign up to obtain your own API key to run this project!
 
-1. Sign up for an account on Event Registry. You can either use a [Free Trial](http://eventregistry.org/news_api) or subscribe to one of their [Monthly Plans](http://eventregistry.org/plans)
-2. Install [Android Studio](https://developer.android.com/studio/?gclid=Cj0KCQjwoub3BRC6ARIsABGhnyYV0yPOYCiElQFHF-beeHsTu1yhqHWvNYrWBGz8hSg9RyjkidfYXQUaAhbqEALw_wcB&gclsrc=aw.ds)
-3. Clone this repo
-4. Open the project in Android Studio
-5. Create a file called `gradle.properties` if it doesn't already exist in your root project directory
-6. Add you API key for event registry into this file like this: `API_KEY=YOUR_API_KEY`
-You file should look something like this
+1. Sign up for an account on Event Registry. You can either use a [Free Trial](http://eventregistry.org/news_api) or subscribe to one of their [Monthly Plans](http://eventregistry.org/plans).
+2. Install [Android Studio](https://developer.android.com/studio/?gclid=Cj0KCQjwoub3BRC6ARIsABGhnyYV0yPOYCiElQFHF-beeHsTu1yhqHWvNYrWBGz8hSg9RyjkidfYXQUaAhbqEALw_wcB&gclsrc=aw.ds).
+3. Clone this repo.
+4. Open the project in Android Studio.
+5. Create a file called `gradle.properties` if it doesn't already exist in your root project directory.
+6. Add your API key for event registry into this file like this: `API_KEY=YOUR_API_KEY`
+Your file should look something like this:
 ``` gradle
 android.useAndroidX=true
 android.enableJetifier=true
@@ -56,29 +56,29 @@ API_KEY=YOUR_API_KEY
 - Language
   - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - Architecture
-  - [MVVM & Repository pattern](https://developer.android.com/jetpack/docs/guide#overview) - separate ui logic from business logic
-  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - an observable lifecycle-aware data holder class
-  - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html) - for asynchronous programming and more
-  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - easily write code that interacts with views
+  - [MVVM & Repository pattern](https://developer.android.com/jetpack/docs/guide#overview) - separate ui logic from business logic.
+  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - an observable lifecycle-aware data holder class.
+  - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html) - for asynchronous programming and more.
+  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - easily write code that interacts with views.
 - Dependency Injection
-  - [Koin](https://insert-koin.io/) - A pragmatic lightweight dependency injection framework
+  - [Koin](https://insert-koin.io/) - A pragmatic lightweight dependency injection framework.
 - Network
-  - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java
-  - [OkHttp](https://square.github.io/okhttp/) - an HTTP client that’s efficient by default
-  - [Moshi](https://github.com/square/moshi) - a modern JSON library for Android and Java
+  - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
+  - [OkHttp](https://square.github.io/okhttp/) - an HTTP client that’s efficient by default.
+  - [Moshi](https://github.com/square/moshi) - a modern JSON library for Android and Java.
 - Database
-  - [Room](https://developer.android.com/training/data-storage/room) - robust database access while harnessing the full power of SQLite
+  - [Room](https://developer.android.com/training/data-storage/room) - robust database access while harnessing the full power of SQLite.
 - UI
-  - [Databinding](https://developer.android.com/topic/libraries/data-binding) - bind UI components in your layouts to data sources in your app
-  - [Material Design](https://material.io/design) - a visual language that synthesizes the classic principles of good design with the innovation of technology and science
-  - [Icons](https://material.io/resources/icons/?style=baseline) - delightful, beautifully crafted symbols for common actions and items
+  - [Databinding](https://developer.android.com/topic/libraries/data-binding) - bind UI components in your layouts to data sources in your app.
+  - [Material Design](https://material.io/design) - a visual language that synthesizes the classic principles of good design with the innovation of technology and science.
+  - [Icons](https://material.io/resources/icons/?style=baseline) - delightful, beautifully crafted symbols for common actions and items.
 - Image loading
-  - [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling
+  - [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling.
 - Logging
   - [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
 - Testing
-  - [Robolectric](https://github.com/robolectric/robolectric) - a framework that brings fast and reliable unit tests to Android
-  - [Stetho](http://facebook.github.io/stetho/) - a sophisticated debug bridge for Android applications
+  - [Robolectric](https://github.com/robolectric/robolectric) - a framework that brings fast and reliable unit tests to Android.
+  - [Stetho](http://facebook.github.io/stetho/) - a sophisticated debug bridge for Android applications.
 
 ## Even more features
 
