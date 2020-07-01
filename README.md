@@ -95,6 +95,9 @@ Save your favourites and come back to them later. Favourites are available to re
 #### Multiple language support
 NewsCast provides news in 35 different languages
 
+<img src="screenshots/clay_mocks_language.png"/>  
+
+
 ## Credits :closed_book:
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
