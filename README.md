@@ -93,7 +93,7 @@ Save your favourites and come back to them later. Favourites are available to re
 <img src="screenshots/clay_mocks_fav.png"/>  
 
 #### Multiple language support
-NewsCast provides news in 35 different languages
+NewsCast provides news in 35 different languages.
 
 <img src="screenshots/clay_mocks_language.png"/>  
 
