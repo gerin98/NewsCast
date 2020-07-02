@@ -39,7 +39,8 @@ Unfortunately, I can't afford to stay subscribed to Event Registry's API to keep
 
 1. Sign up for an account on Event Registry. You can either use a [Free Trial](http://eventregistry.org/news_api) or subscribe to one of their [Monthly Plans](http://eventregistry.org/plans).
 2. Install [Android Studio](https://developer.android.com/studio/?gclid=Cj0KCQjwoub3BRC6ARIsABGhnyYV0yPOYCiElQFHF-beeHsTu1yhqHWvNYrWBGz8hSg9RyjkidfYXQUaAhbqEALw_wcB&gclsrc=aw.ds).
-3. Clone this repo.
+3. Clone this repo. </br>
+`git clone https://github.com/gerin98/NewsCast.git`
 4. Open the project in Android Studio.
 5. Create a file called `gradle.properties` if it doesn't already exist in your root project directory.
 6. Add your API key for event registry into this file like this: `API_KEY=YOUR_API_KEY`
